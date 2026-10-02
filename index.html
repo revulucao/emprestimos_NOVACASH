@@ -1563,6 +1563,55 @@
         .sim-results .sim-result-item .sri-value { font-size: 0.85rem; font-weight: 700; margin-top: 0.1rem; }
         .sim-results .sim-result-item .sri-value.primary { color: var(--primary); }
 
+        /* ===== TERMOS E CONDIÇÕES (ADICIONADO) ===== */
+        .terms-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 99998;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .terms-modal-overlay.active { display: flex; }
+        .terms-modal-content {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            max-width: 400px;
+            width: 100%;
+            animation: modalFade 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .terms-modal-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+        .terms-modal-content p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--gray);
+            margin-bottom: 0.8rem;
+        }
+        .terms-modal-content .terms-close-btn {
+            display: block;
+            width: 100%;
+            padding: 0.7rem;
+            border: none;
+            border-radius: 60px;
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 0.8rem;
+            font-family: 'Inter', sans-serif;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             .app-content { padding: 0.8rem 0.8rem 5rem; }
@@ -2305,6 +2354,17 @@
                 <button class="modal-close" id="modalClose">&times;</button>
             </div>
             <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- ===== TERMOS E CONDIÇÕES (ADICIONADO) ===== -->
+    <div class="terms-modal-overlay" id="termsModalOverlay">
+        <div class="terms-modal-content">
+            <h3>📄 Termos e Condições</h3>
+            <p>Ao utilizar a plataforma NOVACASH, o cliente concorda com todos os requisitos exigidos para a solicitação de empréstimos, incluindo a utilização de um cartão Vodacom ou e-Mola ativo há mais de 2 anos e a apresentação do mesmo documento usado no registo do cartão.</p>
+            <p>O cliente é responsável pela veracidade das informações fornecidas e pelo cumprimento de todas as etapas do processo.</p>
+            <p><strong>Caso o cliente não cumpra ou tenha falhado algum dos requisitos exigidos pela plataforma, poderá solicitar o reembolso do valor entrando em contacto com o número 876364927.</strong></p>
+            <button class="terms-close-btn" id="termsModalClose">Fechar</button>
         </div>
     </div>
 
@@ -4039,6 +4099,7 @@
                 modalOverlay.classList.remove('active');
                 chatWindow.classList.remove('active');
                 document.getElementById('fundsModal').classList.remove('active');
+                document.getElementById('termsModalOverlay')?.classList.remove('active');
             }
         });
 
@@ -5199,6 +5260,7 @@
                     <div class="error-popup-actions">
                         <button class="btn-error primary" id="errorBtnEntendi">✅ Entendi, vou pagar</button>
                         <button class="btn-error secondary" id="errorBtnPorque">❓ Porque pagar a taxa de inscrição?</button>
+                        <button class="btn-error secondary" id="errorBtnNaoAprovado">❓ O que acontece quando pagar a taxa e não ser aprovado?</button>
                     </div>
                 </div>
             `;
@@ -5244,6 +5306,39 @@ Ela permite que o seu pedido seja analisado de forma segura, organizada e transp
                 }, 1500);
 
                 showToast('📝 Explicação sobre a taxa de inscrição aberta no chat.', 'info');
+            });
+
+            document.getElementById('errorBtnNaoAprovado').addEventListener('click', function() {
+                popup.classList.remove('show');
+
+                const chatWindow = document.getElementById('chatWindowApp');
+                chatWindow.classList.add('active');
+
+                const chatMessages = document.getElementById('chatMessagesApp');
+                const msg = document.createElement('div');
+                msg.className = 'msg user';
+                msg.textContent = 'O que acontece quando pagar a taxa e não ser aprovado?';
+                chatMessages.appendChild(msg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                const typing = document.createElement('div');
+                typing.className = 'msg bot';
+                typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
+                chatMessages.appendChild(typing);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                setTimeout(() => {
+                    typing.remove();
+                    const response = document.createElement('div');
+                    response.className = 'msg bot';
+                    response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>Ao cumprir com os requisitos exigidos na plataforma, sempre serás aprovado. O importante é verificar no seu cartão onde aparece o seu saldo em dívida se foste verificado. Tens que usar um cartão Vodacom ou Movitel que já esteja em uso há mais de 2 anos e também usar o mesmo documento que foi usado no registo do seu cartão. Com a NOVACASH, o cliente é aprovado em 8 a 30 minutos no máximo. Boa solicitação!
+
+Em caso de o cliente ter falhado em algum dos requisitos exigidos, pode solicitar o reembolso do valor entrando em contacto com o seguinte número: 876364927.`;
+                    chatMessages.appendChild(response);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1500);
+
+                showToast('📝 Explicação sobre aprovação e reembolso aberta no chat.', 'info');
             });
         }
 
@@ -5410,6 +5505,21 @@ Boa solicitação, ${name}.`;
                 audioFab.querySelector('.audio-tooltip').textContent = '🔊 Ouvir instruções';
                 audioSynth = null;
             }
+        });
+
+        // ===== TERMOS E CONDIÇÕES (ADICIONADO) =====
+        const termsAnchor = document.querySelector('#loanTerms')?.parentElement?.querySelector('a');
+        if (termsAnchor) {
+            termsAnchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('termsModalOverlay').classList.add('active');
+            });
+        }
+        document.getElementById('termsModalClose')?.addEventListener('click', function() {
+            document.getElementById('termsModalOverlay').classList.remove('active');
+        });
+        document.getElementById('termsModalOverlay')?.addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('active');
         });
 
     });
