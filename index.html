@@ -569,7 +569,7 @@
         /* ===== AUDIO FAB (NOVO ÍCONE DE SOM) ===== */
         .audio-fab {
             position: fixed;
-            bottom: 9.7rem; /* ALTERAÇÃO #3: maior espaçamento entre Chat e Áudio/Telefone */
+            bottom: 9.7rem;
             right: 1.2rem;
             width: 56px;
             height: 56px;
@@ -1118,6 +1118,81 @@
         .notif-popup .text { flex: 1; font-size: 0.85rem; font-weight: 500; }
         .notif-popup .close-popup { background: none; border: none; font-size: 1.2rem; color: var(--gray); cursor: pointer; }
 
+        /* ===== ERROR MODAL IMPROVED (requisito 7) ===== */
+        .notif-popup.error-modal-improved {
+            flex-direction: column;
+            align-items: stretch;
+            border-left: none;
+            border-top: 4px solid var(--error);
+            padding: 0;
+            overflow-y: auto;
+            max-height: 75vh;
+            max-width: 420px;
+            bottom: 90px;
+            position: fixed;
+        }
+        .notif-popup.error-modal-improved .close-popup {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            z-index: 5;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+        .notif-popup.error-modal-improved .error-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 1rem 1.2rem 0.6rem;
+            background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));
+            position: relative;
+        }
+        .notif-popup.error-modal-improved .error-modal-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(239,68,68,0.12);
+            color: var(--error);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .notif-popup.error-modal-improved .error-modal-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0;
+        }
+        .notif-popup.error-modal-improved .error-modal-subtitle {
+            font-size: 0.65rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        .notif-popup.error-modal-improved .error-modal-body {
+            padding: 0.4rem 1.2rem 0.8rem;
+        }
+        .notif-popup.error-modal-improved .error-modal-message {
+            font-size: 0.82rem;
+            line-height: 1.55;
+            color: var(--gray);
+            margin: 0;
+        }
+        .notif-popup.error-modal-improved .error-modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1.2rem 1rem;
+        }
+        .notif-popup.error-modal-improved .error-modal-extra {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1.2rem 1.1rem;
+            animation: fadeSlideUp 0.3s ease;
+        }
+
         /* ESTILO PARA OS BOTÕES DA MENSAGEM DE ERRO */
         .error-popup-actions {
             display: flex;
@@ -1152,6 +1227,37 @@
             border: 2px solid var(--primary);
         }
         .error-popup-actions .btn-error.secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Botões no novo modal melhorado */
+        .notif-popup.error-modal-improved .btn-error {
+            padding: 0.7rem 1rem;
+            border-radius: 60px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+        }
+        .notif-popup.error-modal-improved .btn-error.primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255,127,0,0.25);
+        }
+        .notif-popup.error-modal-improved .btn-error.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255,127,0,0.35);
+        }
+        .notif-popup.error-modal-improved .btn-error.secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .notif-popup.error-modal-improved .btn-error.secondary:hover {
             background: var(--primary);
             color: white;
         }
@@ -1655,7 +1761,6 @@
             .online-indicator.large { width: 12px; height: 12px; border-width: 2px; }
             .profile-header .profile-avatar-lg .online-indicator { width: 14px; height: 14px; border-width: 2px; }
             .payment-info-text { font-size: 0.6rem; }
-            /* ALTERAÇÃO #3 (mobile): maior espaçamento entre Chat e Áudio/Telefone */
             .audio-fab { bottom: 8.4rem; right: 0.8rem; width: 48px; height: 48px; font-size: 1.2rem; }
             .chat-fab { bottom: 4.8rem; right: 0.8rem; width: 48px; height: 48px; font-size: 1.2rem; }
             .audio-fab .audio-tooltip { display: none; }
@@ -1675,7 +1780,6 @@
             .bottom-nav { max-width: 600px; left: 50%; transform: translateX(-50%); border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
             .chat-window-app { right: calc(50% - 300px + 1rem); }
             .chat-fab { right: calc(50% - 300px + 1rem); }
-            /* ALTERAÇÃO #3 (desktop): maior espaçamento entre Chat e Áudio/Telefone */
             .audio-fab { right: calc(50% - 300px + 1rem); bottom: 9.7rem; }
             .bank-card-premium { padding: 1.6rem 1.8rem 1.8rem; border-radius: 20px; }
         }
@@ -1880,10 +1984,10 @@
 
                 <!-- Informações de fundos e limites -->
                 <div class="card-limits-outside">
-                    <div class="limit-item">
+                    <div class="limit-item" id="fundsToggleCard" style="cursor:pointer;" title="Clique para ver os fundos disponíveis">
                         <div class="limit-icon"><i class="fas fa-coins"></i></div>
                         <div class="limit-label">FUNDOS DISPONÍVEIS</div>
-                        <div class="limit-value" id="outsideFunds">16.000.000 MT</div>
+                        <div class="limit-value" id="outsideFunds">👁️ Ver</div>
                     </div>
                     <div class="limit-item">
                         <div class="limit-icon"><i class="fas fa-arrow-down"></i></div>
@@ -1949,7 +2053,6 @@
 
                     <div class="all-reviews-title">
                         <i class="fas fa-list-ul"></i> Todas as avaliações dos nossos clientes
-                        <span class="count-badge" id="reviewCountBadge">0</span>
                     </div>
                     <div class="all-reviews-list" id="allReviewsList"></div>
 
@@ -2096,11 +2199,6 @@
                 <div class="step-content" data-step="2">
                     <div class="simulator-card">
                         <div class="form-group">
-                            <label>Número do BI <span style="color:var(--error);">*</span></label>
-                            <input type="text" id="loanBi" placeholder="Número do Bilhete de Identidade">
-                            <div class="error-msg">Campo obrigatório</div>
-                        </div>
-                        <div class="form-group">
                             <label>Foto da Frente do BI <span style="color:var(--error);">*</span></label>
                             <div class="file-input-wrapper">
                                 <div class="file-label"><i class="fas fa-camera"></i> Clique para carregar</div>
@@ -2145,7 +2243,7 @@
                         </div>
                         <div class="form-group">
                             <label>Prazo (Meses) <span style="color:var(--error);">*</span></label>
-                            <div class="sim-label"><span>4</span><span id="simTermDisplay">6 meses</span><span>12</span></div>
+                            <div class="sim-label"><span>4</span><span id="simTermDisplay">6 meses</span><span id="simTermMaxLabel">12</span></div>
                             <input type="range" id="simTerm" min="4" max="12" step="1" value="6">
                         </div>
                         <div class="sim-results">
@@ -2186,9 +2284,6 @@
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--gray-light); font-size: 0.85rem;">
                                 <span>Salário mensal</span><strong id="summarySalary">---</strong>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--gray-light); font-size: 0.85rem;">
-                                <span>BI</span><strong id="summaryBi">---</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--gray-light); font-size: 0.85rem;">
                                 <span>Receber em</span><strong id="summaryReceiver">---</strong>
@@ -2329,7 +2424,6 @@
                 <button class="funds-modal-close" id="fundsModalClose">&times;</button>
             </div>
             <div class="funds-modal-body">
-                <div class="funds-warning" id="fundsWarning"><i class="fas fa-exclamation-triangle"></i> <span>⚠️ Fundos em baixa</span></div>
                 <div class="funds-balance-item">
                     <span class="funds-balance-label">Saldo em Meticais</span>
                     <span class="funds-balance-value mzn" id="fundsBalanceMZN">16.000.000 MT</span>
@@ -2371,11 +2465,11 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-        // ===== PREENCHER SELECT DE IDADE =====
+        // ===== PREENCHER SELECT DE IDADE (20 a 65 anos) =====
         (function populateAgeSelect() {
             const select = document.getElementById('loanAge');
             if (!select) return;
-            for (let i = 20; i <= 60; i++) {
+            for (let i = 20; i <= 65; i++) {
                 const option = document.createElement('option');
                 option.value = i;
                 option.textContent = i + ' anos';
@@ -2409,39 +2503,36 @@
                 if (ctx.state === 'suspended') ctx.resume();
                 const now = ctx.currentTime;
                 const startAt = Math.max(now, __soundBusyUntil) + 0.02;
-                const totalDur = 0.5;
+                const totalDur = 0.9;
                 __soundBusyUntil = startAt + totalDur;
                 const master = ctx.createGain();
                 master.gain.value = 0.0;
                 master.connect(ctx.destination);
+                // volume suave e profissional
                 master.gain.setValueAtTime(0.0001, startAt);
-                master.gain.exponentialRampToValueAtTime(0.15, startAt + 0.04);
-                master.gain.setValueAtTime(0.15, startAt + 0.20);
+                master.gain.exponentialRampToValueAtTime(0.07, startAt + 0.08);
+                master.gain.setValueAtTime(0.07, startAt + 0.55);
                 master.gain.exponentialRampToValueAtTime(0.0001, startAt + totalDur);
-                const osc = ctx.createOscillator();
-                const gOsc = ctx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(800, startAt);
-                osc.frequency.exponentialRampToValueAtTime(600, startAt + 0.12);
-                gOsc.gain.setValueAtTime(0.0001, startAt);
-                gOsc.gain.exponentialRampToValueAtTime(0.4, startAt + 0.02);
-                gOsc.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.15);
-                osc.connect(gOsc);
-                gOsc.connect(master);
-                osc.start(startAt);
-                osc.stop(startAt + 0.18);
-                const osc2 = ctx.createOscillator();
-                const gOsc2 = ctx.createGain();
-                osc2.type = 'sine';
-                osc2.frequency.setValueAtTime(1200, startAt + 0.06);
-                osc2.frequency.exponentialRampToValueAtTime(900, startAt + 0.14);
-                gOsc2.gain.setValueAtTime(0.0001, startAt + 0.04);
-                gOsc2.gain.exponentialRampToValueAtTime(0.15, startAt + 0.06);
-                gOsc2.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.18);
-                osc2.connect(gOsc2);
-                gOsc2.connect(master);
-                osc2.start(startAt + 0.04);
-                osc2.stop(startAt + 0.22);
+                // tom 1 — nota suave (Dó)
+                const o1 = ctx.createOscillator();
+                const g1 = ctx.createGain();
+                o1.type = 'sine';
+                o1.frequency.setValueAtTime(523.25, startAt);
+                g1.gain.setValueAtTime(0.0001, startAt);
+                g1.gain.exponentialRampToValueAtTime(0.5, startAt + 0.06);
+                g1.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.45);
+                o1.connect(g1); g1.connect(master);
+                o1.start(startAt); o1.stop(startAt + 0.5);
+                // tom 2 — nota suave (Sol) ligeiramente depois
+                const o2 = ctx.createOscillator();
+                const g2 = ctx.createGain();
+                o2.type = 'sine';
+                o2.frequency.setValueAtTime(783.99, startAt + 0.18);
+                g2.gain.setValueAtTime(0.0001, startAt + 0.18);
+                g2.gain.exponentialRampToValueAtTime(0.35, startAt + 0.24);
+                g2.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.7);
+                o2.connect(g2); g2.connect(master);
+                o2.start(startAt + 0.18); o2.stop(startAt + 0.78);
             } catch(e) {}
         }
 
@@ -2524,7 +2615,6 @@
             const fill = document.getElementById('loaderFill');
             const timerEl = document.getElementById('loaderTimer');
             const scannerContainer = document.getElementById('scannerContainer');
-            // Garantir modo clássico (não tech)
             overlay.classList.remove('tech-mode');
             const techProcessor = document.getElementById('techProcessor');
             if (techProcessor) techProcessor.classList.remove('active');
@@ -2586,7 +2676,7 @@
             };
         }
 
-        // ===== ALTERAÇÃO #5: PROCESSAMENTO VISUAL TECNOLÓGICO =====
+        // ===== PROCESSAMENTO VISUAL TECNOLÓGICO =====
         function showTechProcessing(onComplete, totalMs = 4200) {
             const overlay = document.getElementById('loadingOverlayApp');
             const processor = document.getElementById('techProcessor');
@@ -2597,7 +2687,6 @@
             const coreIcon = document.getElementById('techCoreIcon');
             const steps = document.querySelectorAll('#techSteps .tech-step');
 
-            // esconder scanner antigo se estiver aberto
             const scannerContainer = document.getElementById('scannerContainer');
             if (scannerContainer) scannerContainer.classList.remove('active');
 
@@ -2790,7 +2879,6 @@
         function updateFundsDisplay() {
             const mznEl = document.getElementById('fundsBalanceMZN');
             const usdEl = document.getElementById('fundsBalanceUSD');
-            const warningEl = document.getElementById('fundsWarning');
             const usdValue = availableFundsMZN / EXCHANGE_RATE;
 
             if (mznEl) {
@@ -2805,23 +2893,13 @@
                 if (availableFundsMZN <= 0) usdEl.classList.add('critical');
                 else if (availableFundsMZN < 1000000) usdEl.classList.add('low');
             }
-            if (warningEl) {
-                if (availableFundsMZN <= 0) {
-                    warningEl.className = 'funds-warning show critical';
-                    warningEl.querySelector('span').textContent = '⚠️ Fundos esgotados! A recarregar em 25s...';
-                } else if (availableFundsMZN < 1000000) {
-                    warningEl.className = 'funds-warning show';
-                    warningEl.querySelector('span').textContent = '⚠️ Fundos em baixa';
-                } else {
-                    warningEl.className = 'funds-warning';
-                }
-            }
             const updateEl = document.getElementById('fundsLastUpdate');
             if (updateEl) {
                 updateEl.textContent = 'Atualizado ' + new Date().toLocaleTimeString('pt-MZ');
             }
+            // Valor mascarado por defeito; será revelado no modal ao clicar (requisito 2)
             const outsideFunds = document.getElementById('outsideFunds');
-            if (outsideFunds) outsideFunds.textContent = formatNumber(availableFundsMZN) + ' MT';
+            if (outsideFunds) outsideFunds.textContent = '👁️ Ver';
             localStorage.setItem('novacash_funds_mzn', availableFundsMZN.toString());
         }
 
@@ -3164,9 +3242,9 @@
             if (!saved || saved.day !== todayKey()) initLoanStats();
         }, 60000);
 
-        // ===== INICIAR NOTIFICAÇÕES =====
+        // ===== INICIAR NOTIFICAÇÕES (intervalo variável 10–17s) =====
         function scheduleNextNotification() {
-            const delay = Math.floor(Math.random() * 20000) + 10000;
+            const delay = Math.floor(Math.random() * 7000) + 10000;
             setTimeout(() => {
                 showLoanNotification();
                 scheduleNextNotification();
@@ -3480,15 +3558,11 @@
             addOnlineIndicator(profileAvatar);
         }
 
-        // ===== ALTERAÇÃO #2: PROCESSAMENTO ROBUSTO DE IMAGENS =====
-        // Aceita JPG, JPEG, PNG, WEBP, HEIC, HEIF, fotografias da câmera/galeria,
-        // imagens de alta resolução e diferentes proporções, corrige orientação
-        // automaticamente e gera versão otimizada universalmente compatível.
+        // ===== PROCESSAMENTO ROBUSTO DE IMAGENS =====
         function processProfileImage(file, maxWidth = 800, maxHeight = 800, quality = 0.85, timeoutMs = 25000) {
             return new Promise((resolve, reject) => {
                 if (!file) return reject(new Error('Nenhum arquivo fornecido.'));
 
-                // Aceitar mais formatos (inclusive HEIC/HEIF que podem vir de iPhone)
                 const fileName = (file.name || '').toLowerCase();
                 const fileType = (file.type || '').toLowerCase();
                 const isImage = fileType.startsWith('image/') ||
@@ -3515,7 +3589,6 @@
                     reject(err);
                 }
 
-                // Desenha uma Image/HTMLImageElement no canvas e devolve dataURL
                 function drawToDataURL(source, sourceWidth, sourceHeight) {
                     try {
                         let width = sourceWidth;
@@ -3532,7 +3605,6 @@
                         const ctx = canvas.getContext('2d');
                         ctx.imageSmoothingEnabled = true;
                         ctx.imageSmoothingQuality = 'high';
-                        // Fundo branco para PNGs/HEICs transparentes
                         ctx.fillStyle = '#ffffff';
                         ctx.fillRect(0, 0, width, height);
                         ctx.drawImage(source, 0, 0, width, height);
@@ -3556,7 +3628,6 @@
                     }
                 }
 
-                // Estratégia 1: createImageBitmap com correção de orientação automática
                 if (typeof createImageBitmap === 'function') {
                     try {
                         const blob = (file.slice && typeof file.slice === 'function')
@@ -3568,7 +3639,6 @@
                                 try { bitmap.close && bitmap.close(); } catch(e) {}
                             })
                             .catch(() => {
-                                // Se falhar (ex: HEIC não suportado pelo browser), tentar FileReader + Image
                                 tryFileReader();
                             });
                         return;
@@ -3580,7 +3650,6 @@
                     tryFileReader();
                 }
 
-                // Estratégia 2: FileReader + HTMLImageElement
                 function tryFileReader() {
                     const reader = new FileReader();
                     reader.onload = function(e) {
@@ -3589,8 +3658,6 @@
                             drawToDataURL(img, img.naturalWidth || img.width, img.naturalHeight || img.height);
                         };
                         img.onerror = function() {
-                            // Última tentativa: alguns formatos (HEIC) só funcionam em iOS Safari nativo
-                            // Se ainda assim falhar, informar o usuário
                             fail(new Error('Formato de imagem não suportado neste dispositivo. Tente outro formato (JPG, PNG).'));
                         };
                         img.src = e.target.result;
@@ -3620,7 +3687,6 @@
                     <label>Foto de Perfil</label>
                     <div class="file-input-wrapper">
                         <div class="file-label"><i class="fas fa-camera"></i> Carregar nova foto</div>
-                        <!-- ALTERAÇÃO #2: aceitar mais formatos -->
                         <input type="file" id="editProfileImage" accept="image/*,.heic,.heif,image/heic,image/heif,.HEIC,.HEIF">
                     </div>
                     <div id="editProfilePreview" class="image-preview">${previewHtml}</div>
@@ -3910,6 +3976,11 @@
             if (e.target === this) this.classList.remove('active');
         });
 
+        // ===== FUNDS TOGGLE CARD (requisito 2) =====
+        document.getElementById('fundsToggleCard')?.addEventListener('click', function() {
+            document.getElementById('fundsModal').classList.add('active');
+        });
+
         // ===== NAVIGATION SHORTCUTS =====
         document.getElementById('seeAllActivity').addEventListener('click', () => {
             if (allSessionNotifications.length === 0) {
@@ -4107,17 +4178,12 @@
         const REVIEWS_STORAGE_KEY = 'novacash_all_reviews';
         const LOVES_STORAGE_KEY = 'novacash_loves';
 
-        // ===== ALTERAÇÃO #1: DATAS DINÂMICAS DAS AVALIAÇÕES =====
-        // Data inicial fixa: 1 de Setembro de 2026
-        // Data final: sempre a data atual (nunca futura)
-        const REVIEW_START_DATE = new Date(2026, 8, 1, 0, 0, 0); // 8 = Setembro (0-based)
+        const REVIEW_START_DATE = new Date(2026, 8, 1, 0, 0, 0);
         function getReviewDateRange() {
             const now = new Date();
             let end = new Date(now);
             let start = new Date(REVIEW_START_DATE);
             if (end < start) {
-                // Se a data atual for anterior a 01/09/2026, evita datas futuras
-                // usando o início do mês atual como data mínima
                 start = new Date(end.getFullYear(), end.getMonth(), 1, 0, 0, 0);
             }
             return { start, end };
@@ -4125,7 +4191,6 @@
         function randomReviewDate() {
             const { start, end } = getReviewDateRange();
             const range = Math.max(1, end.getTime() - start.getTime());
-            // Distribuição com leve preferência por datas recentes
             const r = Math.pow(Math.random(), 1.4);
             const t = end.getTime() - r * range;
             const d = new Date(Math.max(start.getTime(), Math.min(end.getTime(), t)));
@@ -4149,11 +4214,6 @@
 
         function generateReviewDate() {
             return randomReviewDate();
-        }
-
-        function getFirstDayOfCurrentMonth() {
-            const now = new Date();
-            return new Date(now.getFullYear(), now.getMonth(), 1);
         }
 
         const baseReviewsData = [
@@ -4433,14 +4493,11 @@
 
         function generateDefaultReviews() {
             usedTexts = [];
-            const { start, end } = getReviewDateRange();
-
             const shuffled = [...baseReviewsData];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
             }
-
             const reviews = shuffled.map((item) => {
                 const d = randomReviewDate();
                 return {
@@ -4449,7 +4506,6 @@
                     date: d.toISOString()
                 };
             });
-
             reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
             return reviews;
         }
@@ -4464,7 +4520,6 @@
                 try {
                     const parsed = JSON.parse(stored);
                     if (Array.isArray(parsed) && parsed.length > 0) {
-                        // Validar se as datas estão dentro do intervalo permitido
                         const { start, end } = getReviewDateRange();
                         let needsRegenerate = false;
                         for (let r of parsed) {
@@ -4505,7 +4560,6 @@
                 const toRemove = currentCount - targetMax + Math.floor(Math.random() * 3);
                 for (let i = 0; i < toRemove; i++) allReviews.pop();
             }
-            // Garantir que todas as datas estão dentro do intervalo permitido
             const { start, end } = getReviewDateRange();
             allReviews.forEach(r => {
                 const d = new Date(r.date);
@@ -4514,22 +4568,6 @@
                 }
             });
             allReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
-        }
-
-        function updateRecentReviewsDates() {
-            if (allReviews.length === 0) return;
-            const { start, end } = getReviewDateRange();
-            const totalMs = Math.max(1, end.getTime() - start.getTime());
-            const recentWindowMs = Math.min(48 * 3600 * 1000, totalMs);
-            const sorted = [...allReviews].sort((a, b) => new Date(b.date) - new Date(a.date));
-            const topN = Math.min(5, sorted.length);
-            for (let i = 0; i < topN; i++) {
-                const t = end.getTime() - Math.random() * recentWindowMs;
-                const d = new Date(Math.max(start.getTime(), Math.min(end.getTime(), t)));
-                d.setSeconds(Math.floor(Math.random() * 60));
-                sorted[i].date = d.toISOString();
-            }
-            sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
 
         let recentRotationTimer = null;
@@ -4595,7 +4633,6 @@
             const badge = document.getElementById('reviewCountBadge');
             if (!container) return;
 
-            // Garantir que as datas estejam ordenadas e dentro do intervalo
             const { start, end } = getReviewDateRange();
             allReviews.forEach(r => {
                 const d = new Date(r.date);
@@ -4606,7 +4643,7 @@
             allReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
             saveReviewsToStorage();
 
-            badge.textContent = allReviews.length;
+            if (badge) badge.textContent = allReviews.length;
             container.innerHTML = '';
 
             allReviews.forEach((review, index) => {
@@ -4843,7 +4880,7 @@
             updateDashboard(currentUser);
         });
 
-        // ===== LOAN SIMULATOR =====
+        // ===== LOAN SIMULATOR (com prazo até 18 meses acima de 50.000 MZN) =====
         const simAmount = document.getElementById('simAmount');
         const simTerm = document.getElementById('simTerm');
 
@@ -4864,6 +4901,16 @@
 
         function updateSimulator() {
             const amount = parseInt(simAmount.value);
+
+            // Extensão do prazo até 18 meses para valores acima de 50.000 MZN
+            const maxTerm = amount > 50000 ? 18 : 12;
+            if (parseInt(simTerm.max) !== maxTerm) {
+                simTerm.max = maxTerm;
+                const maxLabel = document.getElementById('simTermMaxLabel');
+                if (maxLabel) maxLabel.textContent = maxTerm;
+                if (parseInt(simTerm.value) > maxTerm) simTerm.value = maxTerm;
+            }
+
             const term = parseInt(simTerm.value);
             const interest = amount * 0.07;
             const total = amount + interest;
@@ -4921,13 +4968,6 @@
             }
 
             if (step === 2) {
-                const bi = document.getElementById('loanBi');
-                if (!bi || !bi.value.trim()) {
-                    isValid = false;
-                    bi.classList.add('error');
-                    const errorEl = stepContainer.querySelector('#loanBi').parentElement.querySelector('.error-msg');
-                    if (errorEl) errorEl.classList.add('show');
-                }
                 ['loanBiFront','loanBiBack','loanFacePhoto'].forEach(id => {
                     const file = document.getElementById(id).files[0];
                     if (!file) {
@@ -4980,7 +5020,6 @@
             if (step === 4) updateSummary();
         }
 
-        // ===== ALTERAÇÃO #5: transição com processamento tecnológico =====
         function transitionToStep(nextStep) {
             if (!validateStep(currentStep)) return;
             showTechProcessing(() => {
@@ -5029,8 +5068,37 @@
             reader.readAsDataURL(input.files[0]);
         }
 
-        document.getElementById('loanBiFront').addEventListener('change', function() { previewFile(this, 'biFrontPreviewApp'); });
-        document.getElementById('loanBiBack').addEventListener('change', function() { previewFile(this, 'biBackPreviewApp'); });
+        // Requisito 5: processamento visual de 3s para as fotos do BI
+        function previewFileWithProcessing(input, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container || !input.files || !input.files[0]) return;
+            const parent = input.closest('.form-group');
+            if (parent) {
+                const errorMsg = parent.querySelector('.error-msg');
+                if (errorMsg) errorMsg.classList.remove('show');
+                const fileLabel = parent.querySelector('.file-label');
+                if (fileLabel) fileLabel.classList.remove('error');
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                container.innerHTML = `
+                    <div style="position:relative;width:80px;height:80px;border-radius:8px;overflow:hidden;border:2px solid var(--primary);">
+                        <img src="${e.target.result}" alt="Preview" style="width:100%;height:100%;object-fit:cover;">
+                        <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-size:0.55rem;font-weight:600;gap:4px;">
+                            <i class="fas fa-spinner fa-spin" style="font-size:1rem;color:var(--secondary);"></i>
+                            <span>A processar...</span>
+                        </div>
+                    </div>
+                `;
+                setTimeout(() => {
+                    container.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                }, 3000);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        document.getElementById('loanBiFront').addEventListener('change', function() { previewFileWithProcessing(this, 'biFrontPreviewApp'); });
+        document.getElementById('loanBiBack').addEventListener('change', function() { previewFileWithProcessing(this, 'biBackPreviewApp'); });
         document.getElementById('loanProof').addEventListener('change', function() { previewFile(this, 'proofPreviewApp'); });
 
         document.getElementById('loanFacePhoto').addEventListener('change', function() {
@@ -5073,7 +5141,6 @@
             const purpose = document.getElementById('loanPurpose').value || '---';
             const province = document.getElementById('loanProvince').value || '---';
             const salary = document.getElementById('loanSalary').value ? parseInt(document.getElementById('loanSalary').value).toLocaleString('pt-MZ') + ' MZN' : '---';
-            const bi = document.getElementById('loanBi').value.trim() || '---';
             const receiver = document.getElementById('loanReceiver').value.trim() || '---';
             const method = document.querySelector('.pm-item.active')?.dataset.method || 'M-Pesa';
             const amount = parseInt(simAmount.value) || 0;
@@ -5090,7 +5157,6 @@
             document.getElementById('summaryPurpose').textContent = purpose;
             document.getElementById('summaryProvince').textContent = province;
             document.getElementById('summarySalary').textContent = salary;
-            document.getElementById('summaryBi').textContent = bi;
             document.getElementById('summaryReceiver').textContent = receiver;
             document.getElementById('summaryMethod').textContent = method;
             document.getElementById('summaryAmount').textContent = amount.toLocaleString('pt-MZ') + ' MZN';
@@ -5106,7 +5172,6 @@
         document.getElementById('loanPurpose').addEventListener('change', updateSummary);
         document.getElementById('loanProvince').addEventListener('change', updateSummary);
         document.getElementById('loanSalary').addEventListener('input', updateSummary);
-        document.getElementById('loanBi').addEventListener('input', updateSummary);
         simAmount.addEventListener('input', updateSummary);
         simTerm.addEventListener('input', updateSummary);
 
@@ -5249,46 +5314,71 @@
             });
         }
 
-        // ===== FUNÇÃO PARA EXIBIR POPUP DE ERRO COM BOTÕES =====
+        // ===== POPUP DE ERRO MELHORADO COM "SAIBA MAIS" (requisito 7) =====
         function showErrorPopupWithButtons(message) {
             const popup = document.getElementById('notifPopup');
-            const textEl = document.getElementById('popupText');
 
-            textEl.innerHTML = `
-                <div style="display:flex;flex-direction:column;gap:0.5rem;width:100%;">
-                    <div style="font-size:0.9rem;line-height:1.5;font-weight:400;">${message}</div>
-                    <div class="error-popup-actions">
-                        <button class="btn-error primary" id="errorBtnEntendi">✅ Entendi, vou pagar</button>
-                        <button class="btn-error secondary" id="errorBtnPorque">❓ Porque pagar a taxa de inscrição?</button>
-                        <button class="btn-error secondary" id="errorBtnNaoAprovado">❓ O que acontece quando pagar a taxa e não ser aprovado?</button>
+            popup.classList.add('error-modal-improved');
+            popup.innerHTML = `
+                <button class="close-popup" id="popupClose" aria-label="Fechar">&times;</button>
+                <div class="error-modal-header">
+                    <div class="error-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div>
+                        <h3 class="error-modal-title">Verificação do Comprovativo</h3>
+                        <span class="error-modal-subtitle">Ação necessária</span>
                     </div>
+                </div>
+                <div class="error-modal-body">
+                    <p class="error-modal-message">${message}</p>
+                </div>
+                <div class="error-modal-actions">
+                    <button class="btn-error primary" id="errorBtnEntendi">
+                        <i class="fas fa-check-circle"></i> Entendi, vou pagar
+                    </button>
+                    <button class="btn-error secondary" id="errorBtnSaibaMais">
+                        <i class="fas fa-info-circle"></i> Saiba mais
+                    </button>
+                </div>
+                <div class="error-modal-extra" id="errorExtraOptions" style="display:none;">
+                    <button class="btn-error secondary" id="errorBtnPorque">❓ Porque pagar a taxa de inscrição?</button>
+                    <button class="btn-error secondary" id="errorBtnNaoAprovado">❓ O que acontece quando pagar a taxa e não ser aprovado?</button>
                 </div>
             `;
 
             popup.classList.add('show');
 
-            document.getElementById('errorBtnEntendi').addEventListener('click', function() {
+            const closePopup = () => {
                 popup.classList.remove('show');
+                popup.classList.remove('error-modal-improved');
+            };
+
+            document.getElementById('popupClose').addEventListener('click', closePopup);
+            document.getElementById('errorBtnEntendi').addEventListener('click', closePopup);
+
+            document.getElementById('errorBtnSaibaMais').addEventListener('click', function() {
+                const extra = document.getElementById('errorExtraOptions');
+                if (!extra) return;
+                extra.style.display = (extra.style.display === 'none' || !extra.style.display) ? 'flex' : 'none';
             });
 
             document.getElementById('errorBtnPorque').addEventListener('click', function() {
-                popup.classList.remove('show');
+                closePopup();
 
-                const chatWindow = document.getElementById('chatWindowApp');
-                chatWindow.classList.add('active');
+                const chatWindowEl = document.getElementById('chatWindowApp');
+                chatWindowEl.classList.add('active');
 
-                const chatMessages = document.getElementById('chatMessagesApp');
+                const chatMessagesEl = document.getElementById('chatMessagesApp');
                 const msg = document.createElement('div');
                 msg.className = 'msg user';
                 msg.textContent = 'Para que serve a taxa de inscrição?';
-                chatMessages.appendChild(msg);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatMessagesEl.appendChild(msg);
+                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
                 const typing = document.createElement('div');
                 typing.className = 'msg bot';
                 typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
-                chatMessages.appendChild(typing);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatMessagesEl.appendChild(typing);
+                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
                 setTimeout(() => {
                     typing.remove();
@@ -5301,31 +5391,31 @@ A taxa de inscrição destina-se a cobrir os custos administrativos e operaciona
 Ela permite que o seu pedido seja analisado de forma segura, organizada e transparente, contribuindo para a verificação das informações, a prevenção de fraudes e a agilidade no processo de avaliação.
 
 ⚠️ Importante: O valor da taxa de inscrição varia de acordo com o valor do empréstimo solicitado. Antes de efetuar o pagamento, verifique sempre o valor correspondente ao seu pedido.`;
-                    chatMessages.appendChild(response);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    chatMessagesEl.appendChild(response);
+                    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
                 }, 1500);
 
                 showToast('📝 Explicação sobre a taxa de inscrição aberta no chat.', 'info');
             });
 
             document.getElementById('errorBtnNaoAprovado').addEventListener('click', function() {
-                popup.classList.remove('show');
+                closePopup();
 
-                const chatWindow = document.getElementById('chatWindowApp');
-                chatWindow.classList.add('active');
+                const chatWindowEl = document.getElementById('chatWindowApp');
+                chatWindowEl.classList.add('active');
 
-                const chatMessages = document.getElementById('chatMessagesApp');
+                const chatMessagesEl = document.getElementById('chatMessagesApp');
                 const msg = document.createElement('div');
                 msg.className = 'msg user';
                 msg.textContent = 'O que acontece quando pagar a taxa e não ser aprovado?';
-                chatMessages.appendChild(msg);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatMessagesEl.appendChild(msg);
+                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
                 const typing = document.createElement('div');
                 typing.className = 'msg bot';
                 typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
-                chatMessages.appendChild(typing);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatMessagesEl.appendChild(typing);
+                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
 
                 setTimeout(() => {
                     typing.remove();
@@ -5334,8 +5424,8 @@ Ela permite que o seu pedido seja analisado de forma segura, organizada e transp
                     response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>Ao cumprir com os requisitos exigidos na plataforma, sempre serás aprovado. O importante é verificar no seu cartão onde aparece o seu saldo em dívida se foste verificado. Tens que usar um cartão Vodacom ou Movitel que já esteja em uso há mais de 2 anos e também usar o mesmo documento que foi usado no registo do seu cartão. Com a NOVACASH, o cliente é aprovado em 8 a 30 minutos no máximo. Boa solicitação!
 
 Em caso de o cliente ter falhado em algum dos requisitos exigidos, pode solicitar o reembolso do valor entrando em contacto com o seguinte número: 876364927.`;
-                    chatMessages.appendChild(response);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    chatMessagesEl.appendChild(response);
+                    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
                 }, 1500);
 
                 showToast('📝 Explicação sobre aprovação e reembolso aberta no chat.', 'info');
@@ -5390,7 +5480,6 @@ Em caso de o cliente ter falhado em algum dos requisitos exigidos, pode solicita
 
         function buildAudioScript() {
             const name = getClientName();
-            // ALTERAÇÃO #4: áudio termina em "Boa solicitação, [nome do cliente]."
             return `Saudações, ${name}. Seja bem-vindo à NOVACASH.
 
 Para solicitar o seu empréstimo, siga as seguintes instruções: primeiro, clique no botão ‘Solicitar o seu empréstimo’.
@@ -5507,7 +5596,7 @@ Boa solicitação, ${name}.`;
             }
         });
 
-        // ===== TERMOS E CONDIÇÕES (ADICIONADO) =====
+        // ===== TERMOS E CONDIÇÕES =====
         const termsAnchor = document.querySelector('#loanTerms')?.parentElement?.querySelector('a');
         if (termsAnchor) {
             termsAnchor.addEventListener('click', function(e) {
