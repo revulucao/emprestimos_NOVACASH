@@ -1718,6 +1718,286 @@
             font-family: 'Inter', sans-serif;
         }
 
+        /* ===== NOVIDADE NEWS CARD (NOVO) ===== */
+        .novacash-news-card {
+            width: 100%;
+            padding: 0.9rem 1.1rem;
+            border: none;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #FF7F00 0%, #FFA347 100%);
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 22px rgba(255, 127, 0, 0.28);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .novacash-news-card:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 10px 32px rgba(255, 127, 0, 0.4);
+        }
+        .novacash-news-card:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 14px rgba(255, 127, 0, 0.3);
+        }
+        .novacash-news-card .news-gift {
+            font-size: 1.8rem;
+            line-height: 1;
+            display: inline-block;
+            animation: giftSway 2.6s ease-in-out infinite;
+            transform-origin: center bottom;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+            flex-shrink: 0;
+        }
+        @keyframes giftSway {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(8deg) scale(1.06); }
+            50% { transform: rotate(-4deg) scale(1.02); }
+            75% { transform: rotate(6deg) scale(1.05); }
+        }
+        .novacash-news-card .news-text {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+        }
+        .novacash-news-card .news-title {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            line-height: 1.2;
+            color: #FFFFFF;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        }
+        .novacash-news-card .news-sub {
+            font-size: 0.72rem;
+            font-weight: 500;
+            opacity: 0.92;
+            line-height: 1.2;
+            color: #FFF8E7;
+        }
+        .novacash-news-card .news-arrow {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .novacash-news-card:hover .news-arrow {
+            transform: translateX(3px);
+        }
+        /* brilho ocasional */
+        .novacash-news-card::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -60%;
+            width: 220%;
+            height: 220%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+            transform: rotate(25deg);
+            animation: newsShine 4.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes newsShine {
+            0%, 100% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
+            40% { opacity: 1; }
+            60% { opacity: 1; }
+            80% { transform: translateX(100%) rotate(25deg); opacity: 0; }
+        }
+
+        /* Modal NOVIDADE */
+        .novacash-news-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 200000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            animation: newsFadeIn 0.3s ease;
+        }
+        .novacash-news-overlay.active { display: flex; }
+        @keyframes newsFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .novacash-news-modal {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 1.6rem 1.4rem 1.4rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+            animation: newsModalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        @keyframes newsModalIn {
+            from { opacity: 0; transform: scale(0.92) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .novacash-news-close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: rgba(0,0,0,0.04);
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            color: #6B7280;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+            z-index: 2;
+        }
+        .novacash-news-close:hover {
+            background: rgba(0,0,0,0.08);
+            color: #0A0A0F;
+        }
+        .novacash-news-modal h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #0A0A0F;
+            margin-bottom: 1rem;
+            line-height: 1.35;
+            padding-right: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .novacash-news-modal .news-body {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: #374151;
+            margin-bottom: 0.8rem;
+        }
+        .novacash-news-modal .news-body p {
+            margin-bottom: 0.7rem;
+        }
+        .novacash-news-modal .news-highlight {
+            background: #FFF4E6;
+            border-radius: 14px;
+            padding: 0.7rem 1rem;
+            margin: 0.6rem 0;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #0A0A0F;
+            line-height: 1.5;
+            border-left: 4px solid #FF7F00;
+        }
+        .novacash-news-modal .news-highlight strong {
+            color: #E66A00;
+        }
+        .novacash-news-modal .news-comparison {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 0.9rem 0;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        .novacash-news-modal .news-comparison .old-term {
+            background: #F3F4F6;
+            color: #6B7280;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+        .novacash-news-modal .news-comparison .new-term {
+            background: linear-gradient(135deg, #FF7F00, #FFB347);
+            color: #FFFFFF;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(255, 127, 0, 0.3);
+        }
+        .novacash-news-modal .news-arrow-between {
+            font-size: 1.3rem;
+            color: #FF7F00;
+            font-weight: 900;
+        }
+        .novacash-news-modal .news-benefit {
+            background: #F0FDF4;
+            border-radius: 12px;
+            padding: 0.7rem 1rem;
+            margin: 0.7rem 0;
+            font-size: 0.85rem;
+            color: #065F46;
+            font-weight: 500;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .novacash-news-modal .news-benefit i {
+            color: #10B981;
+            font-size: 1.1rem;
+            margin-top: 0.1rem;
+            flex-shrink: 0;
+        }
+        .novacash-news-modal .news-footer {
+            font-size: 0.85rem;
+            color: #6B7280;
+            font-style: italic;
+            margin: 0.9rem 0 1.2rem;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .novacash-news-modal .news-confirm {
+            display: block;
+            width: 100%;
+            padding: 0.85rem;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #FF7F00, #FFB347);
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 22px rgba(255, 127, 0, 0.3);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+        }
+        .novacash-news-modal .news-confirm:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 127, 0, 0.4);
+        }
+        .novacash-news-modal .news-confirm:active {
+            transform: scale(0.98);
+        }
+
+        /* Respeitar prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .novacash-news-card .news-gift { animation: none; }
+            .novacash-news-card::after { animation: none; opacity: 0; }
+            .novacash-news-overlay { animation: none; }
+            .novacash-news-modal { animation: none; }
+            .novacash-news-card { transition: none; }
+            .novacash-news-card:hover { transform: none; }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             .app-content { padding: 0.8rem 0.8rem 5rem; }
@@ -1774,6 +2054,17 @@
             .tech-steps .tech-step { min-width: 44px; font-size: 0.5rem; }
             .tech-steps .tech-step i { width: 28px; height: 28px; font-size: 0.7rem; }
             .tech-message { font-size: 0.88rem; }
+            .novacash-news-card { padding: 0.8rem 1rem; gap: 0.6rem; }
+            .novacash-news-card .news-gift { font-size: 1.6rem; }
+            .novacash-news-card .news-title { font-size: 0.92rem; }
+            .novacash-news-card .news-sub { font-size: 0.68rem; }
+            .novacash-news-modal { padding: 1.4rem 1.2rem 1.2rem; border-radius: 24px; }
+            .novacash-news-modal h2 { font-size: 1.05rem; }
+            .novacash-news-modal .news-body { font-size: 0.84rem; }
+            .novacash-news-modal .news-comparison { font-size: 0.82rem; gap: 0.5rem; }
+            .novacash-news-modal .news-comparison .old-term { padding: 0.35rem 0.8rem; }
+            .novacash-news-modal .news-comparison .new-term { padding: 0.35rem 1rem; }
+            .novacash-news-modal .news-benefit { font-size: 0.8rem; padding: 0.6rem 0.8rem; }
         }
         @media (min-width: 768px) {
             .app-content { max-width: 600px; margin: 0 auto; padding: 1.5rem 1.5rem 6rem; }
@@ -2000,6 +2291,16 @@
                         <div class="limit-value">300.000 <span class="highlight">MZN</span></div>
                     </div>
                 </div>
+
+                <!-- ===== NOVA FUNCIONALIDADE: BOTÃO NOVIDADE ===== -->
+                <button class="novacash-news-card" id="novacashNewsBtn" aria-label="Nova atualização disponível: prazos de até 18 meses">
+                    <span class="news-gift" aria-hidden="true">🎁</span>
+                    <span class="news-text">
+                        <span class="news-title">NOVIDADE</span>
+                        <span class="news-sub">Nova atualização disponível</span>
+                    </span>
+                    <i class="fas fa-chevron-right news-arrow" aria-hidden="true"></i>
+                </button>
 
                 <!-- Botão Solicitar Empréstimo -->
                 <button class="loan-btn-main" id="loanBtnMain">
@@ -2416,6 +2717,30 @@
         </div>
     </div>
 
+    <!-- ===== NOVIDADE MODAL ===== -->
+    <div class="novacash-news-overlay" id="novacashNewsOverlay" role="dialog" aria-modal="true" aria-labelledby="novacashNewsTitle">
+        <div class="novacash-news-modal">
+            <button class="novacash-news-close" id="novacashNewsClose" aria-label="Fechar novidade">&times;</button>
+            <h2 id="novacashNewsTitle">🚨 NOVA ATUALIZAÇÃO NA NOVACASH! 💰</h2>
+            <div class="news-body">
+                <p>Você sabia? 👀</p>
+                <p>A NOVACASH acaba de ampliar as opções de pagamento! 🎉</p>
+                <p>Agora, clientes que solicitam valores superiores a <strong>50.000 MZN</strong> podem ter a possibilidade de efetuar o pagamento em até <strong>18 meses</strong>.</p>
+            </div>
+            <div class="news-comparison">
+                <span class="old-term">📌 Antes: até 12 meses</span>
+                <span class="news-arrow-between">🚀</span>
+                <span class="new-term">Agora: até 18 meses</span>
+            </div>
+            <div class="news-benefit">
+                <i class="fas fa-check-circle"></i>
+                <span>Mais tempo para organizar o seu orçamento e escolher um plano que se adapte melhor às suas necessidades.</span>
+            </div>
+            <p class="news-footer">✨ Consulte agora as novas opções disponíveis na sua simulação.</p>
+            <button class="novacash-news-confirm" id="novacashNewsConfirm">Entendi 👍</button>
+        </div>
+    </div>
+
     <!-- ===== FUNDS MODAL ===== -->
     <div class="funds-modal-overlay" id="fundsModal">
         <div class="funds-modal">
@@ -2475,6 +2800,43 @@
                 option.textContent = i + ' anos';
                 select.appendChild(option);
             }
+        })();
+
+        // ===== NOVIDADE (NOVA FUNCIONALIDADE) =====
+        (function initNewsFeature() {
+            const newsBtn = document.getElementById('novacashNewsBtn');
+            const overlay = document.getElementById('novacashNewsOverlay');
+            const closeBtn = document.getElementById('novacashNewsClose');
+            const confirmBtn = document.getElementById('novacashNewsConfirm');
+
+            if (!newsBtn || !overlay || !closeBtn || !confirmBtn) return;
+
+            function openNewsModal() {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => closeBtn.focus(), 100);
+            }
+
+            function closeNewsModal() {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            newsBtn.addEventListener('click', openNewsModal);
+            closeBtn.addEventListener('click', closeNewsModal);
+            confirmBtn.addEventListener('click', closeNewsModal);
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeNewsModal();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                    closeNewsModal();
+                }
+            });
         })();
 
         // ===== SOUND NOTIFICATION =====
@@ -4171,6 +4533,7 @@
                 chatWindow.classList.remove('active');
                 document.getElementById('fundsModal').classList.remove('active');
                 document.getElementById('termsModalOverlay')?.classList.remove('active');
+                document.getElementById('novacashNewsOverlay')?.classList.remove('active');
             }
         });
 
