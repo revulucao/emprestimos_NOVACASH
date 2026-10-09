@@ -309,6 +309,7 @@
             color: white;
             border: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: opacity 0.3s ease;
         }
         .bank-card-premium .card-verified-badge i {
             font-size: 0.85rem;
@@ -2253,9 +2254,9 @@
                 <!-- Premium Bank Card (REDESIGN) -->
                 <div class="bank-card-premium">
                     <div class="card-top-row">
-                        <div class="card-verified-badge">
-                            <i class="fas fa-check-circle"></i>
-                            <span>VERIFICADO</span>
+                        <div class="card-verified-badge" id="cardStatusBadge">
+                            <i class="fas fa-check-circle" id="cardStatusIcon"></i>
+                            <span id="cardStatusText">VERIFICADO</span>
                         </div>
                     </div>
                     <div class="card-user-row">
@@ -3546,6 +3547,7 @@
         }
 
         // ===== ESTATÍSTICAS =====
+        // ALTERAÇÃO #3: valores iniciais ~133
         let requestedToday = 0, approvedToday = 0, approvalGap = 2;
         function todayKey() {
             const d = new Date();
@@ -3558,7 +3560,8 @@
                 requestedToday = saved.requested;
                 approvalGap = (saved.gap === 3) ? 3 : 2;
             } else {
-                requestedToday = 200 + Math.floor(Math.random() * 151);
+                // ALTERAÇÃO #3: começar em ~133 (variação 133–143)
+                requestedToday = 133 + Math.floor(Math.random() * 11);
                 approvalGap = Math.random() < 0.5 ? 2 : 3;
             }
             approvedToday = Math.max(0, requestedToday - approvalGap);
@@ -3604,9 +3607,10 @@
             if (!saved || saved.day !== todayKey()) initLoanStats();
         }, 60000);
 
-        // ===== INICIAR NOTIFICAÇÕES (intervalo variável 10–17s) =====
+        // ===== INICIAR NOTIFICAÇÕES (ALTERAÇÃO #1: intervalo 20–35s) =====
         function scheduleNextNotification() {
-            const delay = Math.floor(Math.random() * 7000) + 10000;
+            // ALTERAÇÃO #1: intervalo variável entre 20s e 35s
+            const delay = Math.floor(Math.random() * 15000) + 20000;
             setTimeout(() => {
                 showLoanNotification();
                 scheduleNextNotification();
@@ -3849,6 +3853,44 @@
             showToast('Sessão encerrada', 'info');
         });
 
+        // ===== STATUS DO CARTÃO — ALTERAÇÃO #2 =====
+        // Primeiro acesso: "EM ANÁLISE" durante 40s → "VERIFICADO"
+        function initCardStatus(user) {
+            const badge = document.getElementById('cardStatusBadge');
+            if (!badge || !user) return;
+
+            const STATUS_KEY = 'novacash_card_verified_' + user.phone;
+
+            function setVerified() {
+                badge.innerHTML = '<i class="fas fa-check-circle"></i><span>VERIFICADO</span>';
+                badge.style.opacity = '1';
+                try { localStorage.setItem(STATUS_KEY, 'verified'); } catch(_) {}
+            }
+
+            function setAnalyzing() {
+                badge.innerHTML = '<i class="fas fa-clock"></i><span>EM ANÁLISE</span>';
+                badge.style.opacity = '0.85';
+            }
+
+            // Se já foi verificado anteriormente, mantém verificado
+            try {
+                if (localStorage.getItem(STATUS_KEY) === 'verified') {
+                    setVerified();
+                    return;
+                }
+            } catch(_) {}
+
+            // Primeiro acesso → Em análise durante 40 segundos
+            setAnalyzing();
+            setTimeout(function() {
+                if (currentUser && currentUser.phone === user.phone) {
+                    setVerified();
+                } else {
+                    try { localStorage.setItem(STATUS_KEY, 'verified'); } catch(_) {}
+                }
+            }, 40000);
+        }
+
         // ===== DASHBOARD UPDATE =====
         function updateDashboard(user) {
             if (!user) return;
@@ -3869,6 +3911,8 @@
             expireOldNotifications(user);
             updateNotifications();
             __sessionActive = true;
+            // ALTERAÇÃO #2: inicializar status do cartão (em análise → verificado)
+            initCardStatus(user);
         }
 
         // ===== ADD ONLINE INDICATOR TO AVATAR =====
