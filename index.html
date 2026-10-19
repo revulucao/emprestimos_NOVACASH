@@ -567,7 +567,7 @@
         }
         .chat-fab:hover { transform: scale(1.05); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
 
-        /* ===== AUDIO FAB (NOVO ÍCONE DE SOM) ===== */
+        /* ===== AUDIO FAB ===== */
         .audio-fab {
             position: fixed;
             bottom: 9.7rem;
@@ -683,34 +683,404 @@
         .loan-notification .notif-close { position: absolute; top: 6px; right: 8px; background: none; border: none; font-size: 0.9rem; color: var(--gray); cursor: pointer; padding: 4px 6px; line-height: 1; opacity: 0.6; transition: opacity 0.2s ease; }
         .loan-notification .notif-close:hover { opacity: 1; }
 
-        /* ===== LOGIN ===== */
-        #loginScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--light); z-index: 100000; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; transition: opacity 0.5s ease; }
-        #loginScreen.hide { opacity: 0; pointer-events: none; }
-        #flagBackground { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/dc/Flag_of_Mozambique.svg'); background-size: cover; background-position: center; z-index: -2; animation: flagWave 6s ease-in-out infinite alternate; transform-origin: center center; }
-        @keyframes flagWave {
-            0% { transform: perspective(1200px) rotateX(2deg) rotateY(-4deg) scale(1.02); filter: brightness(1); }
-            15% { transform: perspective(1200px) rotateX(1deg) rotateY(-2deg) scale(1.01); filter: brightness(0.97); }
-            30% { transform: perspective(1200px) rotateX(4deg) rotateY(1deg) scale(1.03); filter: brightness(1.02); }
-            45% { transform: perspective(1200px) rotateX(-1deg) rotateY(4deg) scale(1.01); filter: brightness(0.98); }
-            60% { transform: perspective(1200px) rotateX(3deg) rotateY(-1deg) scale(1.04); filter: brightness(1.01); }
-            75% { transform: perspective(1200px) rotateX(0deg) rotateY(3deg) scale(1.02); filter: brightness(0.99); }
-            90% { transform: perspective(1200px) rotateX(-2deg) rotateY(-3deg) scale(1.03); filter: brightness(1); }
-            100% { transform: perspective(1200px) rotateX(1deg) rotateY(2deg) scale(1.02); filter: brightness(1); }
+        /* ===== LOGIN SCREEN — REDESENHADA (PROFISSIONAL & TECNOLÓGICA) ===== */
+        #loginScreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0A0A0F;
+            z-index: 100000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 1.5rem;
+            transition: opacity 0.5s ease;
+            overflow: hidden;
         }
-        #flagBackground::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.06) 100%); pointer-events: none; animation: flagShimmer 8s ease-in-out infinite alternate; }
-        @keyframes flagShimmer { 0% { opacity: 0.3; transform: translateX(-5%) skewX(-2deg); } 50% { opacity: 0.6; transform: translateX(5%) skewX(2deg); } 100% { opacity: 0.3; transform: translateX(-5%) skewX(-2deg); } }
-        #flagOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.30); z-index: -1; backdrop-filter: blur(1px); }
+        #loginScreen.hide { opacity: 0; pointer-events: none; }
 
-        #loginScreen .login-box { background: rgba(255,255,255,0.95); backdrop-filter: blur(6px); border-radius: var(--radius-xl); padding: 2rem 1.5rem; width: 100%; max-width: 380px; box-shadow: var(--shadow-xl); position: relative; z-index: 1; }
-        #loginScreen .login-box .login-logo { text-align: center; margin-bottom: 1.5rem; }
-        #loginScreen .login-box .login-logo h1 { font-size: 2rem; font-weight: 900; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        #loginScreen .login-box .login-logo p { color: var(--gray); font-size: 0.8rem; margin-top: 0.2rem; }
-        #loginScreen .login-box .form-group input { background: rgba(255,255,255,0.9); border-color: transparent; padding: 0.8rem 1rem; }
-        #loginScreen .login-box .form-group input:focus { border-color: var(--primary); background: var(--white); }
-        #loginScreen .login-box .login-options { display: flex; justify-content: space-between; font-size: 0.75rem; margin: 0.5rem 0 1rem; }
-        #loginScreen .login-box .login-options a { color: var(--primary); text-decoration: none; font-weight: 600; }
-        .login-box .login-sub { color: var(--gray); font-size: 0.7rem; text-align: center; margin-top: 0.5rem; }
+        /* --- FUNDO TECNOLÓGICO --- */
+        .login-tech-bg {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 50% 30%, rgba(255,127,0,0.10) 0%, transparent 55%),
+                        radial-gradient(circle at 80% 80%, rgba(255,215,0,0.06) 0%, transparent 50%),
+                        linear-gradient(180deg, #0A0A0F 0%, #12121A 50%, #0A0A0F 100%);
+            z-index: 0;
+        }
+        .login-grid-overlay {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,127,0,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,127,0,0.035) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: loginGridMove 14s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+        @keyframes loginGridMove {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 50px 50px, 50px 50px; }
+        }
+        .login-particles {
+            position: absolute; inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .login-particles span {
+            position: absolute;
+            width: 3px; height: 3px;
+            background: var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            opacity: 0;
+            animation: loginParticleFloat linear infinite;
+        }
+        @keyframes loginParticleFloat {
+            0% { transform: translateY(100vh) scale(0.4); opacity: 0; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+        .login-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            pointer-events: none;
+            animation: loginOrbPulse 8s ease-in-out infinite alternate;
+        }
+        .login-orb.o1 {
+            width: 300px; height: 300px;
+            background: rgba(255,127,0,0.12);
+            top: -10%; left: -10%;
+        }
+        .login-orb.o2 {
+            width: 250px; height: 250px;
+            background: rgba(255,215,0,0.08);
+            bottom: -5%; right: -5%;
+            animation-delay: -4s;
+        }
+        @keyframes loginOrbPulse {
+            0% { transform: scale(1) translate(0,0); opacity: 0.6; }
+            100% { transform: scale(1.2) translate(20px,-20px); opacity: 1; }
+        }
 
+        /* --- CONTAINER DO LOGIN --- */
+        .login-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: loginFadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes loginFadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- LOGO PREMIUM --- */
+        .login-logo-premium {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: loginFadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+        }
+        .login-logo-premium .logo-icon-wrap {
+            width: 76px; height: 76px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #FF7F00, #FFB347, #FFD700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+            box-shadow: 0 0 40px rgba(255,127,0,0.35), 0 8px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-logo-premium .logo-icon-wrap::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+            transform: rotate(25deg);
+            animation: logoShine 3.5s ease-in-out infinite;
+        }
+        @keyframes logoShine {
+            0%, 100% { transform: translateX(-100%) rotate(25deg); opacity: 0; }
+            40% { opacity: 1; }
+            60% { opacity: 1; }
+            80% { transform: translateX(100%) rotate(25deg); opacity: 0; }
+        }
+        .login-logo-premium .logo-icon-wrap i {
+            font-size: 2.2rem;
+            color: white;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+            z-index: 1;
+        }
+        .login-logo-premium h1 {
+            font-size: 1.9rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 50%, #FF7F00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .login-logo-premium .logo-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.4rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.04);
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .login-logo-premium .logo-tagline i {
+            color: #10B981;
+            font-size: 0.6rem;
+            animation: pulse-dot 2s infinite;
+        }
+
+        /* --- CARD DE LOGIN GLASSMORPHISM --- */
+        .login-box-premium {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 2rem 1.6rem 1.8rem;
+            width: 100%;
+            box-shadow:
+                0 25px 60px rgba(0,0,0,0.35),
+                0 0 0 1px rgba(255,255,255,0.06),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            position: relative;
+            z-index: 2;
+            animation: loginFadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+            border: 1px solid rgba(255,127,0,0.15);
+        }
+        .login-box-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            border-radius: 0 0 6px 6px;
+            opacity: 0.8;
+        }
+
+        .login-box-premium .login-subtitle {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--gray);
+            margin-bottom: 1.4rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .login-box-premium .login-subtitle i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* --- INPUTS COM ÍCONE --- */
+        .input-icon-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .input-icon-group .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: var(--gray);
+            pointer-events: none;
+            transition: color 0.3s ease;
+            z-index: 2;
+        }
+        .input-icon-group input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.8rem;
+            border: 2px solid var(--gray-light);
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--white);
+            color: var(--dark);
+        }
+        .input-icon-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255,127,0,0.10);
+            background: #FFFDF9;
+        }
+        .input-icon-group input:focus ~ .input-icon {
+            color: var(--primary);
+        }
+        .input-icon-group input::placeholder {
+            color: #B0B5C0;
+            font-weight: 400;
+        }
+        .input-icon-group input.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 4px rgba(239,68,68,0.08);
+        }
+        .input-icon-group .error-msg {
+            color: var(--error);
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-top: 0.3rem;
+            padding-left: 0.2rem;
+            display: none;
+        }
+        .input-icon-group .error-msg.show { display: block; }
+
+        /* --- OPÇÕES --- */
+        .login-options-premium {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            margin: 0.3rem 0 1.2rem;
+            color: var(--gray);
+        }
+        .login-options-premium label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            font-weight: 500;
+            user-select: none;
+        }
+        .login-options-premium input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* --- BOTÃO PREMIUM --- */
+        .login-btn-premium {
+            width: 100%;
+            padding: 0.95rem;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #FF7F00 0%, #FFB347 100%);
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(255,127,0,0.30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+        .login-btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255,127,0,0.40);
+        }
+        .login-btn-premium:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(255,127,0,0.25);
+        }
+        .login-btn-premium:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .login-btn-premium::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 35%, rgba(255,255,255,0.15) 50%, transparent 65%);
+            transform: rotate(45deg);
+            animation: btnShimmer 3s infinite;
+        }
+        @keyframes btnShimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .login-btn-premium i { font-size: 1.1rem; z-index: 1; }
+        .login-btn-premium span { z-index: 1; }
+
+        /* --- INDICADOR DE SEGURANÇA --- */
+        .login-security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16,185,129,0.06);
+            border-radius: 30px;
+            border: 1px solid rgba(16,185,129,0.12);
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #065F46;
+            letter-spacing: 0.2px;
+        }
+        .login-security-badge i {
+            color: var(--success);
+            font-size: 0.85rem;
+        }
+
+        /* --- LINK REGISTO --- */
+        .login-register-link {
+            text-align: center;
+            margin-top: 1.4rem;
+            font-size: 0.82rem;
+            color: var(--gray);
+            animation: loginFadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+        }
+        .login-register-link a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        .login-register-link a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* --- FOOTER --- */
+        .login-footer-premium {
+            margin-top: 1.8rem;
+            text-align: center;
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.25);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            animation: loginFadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .login-footer-premium i { font-size: 0.55rem; }
+
+        /* ===== REGISTER SCREEN ===== */
         #registerScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--light); z-index: 100001; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; overflow-y: auto; }
         #registerScreen.active { display: flex; }
         #registerScreen .register-box { background: var(--white); border-radius: var(--radius-xl); padding: 2rem 1.5rem; width: 100%; max-width: 380px; box-shadow: var(--shadow-xl); margin: auto; }
@@ -1119,7 +1489,7 @@
         .notif-popup .text { flex: 1; font-size: 0.85rem; font-weight: 500; }
         .notif-popup .close-popup { background: none; border: none; font-size: 1.2rem; color: var(--gray); cursor: pointer; }
 
-        /* ===== ERROR MODAL IMPROVED (requisito 7) ===== */
+        /* ===== ERROR MODAL IMPROVED ===== */
         .notif-popup.error-modal-improved {
             flex-direction: column;
             align-items: stretch;
@@ -1194,7 +1564,6 @@
             animation: fadeSlideUp 0.3s ease;
         }
 
-        /* ESTILO PARA OS BOTÕES DA MENSAGEM DE ERRO */
         .error-popup-actions {
             display: flex;
             flex-direction: column;
@@ -1232,7 +1601,6 @@
             color: white;
         }
 
-        /* Botões no novo modal melhorado */
         .notif-popup.error-modal-improved .btn-error {
             padding: 0.7rem 1rem;
             border-radius: 60px;
@@ -1670,7 +2038,7 @@
         .sim-results .sim-result-item .sri-value { font-size: 0.85rem; font-weight: 700; margin-top: 0.1rem; }
         .sim-results .sim-result-item .sri-value.primary { color: var(--primary); }
 
-        /* ===== TERMOS E CONDIÇÕES (ADICIONADO) ===== */
+        /* ===== TERMOS E CONDIÇÕES ===== */
         .terms-modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -1719,7 +2087,7 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* ===== NOVIDADE NEWS CARD (NOVO) ===== */
+        /* ===== NOVIDADE NEWS CARD ===== */
         .novacash-news-card {
             width: 100%;
             padding: 0.9rem 1.1rem;
@@ -1797,7 +2165,6 @@
         .novacash-news-card:hover .news-arrow {
             transform: translateX(3px);
         }
-        /* brilho ocasional */
         .novacash-news-card::after {
             content: '';
             position: absolute;
@@ -1817,7 +2184,6 @@
             80% { transform: translateX(100%) rotate(25deg); opacity: 0; }
         }
 
-        /* Modal NOVIDADE */
         .novacash-news-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -1991,6 +2357,11 @@
 
         /* Respeitar prefers-reduced-motion */
         @media (prefers-reduced-motion: reduce) {
+            .login-particles span { animation: none; opacity: 0; }
+            .login-grid-overlay { animation: none; }
+            .login-orb { animation: none; }
+            .login-logo-premium .logo-icon-wrap::after { animation: none; }
+            .login-btn-premium::after { animation: none; }
             .novacash-news-card .news-gift { animation: none; }
             .novacash-news-card::after { animation: none; opacity: 0; }
             .novacash-news-overlay { animation: none; }
@@ -2066,6 +2437,16 @@
             .novacash-news-modal .news-comparison .old-term { padding: 0.35rem 0.8rem; }
             .novacash-news-modal .news-comparison .new-term { padding: 0.35rem 1rem; }
             .novacash-news-modal .news-benefit { font-size: 0.8rem; padding: 0.6rem 0.8rem; }
+            /* Login mobile */
+            .login-wrapper { max-width: 100%; }
+            .login-logo-premium h1 { font-size: 1.6rem; }
+            .login-logo-premium .logo-icon-wrap { width: 64px; height: 64px; border-radius: 18px; }
+            .login-logo-premium .logo-icon-wrap i { font-size: 1.8rem; }
+            .login-box-premium { padding: 1.5rem 1.2rem 1.4rem; border-radius: 24px; }
+            .login-box-premium .login-subtitle { font-size: 0.75rem; }
+            .input-icon-group input { padding: 0.75rem 1rem 0.75rem 2.6rem; font-size: 0.85rem; }
+            .input-icon-group .input-icon { font-size: 0.9rem; left: 0.9rem; }
+            .login-btn-premium { padding: 0.85rem; font-size: 0.95rem; }
         }
         @media (min-width: 768px) {
             .app-content { max-width: 600px; margin: 0 auto; padding: 1.5rem 1.5rem 6rem; }
@@ -2160,32 +2541,78 @@
         <button class="close-popup" id="popupClose">&times;</button>
     </div>
 
-    <!-- ===== LOGIN ===== -->
+    <!-- ===== LOGIN — REDESENHADO ===== -->
     <div id="loginScreen">
-        <div id="flagBackground"></div>
-        <div id="flagOverlay"></div>
-        <div class="login-box">
-            <div class="login-logo">
-                <h1>💰 NOVACASH</h1>
-                <p>Empréstimos rápidos e seguros</p>
+        <!-- Fundo tecnológico -->
+        <div class="login-tech-bg"></div>
+        <div class="login-grid-overlay"></div>
+        <div class="login-particles" id="loginParticles">
+            <span style="left:8%; animation-duration:12s; animation-delay:0s;"></span>
+            <span style="left:18%; animation-duration:16s; animation-delay:2s;"></span>
+            <span style="left:32%; animation-duration:10s; animation-delay:4s;"></span>
+            <span style="left:45%; animation-duration:14s; animation-delay:1s;"></span>
+            <span style="left:58%; animation-duration:11s; animation-delay:3s;"></span>
+            <span style="left:70%; animation-duration:15s; animation-delay:5s;"></span>
+            <span style="left:82%; animation-duration:13s; animation-delay:2.5s;"></span>
+            <span style="left:92%; animation-duration:17s; animation-delay:1.5s;"></span>
+            <span style="left:25%; animation-duration:9s; animation-delay:6s;"></span>
+            <span style="left:52%; animation-duration:18s; animation-delay:3.5s;"></span>
+            <span style="left:65%; animation-duration:12s; animation-delay:0.5s;"></span>
+            <span style="left:38%; animation-duration:14s; animation-delay:4.5s;"></span>
+        </div>
+        <div class="login-orb o1"></div>
+        <div class="login-orb o2"></div>
+
+        <!-- Container principal -->
+        <div class="login-wrapper">
+            <!-- Logo premium -->
+            <div class="login-logo-premium">
+                <div class="logo-icon-wrap">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1>NOVACASH</h1>
+                <div class="logo-tagline">
+                    <i class="fas fa-circle"></i> Plataforma Segura
+                </div>
             </div>
-            <form id="loginFormApp">
-                <div class="form-group">
-                    <input type="text" id="loginNameApp" placeholder="Nome Completo" required>
+
+            <!-- Card de login -->
+            <div class="login-box-premium">
+                <div class="login-subtitle">
+                    <i class="fas fa-fingerprint"></i> Acesse sua conta com segurança
                 </div>
-                <div class="form-group">
-                    <input type="tel" id="loginPhoneApp" placeholder="Número de Telefone" required>
-                    <div class="error-msg" id="loginPhoneError">Digite um número de telefone válido com 9 dígitos.</div>
+                <form id="loginFormApp">
+                    <div class="input-icon-group">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="loginNameApp" placeholder="Nome Completo" required autocomplete="name">
+                    </div>
+                    <div class="input-icon-group">
+                        <i class="fas fa-mobile-alt input-icon"></i>
+                        <input type="tel" id="loginPhoneApp" placeholder="Número de Telefone" required autocomplete="tel">
+                        <div class="error-msg" id="loginPhoneError">Digite um número de telefone válido com 9 dígitos.</div>
+                    </div>
+                    <div class="login-options-premium">
+                        <label><input type="checkbox" id="rememberMe"> Lembrar-me</label>
+                    </div>
+                    <button type="submit" class="login-btn-premium" id="loginBtnSubmit">
+                        <span>Entrar</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+                <div class="login-security-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>Criptografia de ponta a ponta</span>
                 </div>
-                <div class="login-options">
-                    <label><input type="checkbox" id="rememberMe"> Lembrar-me</label>
-                </div>
-                <button type="submit" class="btn btn-primary" id="loginBtnSubmit">Entrar <i class="fas fa-arrow-right"></i></button>
-            </form>
-            <div class="login-sub">Digite seu nome e telefone para acessar sua conta</div>
-            <div style="text-align: center; margin-top: 0.8rem;">
-                <span style="color: var(--gray); font-size: 0.8rem;">Não tem conta? </span>
-                <a href="#" id="showRegisterApp" style="color: var(--primary); font-weight: 600; text-decoration: none;">Criar Conta</a>
+            </div>
+
+            <!-- Link para registo -->
+            <div class="login-register-link">
+                Não tem conta? <a href="#" id="showRegisterApp">Criar Conta</a>
+            </div>
+
+            <!-- Footer -->
+            <div class="login-footer-premium">
+                <i class="fas fa-shield-alt"></i> NOVACASH © 2026 · Fintech Moçambique
             </div>
         </div>
     </div>
@@ -2251,7 +2678,7 @@
                     <span class="counter-icon"><i class="fas fa-users"></i></span>
                 </div>
 
-                <!-- Premium Bank Card (REDESIGN) -->
+                <!-- Premium Bank Card -->
                 <div class="bank-card-premium">
                     <div class="card-top-row">
                         <div class="card-verified-badge" id="cardStatusBadge">
@@ -2293,7 +2720,7 @@
                     </div>
                 </div>
 
-                <!-- ===== NOVA FUNCIONALIDADE: BOTÃO NOVIDADE ===== -->
+                <!-- NOVA FUNCIONALIDADE: BOTÃO NOVIDADE -->
                 <button class="novacash-news-card" id="novacashNewsBtn" aria-label="Nova atualização disponível: prazos de até 18 meses">
                     <span class="news-gift" aria-hidden="true">🎁</span>
                     <span class="news-text">
@@ -2310,7 +2737,7 @@
                 </button>
                 <div class="loan-btn-sub">É rápido, seguro e 100% online!</div>
 
-                <!-- ===== QUICK STATS ===== -->
+                <!-- QUICK STATS -->
                 <div class="quick-stats" id="statsPanel">
                     <div class="quick-stat">
                         <div class="stat-icon"><i class="fas fa-file-signature"></i></div>
@@ -2336,7 +2763,7 @@
                 </div>
                 <div id="activityList"></div>
 
-                <!-- ===== SEÇÃO DE AVALIAÇÕES PREMIUM ===== -->
+                <!-- SEÇÃO DE AVALIAÇÕES PREMIUM -->
                 <div class="reviews-section-app" id="reviewsPremiumSection">
                     <div class="reviews-header-premium" id="reviewsHeader">
                         <div class="avg-box">
@@ -2441,7 +2868,6 @@
                             </select>
                             <div class="error-msg">Selecione um setor</div>
                         </div>
-                        <!-- NOVO CAMPO: FINALIDADE DO EMPRÉSTIMO -->
                         <div class="form-group">
                             <label>Finalidade do empréstimo <span style="color:var(--error);">*</span></label>
                             <select id="loanPurpose">
@@ -2454,7 +2880,6 @@
                             </select>
                             <div class="error-msg">Selecione uma finalidade</div>
                         </div>
-                        <!-- NOVO CAMPO: PROVÍNCIA -->
                         <div class="form-group">
                             <label>Província <span style="color:var(--error);">*</span></label>
                             <select id="loanProvince">
@@ -2473,7 +2898,6 @@
                             </select>
                             <div class="error-msg">Selecione uma província</div>
                         </div>
-                        <!-- NOVO CAMPO: SALÁRIO MENSAL -->
                         <div class="form-group">
                             <label>Salário mensal (MZN) <span style="color:var(--error);">*</span></label>
                             <input type="number" id="loanSalary" placeholder="Ex: 25000" min="0" step="100">
@@ -2522,7 +2946,6 @@
                             <label>Fotografia do Rosto (para identificação) <span style="color:var(--error);">*</span></label>
                             <div class="file-input-wrapper">
                                 <div class="file-label"><i class="fas fa-user"></i> Clique para carregar a foto do rosto</div>
-                                <!-- ALTERAÇÃO #2: aceitar mais formatos (JPG, JPEG, PNG, WEBP, HEIC, HEIF) -->
                                 <input type="file" id="loanFacePhoto" accept="image/*,.heic,.heif,image/heic,image/heif,.HEIC,.HEIF">
                             </div>
                             <div class="error-msg">Carregue a foto do rosto</div>
@@ -2683,7 +3106,7 @@
             <button class="nav-item" data-page="pageProfile"><i class="fas fa-user"></i><span class="nav-label">Perfil</span></button>
         </nav>
 
-        <!-- ===== AUDIO FAB (NOVO ÍCONE DE SOM) ===== -->
+        <!-- AUDIO FAB -->
         <button class="audio-fab" id="audioFab" aria-label="Ouvir instruções em áudio">
             <span class="audio-tooltip">🔊 Ouvir instruções</span>
             <span class="audio-pulse"></span>
@@ -2777,7 +3200,7 @@
         </div>
     </div>
 
-    <!-- ===== TERMOS E CONDIÇÕES (ADICIONADO) ===== -->
+    <!-- ===== TERMOS E CONDIÇÕES ===== -->
     <div class="terms-modal-overlay" id="termsModalOverlay">
         <div class="terms-modal-content">
             <h3>📄 Termos e Condições</h3>
@@ -2871,12 +3294,10 @@
                 const master = ctx.createGain();
                 master.gain.value = 0.0;
                 master.connect(ctx.destination);
-                // volume suave e profissional
                 master.gain.setValueAtTime(0.0001, startAt);
                 master.gain.exponentialRampToValueAtTime(0.07, startAt + 0.08);
                 master.gain.setValueAtTime(0.07, startAt + 0.55);
                 master.gain.exponentialRampToValueAtTime(0.0001, startAt + totalDur);
-                // tom 1 — nota suave (Dó)
                 const o1 = ctx.createOscillator();
                 const g1 = ctx.createGain();
                 o1.type = 'sine';
@@ -2886,7 +3307,6 @@
                 g1.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.45);
                 o1.connect(g1); g1.connect(master);
                 o1.start(startAt); o1.stop(startAt + 0.5);
-                // tom 2 — nota suave (Sol) ligeiramente depois
                 const o2 = ctx.createOscillator();
                 const g2 = ctx.createGain();
                 o2.type = 'sine';
@@ -3260,7 +3680,6 @@
             if (updateEl) {
                 updateEl.textContent = 'Atualizado ' + new Date().toLocaleTimeString('pt-MZ');
             }
-            // Valor mascarado por defeito; será revelado no modal ao clicar (requisito 2)
             const outsideFunds = document.getElementById('outsideFunds');
             if (outsideFunds) outsideFunds.textContent = '👁️ Ver';
             localStorage.setItem('novacash_funds_mzn', availableFundsMZN.toString());
@@ -3547,7 +3966,6 @@
         }
 
         // ===== ESTATÍSTICAS =====
-        // ALTERAÇÃO #3: valores iniciais ~133
         let requestedToday = 0, approvedToday = 0, approvalGap = 2;
         function todayKey() {
             const d = new Date();
@@ -3560,7 +3978,6 @@
                 requestedToday = saved.requested;
                 approvalGap = (saved.gap === 3) ? 3 : 2;
             } else {
-                // ALTERAÇÃO #3: começar em ~133 (variação 133–143)
                 requestedToday = 133 + Math.floor(Math.random() * 11);
                 approvalGap = Math.random() < 0.5 ? 2 : 3;
             }
@@ -3607,9 +4024,8 @@
             if (!saved || saved.day !== todayKey()) initLoanStats();
         }, 60000);
 
-        // ===== INICIAR NOTIFICAÇÕES (ALTERAÇÃO #1: intervalo 20–35s) =====
+        // ===== INICIAR NOTIFICAÇÕES =====
         function scheduleNextNotification() {
-            // ALTERAÇÃO #1: intervalo variável entre 20s e 35s
             const delay = Math.floor(Math.random() * 15000) + 20000;
             setTimeout(() => {
                 showLoanNotification();
@@ -3721,7 +4137,7 @@
                     setTimeout(() => {
                         loading.hide();
                         btn.disabled = false;
-                        btn.innerHTML = 'Entrar <i class="fas fa-arrow-right"></i>';
+                        btn.innerHTML = '<span>Entrar</span><i class="fas fa-arrow-right"></i>';
                         currentUser = user;
                         __sessionActive = true;
                         sessionStorage.setItem('novacash_session', JSON.stringify(user));
@@ -3853,8 +4269,7 @@
             showToast('Sessão encerrada', 'info');
         });
 
-        // ===== STATUS DO CARTÃO — ALTERAÇÃO #2 =====
-        // Primeiro acesso: "EM ANÁLISE" durante 40s → "VERIFICADO"
+        // ===== STATUS DO CARTÃO =====
         function initCardStatus(user) {
             const badge = document.getElementById('cardStatusBadge');
             if (!badge || !user) return;
@@ -3872,7 +4287,6 @@
                 badge.style.opacity = '0.85';
             }
 
-            // Se já foi verificado anteriormente, mantém verificado
             try {
                 if (localStorage.getItem(STATUS_KEY) === 'verified') {
                     setVerified();
@@ -3880,7 +4294,6 @@
                 }
             } catch(_) {}
 
-            // Primeiro acesso → Em análise durante 40 segundos
             setAnalyzing();
             setTimeout(function() {
                 if (currentUser && currentUser.phone === user.phone) {
@@ -3911,7 +4324,6 @@
             expireOldNotifications(user);
             updateNotifications();
             __sessionActive = true;
-            // ALTERAÇÃO #2: inicializar status do cartão (em análise → verificado)
             initCardStatus(user);
         }
 
@@ -4382,7 +4794,7 @@
             if (e.target === this) this.classList.remove('active');
         });
 
-        // ===== FUNDS TOGGLE CARD (requisito 2) =====
+        // ===== FUNDS TOGGLE CARD =====
         document.getElementById('fundsToggleCard')?.addEventListener('click', function() {
             document.getElementById('fundsModal').classList.add('active');
         });
@@ -5309,7 +5721,6 @@
         function updateSimulator() {
             const amount = parseInt(simAmount.value);
 
-            // Extensão do prazo até 18 meses para valores acima de 50.000 MZN
             const maxTerm = amount > 50000 ? 18 : 12;
             if (parseInt(simTerm.max) !== maxTerm) {
                 simTerm.max = maxTerm;
@@ -5475,7 +5886,6 @@
             reader.readAsDataURL(input.files[0]);
         }
 
-        // Requisito 5: processamento visual de 3s para as fotos do BI
         function previewFileWithProcessing(input, containerId) {
             const container = document.getElementById(containerId);
             if (!container || !input.files || !input.files[0]) return;
@@ -5721,7 +6131,7 @@
             });
         }
 
-        // ===== POPUP DE ERRO MELHORADO COM "SAIBA MAIS" (requisito 7) =====
+        // ===== POPUP DE ERRO MELHORADO COM "SAIBA MAIS" =====
         function showErrorPopupWithButtons(message) {
             const popup = document.getElementById('notifPopup');
 
@@ -5873,7 +6283,7 @@ Em caso de o cliente ter falhado em algum dos requisitos exigidos, pode solicita
         });
         document.querySelectorAll('.star-rating-input i[data-value="5"]').forEach(s => s.classList.add('active'));
 
-        // ===== AUDIO FAB (NOVO ÍCONE DE SOM) =====
+        // ===== AUDIO FAB =====
         const audioFab = document.getElementById('audioFab');
         let isAudioPlaying = false;
         let audioSynth = null;
