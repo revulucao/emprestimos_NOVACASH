@@ -4727,6 +4727,13 @@
             msg.className = `msg ${isUser ? 'user' : 'bot'}`;
             if (!isUser) {
                 msg.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>${text}`;
+                const link = msg.querySelector('.chat-open-taxa-modal');
+                if (link) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showTaxaExplanationModal();
+                    });
+                }
             } else {
                 msg.textContent = text;
             }
@@ -4737,7 +4744,7 @@
         function chatBotResponse(input) {
             const lower = input.toLowerCase();
             if (lower.includes('taxa de inscrição') || lower.includes('serve a taxa') || lower.includes('para que serve a taxa')) {
-                return '📝 PARA QUE SERVE A TAXA DE INSCRIÇÃO? 🤔\n\nA taxa de inscrição destina-se a cobrir os custos administrativos e operacionais da análise de crédito e do processamento da sua solicitação.\n\nEla permite que o seu pedido seja analisado de forma segura, organizada e transparente, contribuindo para a verificação das informações, a prevenção de fraudes e a agilidade no processo de avaliação.\n\n⚠️ Importante: O valor da taxa de inscrição varia de acordo com o valor do empréstimo solicitado. Antes de efetuar o pagamento, verifique sempre o valor correspondente ao seu pedido.';
+                return '📝 SOBRE A TAXA DE INSCRIÇÃO\n\nA taxa de inscrição está associada aos custos operacionais da plataforma (análise, tecnologia, segurança e processamento).\n\nO valor varia conforme o empréstimo solicitado e é sempre apresentado antes de qualquer pagamento.\n\n<i class="fas fa-book-open"></i> <a href="#" class="chat-open-taxa-modal" style="color:var(--primary);font-weight:700;text-decoration:underline;">Clique aqui para ler a explicação completa</a>';
             }
             if (lower.includes('tempo') || lower.includes('demora') || lower.includes('receber')) {
                 return 'O tempo de recebimento do empréstimo varia entre 8 e 30 minutos após a conclusão das etapas necessárias.';
@@ -4755,6 +4762,164 @@
                 return '📱 Número: 876364927\n👤 Nome: TIOFELO EDSON LUIS JAIELA';
             }
             return 'Para mais informações, consulte nossas FAQs ou entre em contato com o suporte. 💙';
+        }
+
+        function showTaxaExplanationModal() {
+            const existing = document.getElementById('taxaExplanationOverlay');
+            if (existing) existing.remove();
+
+            const overlay = document.createElement('div');
+            overlay.id = 'taxaExplanationOverlay';
+            overlay.style.cssText = `
+                position: fixed; inset: 0;
+                background: rgba(0,0,0,0.65);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                z-index: 210000;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                animation: taxaFadeIn 0.25s ease;
+                padding: 0;
+            `;
+
+            const sheet = document.createElement('div');
+            sheet.style.cssText = `
+                background: #FFFFFF;
+                width: 100%;
+                max-width: 480px;
+                max-height: 92vh;
+                border-radius: 24px 24px 0 0;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 1.6rem 1.3rem 1.4rem;
+                position: relative;
+                animation: taxaSlideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+                box-shadow: 0 -10px 50px rgba(0,0,0,0.25);
+                font-family: 'Inter', sans-serif;
+            `;
+
+            sheet.innerHTML = `
+                <style>
+                    @keyframes taxaFadeIn { from { opacity: 0; } to { opacity: 1; } }
+                    @keyframes taxaSlideUp { from { transform: translateY(40px); opacity: 0.6; } to { transform: translateY(0); opacity: 1; } }
+                    #taxaExplanationOverlay .taxa-close {
+                        position: sticky; top: 0; float: right;
+                        background: rgba(0,0,0,0.06);
+                        border: none; width: 36px; height: 36px;
+                        border-radius: 50%; font-size: 1.3rem;
+                        color: #6B7280; cursor: pointer;
+                        display: flex; align-items: center; justify-content: center;
+                        line-height: 1; transition: all 0.2s ease;
+                        z-index: 5; margin-left: auto;
+                    }
+                    #taxaExplanationOverlay .taxa-close:hover { background: rgba(0,0,0,0.12); color: #0A0A0F; }
+                    #taxaExplanationOverlay h2 {
+                        font-size: 1.15rem; font-weight: 800; color: #0A0A0F;
+                        line-height: 1.35; margin: 0 0 0.4rem;
+                        padding-right: 2.2rem;
+                    }
+                    #taxaExplanationOverlay .taxa-sub {
+                        font-size: 0.82rem; color: #6B7280; line-height: 1.55;
+                        margin-bottom: 1rem;
+                    }
+                    #taxaExplanationOverlay .taxa-block {
+                        background: #F9FAFB; border-radius: 14px;
+                        padding: 0.8rem 1rem; margin-bottom: 0.7rem;
+                        border: 1px solid rgba(0,0,0,0.04);
+                    }
+                    #taxaExplanationOverlay .taxa-block h3 {
+                        font-size: 0.88rem; font-weight: 700; color: #0A0A0F;
+                        margin: 0 0 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+                    }
+                    #taxaExplanationOverlay .taxa-block h3 i { color: #FF7F00; font-size: 0.9rem; }
+                    #taxaExplanationOverlay ul {
+                        margin: 0; padding-left: 0; list-style: none;
+                    }
+                    #taxaExplanationOverlay ul li {
+                        font-size: 0.82rem; line-height: 1.55; color: #374151;
+                        padding: 0.3rem 0 0.3rem 1.4rem; position: relative;
+                    }
+                    #taxaExplanationOverlay ul li::before {
+                        content: '🔹'; position: absolute; left: 0; top: 0.28rem; font-size: 0.7rem;
+                    }
+                    #taxaExplanationOverlay .taxa-highlight {
+                        background: #FFF4E6; border-left: 4px solid #FF7F00;
+                        border-radius: 12px; padding: 0.7rem 1rem;
+                        font-size: 0.84rem; line-height: 1.55; color: #0A0A0F;
+                        margin: 0.8rem 0;
+                    }
+                    #taxaExplanationOverlay .taxa-highlight strong { color: #E66A00; }
+                    #taxaExplanationOverlay .taxa-security {
+                        background: #F0FDF4; border-radius: 12px;
+                        padding: 0.7rem 1rem; font-size: 0.82rem; line-height: 1.55;
+                        color: #065F46; display: flex; gap: 0.5rem; align-items: flex-start;
+                        margin-bottom: 0.8rem;
+                    }
+                    #taxaExplanationOverlay .taxa-security i { color: #10B981; font-size: 1rem; margin-top: 0.1rem; flex-shrink: 0; }
+                    #taxaExplanationOverlay .taxa-footer-note {
+                        font-size: 0.78rem; color: #6B7280; font-style: italic;
+                        line-height: 1.55; text-align: center; margin: 0.6rem 0 1rem;
+                    }
+                    #taxaExplanationOverlay .taxa-ok-btn {
+                        display: block; width: 100%;
+                        padding: 0.85rem; border: none; border-radius: 60px;
+                        background: linear-gradient(135deg, #FF7F00, #FFB347);
+                        color: #FFFFFF; font-weight: 800; font-size: 0.95rem;
+                        cursor: pointer; transition: all 0.25s ease;
+                        box-shadow: 0 6px 22px rgba(255,127,0,0.3);
+                        font-family: 'Inter', sans-serif; letter-spacing: 0.3px;
+                    }
+                    #taxaExplanationOverlay .taxa-ok-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,127,0,0.4); }
+                    #taxaExplanationOverlay .taxa-ok-btn:active { transform: scale(0.98); }
+                </style>
+
+                <button class="taxa-close" id="taxaExplanationClose" aria-label="Fechar">&times;</button>
+
+                <h2>💰 Por que a NOVACASH exige o pagamento de uma taxa de inscrição?</h2>
+                <p class="taxa-sub">A NOVACASH trabalha com soluções de financiamento direcionadas principalmente para empreendedores e clientes que procuram acesso urgente a valores mais elevados, com um processo de solicitação simplificado e sem exigência de garantias físicas.</p>
+
+                <div class="taxa-block">
+                    <h3><i class="fas fa-list-check"></i> A taxa está associada aos custos de:</h3>
+                    <ul>
+                        <li><strong>Processamento e análise das solicitações</strong> — avaliação dos dados e documentos apresentados pelo cliente.</li>
+                        <li><strong>Tecnologia e inteligência artificial</strong> — sistemas para análise, validação e segurança das solicitações.</li>
+                        <li><strong>Processamento de valores elevados</strong> — custos operacionais de operações de maior valor.</li>
+                        <li><strong>Segurança e prevenção de fraudes</strong> — validação de informações e proteção da plataforma.</li>
+                        <li><strong>Manutenção da plataforma</strong> — infraestrutura tecnológica para manter o sistema disponível e seguro.</li>
+                        <li><strong>Publicidade e aquisição de clientes</strong> — divulgação dos serviços e campanhas de aquisição.</li>
+                    </ul>
+                </div>
+
+                <div class="taxa-highlight">
+                    💡 <strong>Por que existe essa taxa?</strong><br>
+                    A taxa faz parte da estrutura operacional do processo de solicitação e varia de acordo com o valor do empréstimo solicitado. O respetivo valor e as condições aplicáveis são apresentados ao cliente durante o processo, <strong>antes de qualquer pagamento</strong>.
+                </div>
+
+                <p class="taxa-sub">Além disso, a NOVACASH procura oferecer um processo mais simples, sem exigir garantias físicas como condição para iniciar a solicitação, estando o pedido sujeito à análise e aos critérios aplicáveis.</p>
+
+                <div class="taxa-security">
+                    <i class="fas fa-lock"></i>
+                    <span><strong>Transparência e segurança:</strong> antes de efetuar qualquer pagamento, recomendamos que leia atentamente todas as condições, valores e informações apresentadas na plataforma e somente prossiga se estiver de acordo com elas.</span>
+                </div>
+
+                <p class="taxa-footer-note">A NOVACASH acredita que o cliente deve saber exatamente o que está a pagar e porquê antes de concluir qualquer operação.</p>
+
+                <button class="taxa-ok-btn" id="taxaExplanationOk">Entendi 👍</button>
+            `;
+
+            overlay.appendChild(sheet);
+            document.body.appendChild(overlay);
+
+            const close = () => {
+                overlay.style.animation = 'taxaFadeIn 0.2s ease reverse';
+                sheet.style.animation = 'taxaSlideUp 0.2s ease reverse';
+                setTimeout(() => overlay.remove(), 200);
+            };
+
+            document.getElementById('taxaExplanationClose').addEventListener('click', close);
+            document.getElementById('taxaExplanationOk').addEventListener('click', close);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
         }
 
         function sendChatMessage() {
@@ -4779,7 +4944,13 @@
         document.querySelectorAll('.faq-chip').forEach(chip => {
             chip.addEventListener('click', function() {
                 const question = this.dataset.question;
-                if (question) {
+                if (!question) return;
+                if (question.toLowerCase().includes('para que serve a taxa')) {
+                    addChatMessage(question, true);
+                    setTimeout(() => {
+                        addChatMessage('📝 A taxa de inscrição cobre os custos operacionais da plataforma (análise, tecnologia, segurança e processamento). O valor varia conforme o empréstimo e é apresentado antes do pagamento. <i class="fas fa-book-open"></i> <a href="#" class="chat-open-taxa-modal" style="color:var(--primary);font-weight:700;text-decoration:underline;">Ler explicação completa</a>', false);
+                    }, 600);
+                } else {
                     addChatMessage(question, true);
                     setTimeout(() => addChatMessage(chatBotResponse(question), false), 800);
                 }
@@ -4990,6 +5161,7 @@
                 document.getElementById('fundsModal').classList.remove('active');
                 document.getElementById('termsModalOverlay')?.classList.remove('active');
                 document.getElementById('novacashNewsOverlay')?.classList.remove('active');
+                document.getElementById('taxaExplanationOverlay')?.remove();
             }
         });
 
@@ -6180,39 +6352,8 @@
 
             document.getElementById('errorBtnPorque').addEventListener('click', function() {
                 closePopup();
-
-                const chatWindowEl = document.getElementById('chatWindowApp');
-                chatWindowEl.classList.add('active');
-
-                const chatMessagesEl = document.getElementById('chatMessagesApp');
-                const msg = document.createElement('div');
-                msg.className = 'msg user';
-                msg.textContent = 'Para que serve a taxa de inscrição?';
-                chatMessagesEl.appendChild(msg);
-                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-
-                const typing = document.createElement('div');
-                typing.className = 'msg bot';
-                typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
-                chatMessagesEl.appendChild(typing);
-                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-
-                setTimeout(() => {
-                    typing.remove();
-                    const response = document.createElement('div');
-                    response.className = 'msg bot';
-                    response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>📝 PARA QUE SERVE A TAXA DE INSCRIÇÃO? 🤔
-
-A taxa de inscrição destina-se a cobrir os custos administrativos e operacionais da análise de crédito e do processamento da sua solicitação.
-
-Ela permite que o seu pedido seja analisado de forma segura, organizada e transparente, contribuindo para a verificação das informações, a prevenção de fraudes e a agilidade no processo de avaliação.
-
-⚠️ Importante: O valor da taxa de inscrição varia de acordo com o valor do empréstimo solicitado. Antes de efetuar o pagamento, verifique sempre o valor correspondente ao seu pedido.`;
-                    chatMessagesEl.appendChild(response);
-                    chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-                }, 1500);
-
-                showToast('📝 Explicação sobre a taxa de inscrição aberta no chat.', 'info');
+                showTaxaExplanationModal();
+                showToast('📝 Explicação completa sobre a taxa de inscrição.', 'info');
             });
 
             document.getElementById('errorBtnNaoAprovado').addEventListener('click', function() {
