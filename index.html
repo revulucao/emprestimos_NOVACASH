@@ -594,6 +594,104 @@
         #loginScreen .login-box .login-options a { color: var(--primary); text-decoration: none; font-weight: 600; }
         .login-box .login-sub { color: var(--gray); font-size: 0.7rem; text-align: center; margin-top: 0.5rem; }
 
+        /* ===== NOVACASH 3D PREMIUM — APENAS APRESENTAÇÃO DO LOGIN ===== */
+        #loginScreen {
+            --nc-black: #05090F; --nc-metal: #0E1621; --nc-orange: #FF8A00; --nc-gold: #FFC83D;
+            --nc-text: #FFFFFF; --nc-muted: #8DA0B5;
+            background: radial-gradient(120% 70% at 50% 0%, rgba(255,138,0,0.18) 0%, rgba(5,9,15,0) 60%), radial-gradient(90% 60% at 50% 110%, rgba(255,200,61,0.10) 0%, rgba(5,9,15,0) 60%), var(--nc-black);
+            overflow-y: auto; padding: 1.25rem; perspective: 1200px;
+            padding-top: max(1.25rem, env(safe-area-inset-top)); padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+        }
+        #loginScreen #flagBackground, #loginScreen #flagOverlay { display: none; }
+        #loginScreen::before {
+            content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+            background-image: linear-gradient(rgba(255,138,0,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,138,0,0.07) 1px, transparent 1px);
+            background-size: 38px 38px;
+            -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 75%);
+        }
+        #loginScreen .login-box {
+            margin: auto; max-width: 400px; padding: 2rem 1.5rem 1.5rem; border-radius: 28px; position: relative; z-index: 1;
+            background: linear-gradient(160deg, rgba(22,32,46,0.82), rgba(5,9,15,0.92));
+            -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,138,0,0.45);
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 1px 0 rgba(255,255,255,0.14) inset, 0 0 40px rgba(255,138,0,0.20), 0 30px 60px rgba(0,0,0,0.65), 0 10px 20px rgba(0,0,0,0.5);
+            transform: rotateX(2deg); transform-origin: center bottom;
+            animation: ncEnter 0.8s cubic-bezier(.2,.8,.2,1) both;
+        }
+        #loginScreen .login-box::before {
+            content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+            background: linear-gradient(135deg, rgba(255,200,61,0.9), rgba(255,138,0,0) 35%, rgba(255,138,0,0) 65%, rgba(255,138,0,0.8));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+        }
+        @keyframes ncEnter { from { opacity: 0; transform: translateY(24px) rotateX(10deg); } to { opacity: 1; transform: rotateX(2deg); } }
+
+        /* Escudo de segurança 3D (decorativo) */
+        #loginScreen .nc-shield {
+            width: 64px; height: 64px; margin: 0 auto 0.9rem; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: #1a0f00;
+            background: linear-gradient(145deg, #FFE08A, #FF8A00 55%, #B85A00);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 -4px 8px rgba(120,50,0,0.5) inset, 0 8px 0 #8a3f00, 0 18px 26px rgba(0,0,0,0.6), 0 0 28px rgba(255,138,0,0.5);
+            transform: translateZ(30px); animation: ncFloat 4s ease-in-out infinite;
+        }
+        @keyframes ncFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+        #loginScreen .login-box .login-logo { margin-bottom: 1.5rem; }
+        #loginScreen .login-box .login-logo h1 {
+            font-size: 2.1rem; font-weight: 900; letter-spacing: 1px;
+            background: linear-gradient(180deg, #FFF3C4 0%, #FFC83D 35%, #FF8A00 70%, #C25E00 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 0 rgba(120,50,0,0.9)) drop-shadow(0 0 14px rgba(255,138,0,0.45));
+        }
+        #loginScreen .login-box .login-logo p { color: var(--nc-muted); font-size: 0.85rem; margin-top: 0.35rem; }
+
+        #loginScreen .login-box .form-group input[type="text"],
+        #loginScreen .login-box .form-group input[type="tel"] {
+            color: var(--nc-text); font-size: 16px; padding: 0.95rem 1rem 0.95rem 2.9rem; border-radius: 14px;
+            background-color: rgba(255,255,255,0.04); background-repeat: no-repeat; background-position: 1rem 50%; background-size: 18px;
+            border: 1px solid rgba(141,160,181,0.28);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5) inset, 0 1px 0 rgba(255,255,255,0.05);
+        }
+        #loginScreen .login-box .form-group input#loginNameApp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF8A00' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 4-7 8-7s8 3 8 7'/%3E%3C/svg%3E"); }
+        #loginScreen .login-box .form-group input#loginPhoneApp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF8A00' stroke-width='2' stroke-linecap='round'%3E%3Crect x='7' y='2' width='10' height='20' rx='2'/%3E%3Cpath d='M11 18h2'/%3E%3C/svg%3E"); }
+        #loginScreen .login-box .form-group input::placeholder { color: var(--nc-muted); opacity: 0.8; }
+        #loginScreen .login-box .form-group input:focus {
+            outline: none; background-color: rgba(255,138,0,0.07); border-color: var(--nc-orange);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5) inset, 0 0 0 3px rgba(255,138,0,0.20), 0 0 20px rgba(255,138,0,0.35);
+        }
+        #loginScreen .login-box .form-group input.error { border-color: var(--error); box-shadow: 0 0 0 3px rgba(239,68,68,0.2); }
+        #loginScreen .login-box .form-group .error-msg { color: #FF7A7A; }
+
+        #loginScreen .login-box .login-options { margin: 0.25rem 0 1.1rem; }
+        #loginScreen .login-box .login-options label { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--nc-muted); font-size: 0.85rem; cursor: pointer; min-height: 32px; }
+        #loginScreen .login-box .login-options input[type="checkbox"] { accent-color: var(--nc-orange); width: 18px; height: 18px; }
+
+        #loginScreen .login-box #loginBtnSubmit {
+            padding: 1rem 1.5rem; font-size: 1rem; font-weight: 800; letter-spacing: 0.5px; color: #fff; border-radius: 16px; min-height: 54px;
+            background: linear-gradient(180deg, #FFA53A 0%, #FF8A00 50%, #E06A00 100%);
+            text-shadow: 0 1px 2px rgba(120,50,0,0.7);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 6px 0 #A64900, 0 14px 24px rgba(0,0,0,0.55), 0 0 26px rgba(255,138,0,0.55);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease;
+        }
+        #loginScreen .login-box #loginBtnSubmit:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 1px 0 rgba(255,255,255,0.45) inset, 0 8px 0 #A64900, 0 18px 28px rgba(0,0,0,0.55), 0 0 34px rgba(255,138,0,0.7); }
+        #loginScreen .login-box #loginBtnSubmit:active { transform: translateY(5px); box-shadow: 0 1px 0 rgba(255,255,255,0.35) inset, 0 1px 0 #A64900, 0 6px 12px rgba(0,0,0,0.5), 0 0 18px rgba(255,138,0,0.5); }
+        #loginScreen .login-box #loginBtnSubmit:disabled { filter: grayscale(0.4) brightness(0.8); transform: translateY(3px); box-shadow: 0 3px 0 #A64900, 0 6px 12px rgba(0,0,0,0.5); }
+        #loginScreen .login-box #loginBtnSubmit i { transition: transform 0.2s ease; }
+        #loginScreen .login-box #loginBtnSubmit:hover i { transform: translateX(4px); }
+
+        #loginScreen .login-box .login-sub { color: var(--nc-muted); font-size: 0.78rem; margin-top: 0.9rem; }
+        #loginScreen .login-box #showRegisterApp { color: var(--nc-gold) !important; text-shadow: 0 0 12px rgba(255,200,61,0.35); }
+        #loginScreen .login-box #showRegisterApp:hover { text-decoration: underline !important; }
+        #loginScreen .login-box .login-sub + div > span { color: var(--nc-muted) !important; }
+
+        /* Faixa decorativa: Rápido · Seguro · Confiável */
+        #loginScreen .nc-trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1.4rem; padding-top: 1.1rem; border-top: 1px solid rgba(255,138,0,0.2); }
+        #loginScreen .nc-trust div { text-align: center; color: var(--nc-muted); font-size: 0.75rem; font-weight: 600; }
+        #loginScreen .nc-trust i { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; margin: 0 auto 0.35rem; border-radius: 12px; color: var(--nc-orange); font-size: 1rem; background: linear-gradient(145deg, rgba(255,138,0,0.18), rgba(255,138,0,0.04)); border: 1px solid rgba(255,138,0,0.35); box-shadow: 0 4px 10px rgba(0,0,0,0.45), 0 0 12px rgba(255,138,0,0.18); }
+
+        @media (max-width: 380px) { #loginScreen .login-box { padding: 1.6rem 1.1rem 1.2rem; } #loginScreen .login-box .login-logo h1 { font-size: 1.8rem; } }
+        @media (max-height: 640px) { #loginScreen .nc-shield { width: 48px; height: 48px; font-size: 1.2rem; margin-bottom: 0.5rem; } #loginScreen .nc-trust { margin-top: 0.9rem; padding-top: 0.8rem; } }
+        @media (prefers-reduced-motion: reduce) { #loginScreen .login-box, #loginScreen .nc-shield { animation: none; } #loginScreen .login-box { transform: none; } }
+
         #registerScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--light); z-index: 100001; display: none; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; overflow-y: auto; }
         #registerScreen.active { display: flex; }
         #registerScreen .register-box { background: var(--white); border-radius: var(--radius-xl); padding: 2rem 1.5rem; width: 100%; max-width: 380px; box-shadow: var(--shadow-xl); margin: auto; }
@@ -1298,6 +1396,7 @@
         <div id="flagOverlay"></div>
         <div class="login-box">
             <div class="login-logo">
+                <div class="nc-shield" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
                 <h1>💰 NOVACASH</h1>
                 <p>Empréstimos rápidos e seguros</p>
             </div>
@@ -1318,6 +1417,11 @@
             <div style="text-align: center; margin-top: 0.8rem;">
                 <span style="color: var(--gray); font-size: 0.8rem;">Não tem conta? </span>
                 <a href="#" id="showRegisterApp" style="color: var(--primary); font-weight: 600; text-decoration: none;">Criar Conta</a>
+            </div>
+            <div class="nc-trust" aria-hidden="true">
+                <div><i class="fas fa-bolt"></i>Rápido</div>
+                <div><i class="fas fa-lock"></i>Seguro</div>
+                <div><i class="fas fa-handshake"></i>Confiável</div>
             </div>
         </div>
     </div>
