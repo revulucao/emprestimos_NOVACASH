@@ -3004,13 +3004,13 @@
         // CAMPANHA PROMOCIONAL
         // ============================================================
         // CONFIGURAÇÃO ADMINISTRATIVA DA CAMPANHA (horário de Moçambique, UTC+02:00).
-        // Início global da campanha. O fim é calculado automaticamente para exatamente 2 horas depois.
+        // Início global da campanha (16:30). O fim é calculado automaticamente: 2 horas depois, às 18:30.
         // Ajuste startISO para o horário real em que a campanha será publicada.
         // GitHub Pages não oferece relógio/backend confiável: um utilizador avançado
         // ainda pode alterar o relógio do próprio dispositivo. Validação antifraude
         // real exige backend e verificação do prazo no servidor.
         const CAMPAIGN_CONFIG = {
-            startISO: '2026-10-31T15:00:00+02:00',
+            startISO: '2026-10-31T16:30:00+02:00',
             durationMs: 2 * 60 * 60 * 1000
         };
 
