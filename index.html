@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#0B1F3A">
+    <meta name="theme-color" content="#FF7F00">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>NOVACASH.MZ - Fintech</title>
@@ -334,7 +334,20 @@
         .activity-item .activity-amount { font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
         .activity-item .activity-amount.positive { color: var(--success); }
 
-        
+        /* ===== NOVO: TAXA NAS NOTIFICAÇÕES (Alteração #3) ===== */
+        .notif-fee-row {
+            background: rgba(255,127,0,0.08);
+            border-radius: 8px;
+            padding: 0.35rem 0.5rem;
+            margin-top: 0.35rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            border: 1px dashed rgba(255,127,0,0.3);
+        }
+        .notif-fee-row .fee-label { color: var(--gray); font-weight: 500; }
+        .notif-fee-row .fee-value { color: var(--primary); font-weight: 700; }
 
         /* ===== CHAT FAB ===== */
         .chat-fab {
@@ -459,6 +472,76 @@
             transition: opacity 0.2s ease;
         }
         .loan-reminder-toast .reminder-close:hover { opacity: 1; }
+
+        /* ===== NOVO: ÁREA DE TAXA DESTACADA (Alteração #8) ===== */
+        .fee-area {
+            background: rgba(255,127,0,0.08);
+            border-radius: var(--radius);
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            font-size: 0.8rem;
+            border: 2px solid transparent;
+            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .fee-area.attention {
+            border-color: var(--error);
+            background: rgba(239,68,68,0.08);
+            animation: feeAttention 1.6s ease-in-out infinite;
+        }
+        @keyframes feeAttention {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.0); border-color: var(--error); }
+            50% { box-shadow: 0 0 0 6px rgba(239,68,68,0.15); border-color: #ff6b6b; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fee-area.attention { animation: none; border-color: var(--error); background: rgba(239,68,68,0.1); }
+        }
+
+        /* ===== NOVO: CONTADOR DE BLOQUEIO (Alteração #7) ===== */
+        .trial-block-notice {
+            display: none;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: var(--radius);
+            padding: 0.8rem 1rem;
+            margin: 0.6rem 0;
+            font-size: 0.78rem;
+            color: #991B1B;
+            line-height: 1.5;
+        }
+        .trial-block-notice.show { display: block; }
+        .trial-block-notice .block-countdown {
+            font-weight: 800;
+            color: var(--error);
+            font-variant-numeric: tabular-nums;
+        }
+        .trial-block-notice .block-title {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+        .proof-file-wrapper.blocked .file-label {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .proof-file-wrapper.blocked input[type="file"] { pointer-events: none; }
+        #submitLoanApp.blocked {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .trial-counter-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.4rem;
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+        .trial-counter-line .trial-count { font-weight: 800; color: var(--error); }
 
         /* ===== TOAST ===== */
         .toast-container {
@@ -670,7 +753,50 @@
         .notif-popup.error-modal-improved .btn-error.secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
         .notif-popup.error-modal-improved .btn-error.secondary:hover { background: var(--primary); color: white; }
 
-        
+        /* ===== NOVO: MENSAGEM DETALHADA DO COMPROVATIVO (Alteração #4) ===== */
+        .error-modal-details {
+            background: #FEF2F2;
+            border-radius: 12px;
+            padding: 0.7rem 0.9rem;
+            margin: 0.5rem 0;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #374151;
+            border: 1px solid rgba(239,68,68,0.15);
+        }
+        .error-modal-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding: 0.2rem 0;
+        }
+        .error-modal-details .detail-row .detail-label { color: #6B7280; font-weight: 500; }
+        .error-modal-details .detail-row .detail-value { font-weight: 700; color: #0A0A0F; text-align: right; }
+        .error-modal-details .detail-row .detail-value.fee { color: var(--primary); font-size: 0.9rem; }
+        .error-modal-details .detail-row .detail-value.attempts { color: var(--error); }
+        .error-modal-payment-box {
+            background: linear-gradient(135deg, #FFF4E6, #FFE8CC);
+            border-radius: 12px;
+            padding: 0.7rem 0.9rem;
+            margin: 0.5rem 0;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            color: #374151;
+            border: 1px solid rgba(255,127,0,0.2);
+        }
+        .error-modal-payment-box .payment-box-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+        }
+        .error-modal-payment-box .payment-box-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.15rem 0;
+        }
+        .error-modal-payment-box .payment-box-row .pb-label { color: #6B7280; font-weight: 500; }
+        .error-modal-payment-box .payment-box-row .pb-value { font-weight: 700; color: #0A0A0F; }
 
         /* ===== FUNDS MODAL ===== */
         .funds-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 20000; display: none; justify-content: center; align-items: center; padding: 1.5rem; }
@@ -1055,6 +1181,7 @@
             .loan-reminder-toast .reminder-cta { font-size: 0.68rem; }
             .error-modal-details { font-size: 0.72rem; }
             .error-modal-payment-box { font-size: 0.72rem; }
+            .notif-fee-row { font-size: 0.66rem; }
         }
         @media (min-width: 768px) {
             .app-content { max-width: 600px; margin: 0 auto; padding: 1.5rem 1.5rem 6rem; }
@@ -1064,381 +1191,6 @@
             .audio-fab { right: calc(50% - 300px + 1rem); bottom: 9.7rem; }
             .bank-card-premium { padding: 1.6rem 1.8rem 1.8rem; border-radius: 20px; }
             .loan-reminder-toast { right: calc(50% - 300px + 1rem); }
-        }
-
-        /* =====================================================================
-           NOVACASH — REDESIGN FINTECH PREMIUM (APENAS APRESENTAÇÃO)
-           Branco · Azul-marinho · Laranja NOVACASH · Cinza-claro · Dourado discreto
-           Nenhum ID, classe, atributo, evento, texto, valor ou lógica foi alterado.
-           ===================================================================== */
-
-        /* ---------- 1. TOKENS ---------- */
-        :root {
-            --nc-navy: #0B1F3A; --nc-navy-2: #13325C;
-            --nc-orange: #FF7F00; --nc-orange-d: #E86F00;
-            --nc-gold: #C9A24B; --nc-gold-soft: rgba(201,162,75,0.45);
-            --nc-bg: #F3F5F9; --nc-line: #E3E8EF; --nc-ink: #0F1B2D; --nc-muted: #5C6B80;
-
-            --primary: #FF7F00; --primary-dark: #E86F00; --primary-light: #FFA347;
-            --primary-gradient: linear-gradient(135deg, #FF8A14 0%, #F07000 100%);
-            --secondary: #C9A24B;
-            --white: #FFFFFF; --light: #F3F5F9; --dark: #0F1B2D;
-            --gray: #5C6B80; --gray-light: #E3E8EF;
-            --shadow: 0 2px 10px rgba(11,31,58,0.06);
-            --shadow-lg: 0 8px 24px rgba(11,31,58,0.10);
-            --shadow-xl: 0 20px 50px rgba(11,31,58,0.18);
-            --radius: 14px; --radius-lg: 20px; --radius-xl: 24px;
-        }
-        html { background: var(--nc-bg); }
-        body { background: var(--nc-bg); color: var(--nc-ink); -webkit-font-smoothing: antialiased; }
-        ::selection { background: rgba(255,127,0,0.22); }
-        select option { background: #fff; color: var(--nc-ink); }
-
-        /* ---------- 2. SPLASH ---------- */
-        #splashScreen { background: linear-gradient(160deg, #0B1F3A 0%, #13325C 100%); }
-        #splashScreen .logo-splash { color: #fff; letter-spacing: 0.5px; font-weight: 800; }
-        #splashScreen .logo-splash span { color: var(--nc-orange); }
-        #splashScreen .sub-splash { color: rgba(255,255,255,0.72); }
-        #splashScreen .loader-splash { border-color: rgba(255,255,255,0.18); border-top-color: var(--nc-orange); }
-
-        /* ---------- 3. ESTRUTURA, CABEÇALHO E NAVEGAÇÃO ---------- */
-        #app { background: var(--nc-bg); }
-        .status-bar { background: var(--nc-navy); color: rgba(255,255,255,0.7); }
-        .status-bar .time { color: #fff; }
-        .app-header {
-            background: var(--nc-navy);
-            border-bottom: 1px solid var(--nc-gold-soft);
-            box-shadow: 0 6px 18px rgba(11,31,58,0.18);
-        }
-        .app-header .logo-mini { font-weight: 800; letter-spacing: 0.3px; }
-        .app-header .logo-mini .nova { color: var(--nc-orange); }
-        .app-header .logo-mini .cash { color: #fff; }
-        .app-header .header-actions .icon-btn {
-            width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;
-            color: #fff; border-radius: 12px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
-        }
-        .app-header .header-actions .icon-btn:hover { background: rgba(255,255,255,0.16); }
-        .app-header .header-actions .icon-btn .badge { box-shadow: 0 0 0 2px var(--nc-navy); }
-        .app-header .profile-avatar { border: 2px solid rgba(255,255,255,0.35); }
-        .online-indicator { background: #22B573; box-shadow: 0 1px 3px rgba(11,31,58,0.25); }
-
-        .bottom-nav {
-            background: #fff; border-top: 1px solid var(--nc-line);
-            box-shadow: 0 -6px 24px rgba(11,31,58,0.08);
-            -webkit-backdrop-filter: none; backdrop-filter: none;
-            padding: 0.35rem 0.25rem max(0.5rem, env(safe-area-inset-bottom));
-        }
-        .bottom-nav .nav-item { color: #7A889C; font-weight: 600; }
-        .bottom-nav .nav-item i { font-size: 1.15rem; }
-        .bottom-nav .nav-item:hover { color: var(--nc-navy); }
-        .bottom-nav .nav-item.active { color: var(--nc-navy); }
-        .bottom-nav .nav-item.active i { color: var(--nc-orange); transform: none; }
-        .bottom-nav .nav-item.active::before {
-            content: ''; position: absolute; top: -0.35rem; left: 28%; right: 28%; height: 3px;
-            border-radius: 0 0 4px 4px; background: var(--nc-orange);
-        }
-        .bottom-nav .nav-item .nav-badge { box-shadow: 0 0 0 2px #fff; }
-
-        /* ---------- 4. TÍTULOS E BOAS-VINDAS ---------- */
-        .app-content .page > h2 { color: var(--nc-navy); font-weight: 800; letter-spacing: -0.2px; }
-        .greeting-section .greeting-text { color: var(--nc-navy); font-weight: 800; letter-spacing: -0.4px; }
-        .greeting-section .greeting-text .highlight { color: var(--nc-orange); }
-        .greeting-section .greeting-date { color: var(--nc-muted); }
-        .section-title { color: var(--nc-navy); font-size: 0.95rem; font-weight: 800; }
-        .section-title .see-all { color: var(--nc-orange); }
-
-        /* ---------- 5. UTILIZADORES ONLINE (discreto) ---------- */
-        .online-counter {
-            width: fit-content; max-width: 100%; gap: 0.5rem; padding: 0.32rem 0.8rem; font-size: 0.72rem;
-            background: #fff; border: 1px solid var(--nc-line); box-shadow: none;
-            -webkit-backdrop-filter: none; backdrop-filter: none;
-        }
-        .online-counter .online-dot { width: 8px; height: 8px; background: #22B573; }
-        .online-counter .counter-number { color: var(--nc-navy); min-width: 0; font-weight: 700; }
-        .online-counter .counter-label { color: var(--nc-muted); font-size: 0.72rem; }
-        .online-counter .counter-icon { margin-left: 0.15rem; font-size: 0.8rem; color: var(--nc-muted); opacity: 0.7; }
-
-        /* ---------- 6. CARTÃO DO CLIENTE E SALDO EM DÍVIDA ---------- */
-        .bank-card-premium {
-            background: linear-gradient(145deg, #0B1F3A 0%, #13325C 100%);
-            border: 1px solid rgba(201,162,75,0.35); border-radius: 20px;
-            box-shadow: 0 14px 34px rgba(11,31,58,0.22);
-        }
-        .bank-card-premium::before { background: radial-gradient(circle, rgba(255,127,0,0.14) 0%, transparent 70%); }
-        .bank-card-premium::after {
-            top: 0; left: 0; right: 0; bottom: auto; width: auto; height: 3px; border-radius: 0;
-            background: linear-gradient(90deg, var(--nc-orange), var(--nc-gold));
-        }
-        .bank-card-premium .card-verified-badge {
-            background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); box-shadow: none;
-            -webkit-backdrop-filter: none; backdrop-filter: none;
-        }
-        .bank-card-premium .card-verified-badge i { color: #E9C46A; filter: none; }
-        .bank-card-premium .card-user-row .user-avatar-card { border: 2px solid rgba(255,255,255,0.30); background: rgba(255,255,255,0.12); }
-        .bank-card-premium .card-user-row .user-info .user-name { color: #fff; font-weight: 700; }
-        .bank-card-premium .card-user-row .user-info .user-phone { color: rgba(255,255,255,0.68); }
-        .bank-card-premium .card-debt {
-            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-            -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0.8rem 1rem;
-        }
-        .bank-card-premium .card-debt .debt-label { color: rgba(255,255,255,0.72); font-size: 0.62rem; letter-spacing: 0.6px; }
-        .bank-card-premium .card-debt .debt-amount {
-            color: #fff; font-size: 1.9rem; font-weight: 800; text-shadow: none; font-variant-numeric: tabular-nums;
-        }
-        .bank-card-premium .card-debt .debt-status { background: rgba(34,181,115,0.20); color: #9AF0C8; }
-        .bank-card-premium .card-3d-element { opacity: 0.06; transform: none; filter: none; }
-        .bank-card-premium .card-3d-element i { transform: none; }
-
-        /* ---------- 7. FUNDOS E LIMITES ---------- */
-        .card-limits-outside .limit-item {
-            background: #fff; border: 1px solid var(--nc-line); border-radius: 16px;
-            box-shadow: var(--shadow); padding: 0.85rem 0.5rem;
-        }
-        .card-limits-outside .limit-item:hover { transform: none; box-shadow: var(--shadow-lg); }
-        .card-limits-outside .limit-item .limit-icon {
-            width: 34px; height: 34px; margin: 0 auto 0.45rem; border-radius: 11px; opacity: 1; font-size: 0.95rem;
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(255,127,0,0.10); color: var(--nc-orange);
-        }
-        .card-limits-outside .limit-item .limit-label { color: var(--nc-muted); font-size: 0.58rem; letter-spacing: 0.4px; }
-        .card-limits-outside .limit-item .limit-value { color: var(--nc-navy); font-size: 0.92rem; font-weight: 800; font-variant-numeric: tabular-nums; }
-        .card-limits-outside .limit-item .limit-value .highlight { color: var(--nc-muted); font-weight: 600; font-size: 0.72em; }
-        .card-limits-outside .limit-item#fundsToggleCard { border-color: rgba(255,127,0,0.35); }
-        .card-limits-outside .limit-item#fundsToggleCard:hover { border-color: var(--nc-orange); }
-        #outsideFunds { color: var(--nc-orange); }
-
-        /* ---------- 8. NOVIDADES E COMUNICADOS ---------- */
-        .novacash-news-card {
-            display: flex; align-items: center; gap: 0.8rem; width: 100%; text-align: left; margin-bottom: 1rem;
-            padding: 0.8rem 1rem; color: var(--nc-navy); font-family: 'Inter', sans-serif;
-            background: #fff; border: 1px solid var(--nc-line); border-left: 4px solid var(--nc-orange);
-            border-radius: 16px; box-shadow: var(--shadow); position: relative; overflow: hidden; cursor: pointer;
-        }
-        .novacash-news-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
-        .novacash-news-card:active { transform: scale(0.99); box-shadow: var(--shadow); }
-        .novacash-news-card::after { display: none; animation: none; }
-        .novacash-news-card .news-gift {
-            width: 40px; height: 40px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; animation: none; filter: none; background: rgba(255,127,0,0.10);
-        }
-        .novacash-news-card .news-title { color: var(--nc-navy); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.8px; text-shadow: none; }
-        .novacash-news-card .news-sub { color: var(--nc-muted); opacity: 1; font-size: 0.76rem; font-weight: 500; }
-        .novacash-news-card .news-arrow { color: var(--nc-orange); opacity: 1; }
-
-        /* ---------- 9. BOTÕES ---------- */
-        .loan-btn-main {
-            background: var(--primary-gradient); border-radius: 14px; padding: 0.95rem 1rem; font-size: 1rem; font-weight: 700;
-            box-shadow: 0 8px 20px rgba(255,127,0,0.28);
-        }
-        .loan-btn-main::after { display: none; animation: none; }
-        .loan-btn-main:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,127,0,0.36); }
-        .loan-btn-main:active { transform: scale(0.99); }
-        .loan-btn-sub { color: var(--nc-muted); opacity: 1; }
-
-        .btn, .pay-btn { border-radius: 14px; font-family: 'Inter', sans-serif; }
-        .btn-primary, .pay-btn, .terms-modal-content .terms-close-btn, .novacash-news-modal .news-confirm,
-        .novacash-news-modal .novacash-news-confirm {
-            background: var(--primary-gradient); color: #fff; border: none; border-radius: 14px;
-            box-shadow: 0 6px 16px rgba(255,127,0,0.26);
-        }
-        .novacash-news-modal .novacash-news-confirm {
-            display: block; width: 100%; padding: 0.85rem; font-weight: 800; font-size: 0.95rem; cursor: pointer;
-        }
-        .btn-primary:hover:not(:disabled), .pay-btn:hover, .terms-modal-content .terms-close-btn:hover,
-        .novacash-news-modal .news-confirm:hover, .novacash-news-modal .novacash-news-confirm:hover {
-            transform: translateY(-1px); box-shadow: 0 9px 22px rgba(255,127,0,0.34);
-        }
-        .btn-outline { color: var(--nc-orange); border: 1.5px solid var(--nc-orange); background: #fff; }
-        .btn-outline:hover { background: var(--nc-orange); color: #fff; }
-        .pay-btn.secondary { background: #fff; color: var(--nc-navy); border: 1.5px solid var(--nc-line); box-shadow: none; }
-        .pay-btn.secondary:hover { transform: none; border-color: var(--nc-navy); }
-
-        /* Botões flutuantes: brancos com ícone laranja, sombra suave */
-        .chat-fab, .audio-fab { background: #fff; color: var(--nc-orange); border: 1px solid var(--nc-line); box-shadow: 0 8px 22px rgba(11,31,58,0.14); }
-        .chat-fab:hover, .audio-fab:hover { box-shadow: 0 10px 26px rgba(11,31,58,0.20); }
-        .audio-fab .audio-tooltip { background: var(--nc-navy); }
-
-        /* ---------- 10. ESTATÍSTICAS, ATIVIDADE E AVALIAÇÕES ---------- */
-        .quick-stat { background: #fff; border: 1px solid var(--nc-line); border-radius: 16px; box-shadow: var(--shadow); }
-        .quick-stat:hover { transform: none; box-shadow: var(--shadow-lg); }
-        .quick-stat .stat-icon {
-            width: 34px; height: 34px; margin: 0 auto 0.45rem; border-radius: 11px; font-size: 0.95rem;
-            display: flex; align-items: center; justify-content: center; background: rgba(255,127,0,0.10); color: var(--nc-orange);
-        }
-        .quick-stat .stat-value { color: var(--nc-navy); font-weight: 800; font-variant-numeric: tabular-nums; }
-        .quick-stat .stat-label { color: var(--nc-muted); }
-        .activity-item { border: 1px solid var(--nc-line); border-radius: 14px; box-shadow: none; }
-        .activity-item:hover { transform: none; }
-        .history-item, .notif-item, .loan-notification { box-shadow: var(--shadow); }
-        .reviews-header-premium, .review-list-item, .review-form-premium {
-            background: #fff; border: 1px solid var(--nc-line); border-radius: 16px; box-shadow: var(--shadow);
-        }
-        .reviews-header-premium .avg-box .big-score { color: var(--nc-navy); }
-        .all-reviews-title { color: var(--nc-navy); }
-
-        /* ---------- 11. FORMULÁRIOS E SIMULADOR ---------- */
-        .form-group label { color: var(--nc-navy); font-weight: 600; }
-        .form-group input:not([type="checkbox"]):not([type="range"]):not([type="file"]):not([type="hidden"]),
-        .form-group select, .form-group textarea {
-            background: #fff; color: var(--nc-ink); border: 1.5px solid #D6DDE8; border-radius: 12px; box-shadow: none;
-        }
-        .form-group input:not([type="checkbox"]):not([type="range"]):not([type="file"]):not([type="hidden"]):focus,
-        .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: var(--nc-orange); box-shadow: 0 0 0 4px rgba(255,127,0,0.12);
-        }
-        .form-group input.error, .form-group select.error { border-color: var(--error); box-shadow: 0 0 0 4px rgba(239,68,68,0.10); }
-        .form-group input[type="checkbox"], .login-options input[type="checkbox"] { accent-color: var(--nc-orange); }
-        .simulator-card { background: #fff; border: 1px solid var(--nc-line); border-radius: 18px; box-shadow: var(--shadow); }
-        .simulator-card .sim-value { color: var(--nc-navy); }
-        .simulator-card input[type="range"] {
-            -webkit-appearance: none; appearance: none; height: 6px; border-radius: 6px; background: #DCE3EE; box-shadow: none;
-        }
-        .simulator-card input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%;
-            background: var(--nc-orange); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(255,127,0,0.45);
-        }
-        .simulator-card input[type="range"]::-moz-range-thumb {
-            width: 20px; height: 20px; border-radius: 50%; background: var(--nc-orange); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(255,127,0,0.45);
-        }
-        .sim-results .sim-result-item { background: var(--nc-bg); border: 1px solid var(--nc-line); box-shadow: none; }
-        .sim-results .sim-result-item .sri-value { color: var(--nc-navy); font-variant-numeric: tabular-nums; }
-        .sim-results .sim-result-item .sri-value.primary { color: var(--nc-orange); }
-        .step-progress .step-dot { background: #E3E8EF; color: var(--nc-muted); }
-        .step-progress .step-dot.active { background: var(--primary-gradient); color: #fff; }
-        .step-progress .step-label { color: var(--nc-muted); }
-
-        /* ---------- 12. PERFIL ---------- */
-        .profile-header .profile-name { color: var(--nc-navy); font-weight: 800; }
-        .profile-menu { background: #fff; border: 1px solid var(--nc-line); border-radius: 16px; box-shadow: var(--shadow); }
-        .profile-menu .pm-item { color: var(--nc-ink); border-bottom-color: var(--nc-line); }
-        .profile-menu .pm-item:hover { background: var(--nc-bg); }
-        .profile-menu .pm-item i {
-            display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 11px;
-            color: var(--nc-orange); background: rgba(255,127,0,0.10);
-        }
-        .profile-menu .pm-item .pm-arrow i { width: auto; height: auto; background: none; color: var(--nc-muted); font-size: 0.7rem; }
-        .profile-menu .pm-item.danger i { color: var(--error); background: rgba(239,68,68,0.10); }
-        .profile-menu .pm-item.danger .pm-arrow i { background: none; }
-
-        /* ---------- 13. JANELAS MODAIS ---------- */
-        .modal-overlay, .terms-modal-overlay, .novacash-news-overlay, .register-success-overlay {
-            background: rgba(11,31,58,0.55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-        }
-        .funds-modal-overlay { background: rgba(11,31,58,0.65); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-        .modal-content, .terms-modal-content, .register-success-card, .novacash-news-modal {
-            background: #fff; border-radius: 22px; box-shadow: var(--shadow-xl);
-        }
-        .modal-content .modal-header h3, .terms-modal-content h3, .novacash-news-modal h2, .register-success-card h2 { color: var(--nc-navy); }
-        .novacash-news-modal .news-body { color: #3B4A5F; }
-        .novacash-news-modal .news-highlight { color: var(--nc-navy); }
-
-        .funds-modal {
-            background: linear-gradient(145deg, #0B1F3A 0%, #13325C 100%);
-            border: 1px solid rgba(201,162,75,0.40); border-radius: 22px; box-shadow: var(--shadow-xl);
-        }
-        .funds-modal::before { background: radial-gradient(circle, rgba(255,127,0,0.12) 0%, transparent 70%); }
-        .funds-modal-title i { color: #E9C46A; }
-        .funds-balance-item { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
-        .funds-balance-value.mzn { color: #E9C46A; }
-
-        .loading-overlay-app { background: rgba(8,22,42,0.94); }
-
-        /* ---------- 14. ECRÃS DE LOGIN E REGISTO ---------- */
-        #loginScreen, #registerScreen {
-            background: linear-gradient(180deg, #0B1F3A 0%, #13325C 34%, var(--nc-bg) 34%);
-            overflow-y: auto; padding: 1.25rem;
-            padding-top: max(1.25rem, env(safe-area-inset-top)); padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
-        }
-        #loginScreen #flagBackground, #loginScreen #flagOverlay { display: none; }
-        #loginScreen .login-box, #registerScreen .register-box {
-            margin: auto; width: 100%; max-width: 400px; padding: 1.9rem 1.5rem 1.4rem; border-radius: 24px; position: relative;
-            background: #fff; border: 1px solid var(--nc-line); box-shadow: 0 24px 60px rgba(11,31,58,0.22);
-            -webkit-backdrop-filter: none; backdrop-filter: none; transform: none; animation: ncEnter 0.5s ease both;
-        }
-        @keyframes ncEnter { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-        #loginScreen .login-box::before, #registerScreen .register-box::before {
-            content: ''; position: absolute; top: 0; left: 24px; right: 24px; height: 3px; border-radius: 0 0 4px 4px;
-            background: linear-gradient(90deg, var(--nc-orange), var(--nc-gold));
-        }
-        #loginScreen .nc-shield {
-            width: 58px; height: 58px; margin: 0 auto 0.9rem; border-radius: 17px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.45rem; color: var(--nc-orange); background: var(--nc-navy); border: 1px solid var(--nc-gold-soft);
-            box-shadow: 0 8px 20px rgba(11,31,58,0.25);
-        }
-        #registerScreen .register-logo::before {
-            content: ''; display: block; width: 58px; height: 58px; margin: 0 auto 0.9rem; border-radius: 17px;
-            background: var(--nc-navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF7F00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l8 3v6c0 5-3.5 8.5-8 9.5C7.5 20.5 4 17 4 12V6z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E") center / 28px no-repeat;
-            border: 1px solid var(--nc-gold-soft); box-shadow: 0 8px 20px rgba(11,31,58,0.25);
-        }
-        #loginScreen .login-box .login-logo h1, #registerScreen .register-box .register-logo h1 {
-            font-size: 1.8rem; font-weight: 800; letter-spacing: 0.3px; color: var(--nc-navy);
-            background: none; -webkit-text-fill-color: var(--nc-navy);
-        }
-        #loginScreen .login-box .login-logo p, #registerScreen .register-box .register-logo p { color: var(--nc-muted); font-size: 0.85rem; margin-top: 0.3rem; }
-
-        #loginScreen .login-box .form-group input[type="text"], #loginScreen .login-box .form-group input[type="tel"],
-        #registerScreen .register-box .form-group input[type="text"], #registerScreen .register-box .form-group input[type="tel"],
-        #registerScreen .register-box .form-group input[type="password"] {
-            color: var(--nc-ink); font-size: 16px; padding: 0.9rem 1rem 0.9rem 2.8rem; border-radius: 12px;
-            background-color: #F7F9FC; background-repeat: no-repeat; background-position: 1rem 50%; background-size: 18px;
-            border: 1.5px solid #D6DDE8; box-shadow: none;
-        }
-        #loginScreen .login-box .form-group input:focus, #registerScreen .register-box .form-group input:focus {
-            outline: none; background-color: #fff; border-color: var(--nc-orange); box-shadow: 0 0 0 4px rgba(255,127,0,0.12);
-        }
-        #loginScreen .login-box .form-group input#loginNameApp, #registerScreen .register-box .form-group input#regNameApp {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF7F00' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 4-7 8-7s8 3 8 7'/%3E%3C/svg%3E");
-        }
-        #loginScreen .login-box .form-group input#loginPhoneApp, #registerScreen .register-box .form-group input#regPhoneApp {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF7F00' stroke-width='2' stroke-linecap='round'%3E%3Crect x='7' y='2' width='10' height='20' rx='2'/%3E%3Cpath d='M11 18h2'/%3E%3C/svg%3E");
-        }
-        #registerScreen .register-box .form-group input#regPassApp {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF7F00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='10' rx='2'/%3E%3Cpath d='M8 11V8a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E");
-        }
-        #loginScreen .login-box .login-options { margin: 0.25rem 0 1.1rem; }
-        #loginScreen .login-box .login-options label { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--nc-muted); font-size: 0.85rem; cursor: pointer; min-height: 32px; }
-        #loginScreen .login-box .login-options input[type="checkbox"] { width: 18px; height: 18px; }
-        #loginScreen .login-box #loginBtnSubmit, #registerScreen .register-box #registerBtnSubmit {
-            width: 100%; min-height: 52px; padding: 0.95rem 1.5rem; font-size: 1rem; font-weight: 700; color: #fff; border: none; border-radius: 14px;
-            background: var(--primary-gradient); box-shadow: 0 8px 20px rgba(255,127,0,0.28);
-        }
-        #loginScreen .login-box #loginBtnSubmit:hover:not(:disabled), #registerScreen .register-box #registerBtnSubmit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,127,0,0.36); }
-        #loginScreen .login-box #loginBtnSubmit:disabled, #registerScreen .register-box #registerBtnSubmit:disabled { opacity: 0.6; transform: none; }
-        #loginScreen .login-box #loginBtnSubmit i { transition: transform 0.2s ease; }
-        #loginScreen .login-box #loginBtnSubmit:hover i { transform: translateX(3px); }
-        #loginScreen .login-box .login-sub { color: var(--nc-muted); font-size: 0.78rem; margin-top: 0.9rem; }
-        #loginScreen .login-box #showRegisterApp, #registerScreen .register-box #backToLoginApp { color: var(--nc-orange) !important; font-weight: 700; }
-        #loginScreen .login-box #showRegisterApp:hover, #registerScreen .register-box #backToLoginApp:hover { text-decoration: underline !important; }
-        #loginScreen .nc-trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1.3rem; padding-top: 1.1rem; border-top: 1px solid var(--nc-line); }
-        #loginScreen .nc-trust div { text-align: center; color: var(--nc-muted); font-size: 0.75rem; font-weight: 600; }
-        #loginScreen .nc-trust i {
-            display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin: 0 auto 0.35rem;
-            border-radius: 11px; font-size: 0.95rem; color: var(--nc-orange); background: rgba(255,127,0,0.10);
-        }
-
-        /* ---------- 15. RESPONSIVIDADE ---------- */
-        @media (max-width: 480px) {
-            .bank-card-premium .card-debt .debt-amount { font-size: 1.65rem; }
-            .card-limits-outside .limit-item#fundsToggleCard {
-                grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; column-gap: 0.85rem; align-items: center; text-align: left; padding: 0.8rem 1rem;
-            }
-            .card-limits-outside .limit-item#fundsToggleCard .limit-icon { grid-row: 1 / 3; margin: 0; }
-        }
-        @media (max-width: 380px) {
-            #loginScreen .login-box, #registerScreen .register-box { padding: 1.6rem 1.1rem 1.2rem; }
-            #loginScreen .login-box .login-logo h1, #registerScreen .register-box .register-logo h1 { font-size: 1.6rem; }
-            .card-limits-outside .limit-item .limit-value { font-size: 0.82rem; }
-        }
-        @media (max-height: 640px) {
-            #loginScreen .nc-shield, #registerScreen .register-logo::before { width: 46px; height: 46px; margin-bottom: 0.5rem; }
-            #loginScreen .nc-trust { margin-top: 0.9rem; padding-top: 0.8rem; }
-        }
-        @media (min-width: 768px) {
-            .bottom-nav { border-left: 1px solid var(--nc-line); border-right: 1px solid var(--nc-line); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            #loginScreen .login-box, #registerScreen .register-box { animation: none; }
-            .loan-btn-main:hover, .btn-primary:hover, .pay-btn:hover, .novacash-news-card:hover { transform: none; }
         }
     </style>
 </head>
@@ -1536,7 +1288,7 @@
     <!-- ===== NOTIFICATION POPUP ===== -->
     <div class="notif-popup" id="notifPopup">
         <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
-        <div class="text" id="popupText"></div>
+        <div class="text" id="popupText">ERRO NA SUA FOTO DE COMPROVATIVO</div>
         <button class="close-popup" id="popupClose">&times;</button>
     </div>
 
@@ -1546,7 +1298,6 @@
         <div id="flagOverlay"></div>
         <div class="login-box">
             <div class="login-logo">
-                <div class="nc-shield" aria-hidden="true"><i class="fas fa-shield-halved"></i></div>
                 <h1>💰 NOVACASH</h1>
                 <p>Empréstimos rápidos e seguros</p>
             </div>
@@ -1567,11 +1318,6 @@
             <div style="text-align: center; margin-top: 0.8rem;">
                 <span style="color: var(--gray); font-size: 0.8rem;">Não tem conta? </span>
                 <a href="#" id="showRegisterApp" style="color: var(--primary); font-weight: 600; text-decoration: none;">Criar Conta</a>
-            </div>
-            <div class="nc-trust" aria-hidden="true">
-                <div><i class="fas fa-bolt"></i>Rápido</div>
-                <div><i class="fas fa-lock"></i>Seguro</div>
-                <div><i class="fas fa-handshake"></i>Confiável</div>
             </div>
         </div>
     </div>
@@ -1864,14 +1610,16 @@
                         </div>
                         <div class="form-group">
                             <label>Método de Recebimento <span style="color:var(--error);">*</span></label>
-                            <div class="payment-methods" style="grid-template-columns:1fr;">
-                                <div class="pm-item emola active" data-method="E-Mola" aria-label="Recebimento disponível por E-Mola"><i class="fas fa-mobile-alt"></i> E-Mola <span class="pm-check">✔</span></div>
+                            <div class="payment-methods">
+                                <div class="pm-item mpesa active" data-method="M-Pesa"><i class="fas fa-wallet"></i> M-Pesa <span class="pm-check">✔</span></div>
+                                <div class="pm-item emola" data-method="E-Mola"><i class="fas fa-mobile-alt"></i> E-Mola <span class="pm-check">✔</span></div>
+                                <div class="pm-item bank" data-method="Banco"><i class="fas fa-credit-card"></i> Banco <span class="pm-check">✔</span></div>
                             </div>
                             <div class="error-msg" id="methodError">Selecione um método de pagamento</div>
                         </div>
                         <div class="form-group">
                             <label>Número para receber <span style="color:var(--error);">*</span></label>
-                            <input type="text" id="loanReceiver" placeholder="Número E-Mola">
+                            <input type="text" id="loanReceiver" placeholder="Número M-Pesa/E-Mola ou IBAN">
                             <div class="error-msg">Campo obrigatório</div>
                         </div>
                         <button class="btn btn-primary next-step" data-next="2">Continuar <i class="fas fa-arrow-right"></i></button>
@@ -1932,6 +1680,7 @@
                             <div class="sim-result-item"><div class="sri-label">Parcela Mensal</div><div class="sri-value primary" id="simMonthly">8.917 MZN</div></div>
                             <div class="sim-result-item"><div class="sri-label">Total a Pagar</div><div class="sri-value" id="simTotal">53.500 MZN</div></div>
                             <div class="sim-result-item"><div class="sri-label">Juros (7%)</div><div class="sri-value" id="simInterest">3.500 MZN</div></div>
+                            <div class="sim-result-item"><div class="sri-label">Taxa de Inscrição</div><div class="sri-value" id="simFee">1.299 MZN</div></div>
                         </div>
                         <div style="display: flex; gap: 0.6rem; margin-top: 1rem;">
                             <button class="btn btn-outline prev-step" style="flex:1;" data-prev="2"><i class="fas fa-arrow-left"></i> Voltar</button>
@@ -1981,6 +1730,43 @@
                             <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px solid var(--gray-light); font-size: 0.85rem;">
                                 <span>Parcela</span><strong id="summaryMonthly">---</strong>
                             </div>
+                            <div style="display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 2px solid var(--primary); font-size: 0.85rem; font-weight: 700; color: var(--primary);">
+                                <span>Taxa de Inscrição</span><strong id="summaryFee">---</strong>
+                            </div>
+                        </div>
+
+                        <!-- NOVO: ÁREA DA TAXA COM DESTAQUE (Alteração #8) -->
+                        <div class="fee-area" id="feeArea">
+                            <p><strong>📱 Pagamento da Taxa:</strong></p>
+                            <p style="display: flex; justify-content: space-between; margin: 0.3rem 0;"><span>Número:</span><strong id="payNumberDisplay">876364927</strong> <button class="copy-btn" data-text="876364927" style="background: var(--primary); color: white; border: none; padding: 0.1rem 0.6rem; border-radius: 20px; font-size: 0.6rem; cursor: pointer;">Copiar</button></p>
+                            <p style="display: flex; justify-content: space-between;"><span>Nome:</span><strong>TIOFELO EDSON LUIS JAIELA</strong></p>
+                        </div>
+
+                        <button class="pay-btn" id="payFeeBtn" style="margin-bottom: 0.6rem; background: var(--primary-gradient); font-size: 1.1rem; padding: 1rem;">
+                            <i class="fas fa-phone"></i> EFETUAR O PAGAMENTO DA TAXA DE INSCRIÇÃO
+                        </button>
+                        <p class="payment-info-text">Após o pagamento da taxa de inscrição, a recepção do valor poderá ocorrer entre 8 e 30 minutos, no máximo.</p>
+
+                        <!-- NOVO: CAMPO DE COMPROVATIVO COM WRAPPER PARA BLOQUEIO (Alteração #7) -->
+                        <div class="form-group proof-file-wrapper" id="proofFileWrapper">
+                            <label>Comprovativo de Pagamento <span style="color:var(--error);">*</span></label>
+                            <div class="file-input-wrapper">
+                                <div class="file-label"><i class="fas fa-upload"></i> Carregar comprovativo</div>
+                                <input type="file" id="loanProof" accept="image/*">
+                            </div>
+                            <div class="error-msg">Carregue o comprovativo de pagamento</div>
+                            <div class="trial-counter-line" id="trialCounterLine">
+                                <span>Tentativas utilizadas:</span>
+                                <span class="trial-count" id="trialCountDisplay">0 / 3</span>
+                            </div>
+                            <div id="proofPreviewApp" class="image-preview"></div>
+                        </div>
+
+                        <!-- NOVO: AVISO DE BLOQUEIO (Alteração #7) -->
+                        <div class="trial-block-notice" id="trialBlockNotice">
+                            <div class="block-title"><i class="fas fa-lock"></i> Limite de tentativas atingido</div>
+                            <div>O limite de 3 tentativas foi alcançado. Será necessário aguardar <strong>30 minutos</strong> para tentar novamente.</div>
+                            <div style="margin-top:0.4rem;">Tempo restante: <span class="block-countdown" id="blockCountdownDisplay">30:00</span></div>
                         </div>
 
                         <div class="form-group">
@@ -1989,7 +1775,7 @@
                         </div>
                         <div style="display: flex; gap: 0.6rem;">
                             <button class="btn btn-outline prev-step" style="flex:1;" data-prev="3"><i class="fas fa-arrow-left"></i> Voltar</button>
-                            <button class="btn btn-success" style="flex:2;" id="completeLoanRequest"><i class="fas fa-check-circle"></i> CONCLUIR SOLICITAÇÃO</button>
+                            <button class="btn btn-success" style="flex:2;" id="submitLoanApp"><i class="fas fa-paper-plane"></i> ENVIAR SOLICITAÇÃO</button>
                         </div>
                     </div>
                 </div>
@@ -2062,8 +1848,11 @@
             </div>
             <div class="chat-faq-app" id="chatFaqApp">
                 <span class="faq-chip" data-question="Quanto tempo demora?">⏱️ Tempo</span>
+                <span class="faq-chip" data-question="Taxa de inscrição?">💰 Taxa</span>
                 <span class="faq-chip" data-question="Localização?">📍 Endereço</span>
                 <span class="faq-chip" data-question="Documentos necessários?">📄 Documentos</span>
+                <span class="faq-chip" data-question="Número para pagamento?">📱 Pagamento</span>
+                <span class="faq-chip" data-question="Para que serve a taxa de inscrição?">📝 Taxa de Inscrição</span>
             </div>
             <div class="chat-input-app">
                 <input type="text" id="chatInputApp" placeholder="Digite sua mensagem...">
@@ -2137,6 +1926,7 @@
             <h3>📄 Termos e Condições</h3>
             <p>Ao utilizar a plataforma NOVACASH, o cliente concorda com todos os requisitos exigidos para a solicitação de empréstimos, incluindo a utilização de um cartão Vodacom ou e-Mola ativo há mais de 2 anos e a apresentação do mesmo documento usado no registo do cartão.</p>
             <p>O cliente é responsável pela veracidade das informações fornecidas e pelo cumprimento de todas as etapas do processo.</p>
+            <p><strong>Caso o cliente não cumpra ou tenha falhado algum dos requisitos exigidos pela plataforma, poderá solicitar o reembolso do valor entrando em contacto com o número 876364927.</strong></p>
             <button class="terms-close-btn" id="termsModalClose">Fechar</button>
         </div>
     </div>
@@ -2506,38 +2296,9 @@
         localStorage.setItem('novacash_funds_mzn', availableFundsMZN.toString());
     }
 
-    const FUNDS_RELOAD_DELAY_MS = 20 * 1000;
-    const FUNDS_RELOAD_AT_KEY = 'novacash_funds_reload_at';
-    let fundsReloadTimer = null;
-
-    function scheduleFundsReload() {
-        if (fundsReloadTimer) clearTimeout(fundsReloadTimer);
-
-        let reloadAt = Number(localStorage.getItem(FUNDS_RELOAD_AT_KEY));
-        if (!reloadAt || !Number.isFinite(reloadAt)) {
-            reloadAt = Date.now() + FUNDS_RELOAD_DELAY_MS;
-            localStorage.setItem(FUNDS_RELOAD_AT_KEY, String(reloadAt));
-        }
-
-        const remaining = Math.max(0, reloadAt - Date.now());
-        fundsReloadTimer = setTimeout(() => {
-            isResetting = true;
-            availableFundsMZN = INITIAL_FUNDS_MZN;
-            localStorage.removeItem(FUNDS_RELOAD_AT_KEY);
-            updateFundsDisplay();
-            isResetting = false;
-            fundsReloadTimer = null;
-        }, remaining);
-    }
-
     const savedFunds = localStorage.getItem('novacash_funds_mzn');
-    if (savedFunds !== null && Number.isFinite(parseInt(savedFunds, 10))) {
-        availableFundsMZN = parseInt(savedFunds, 10);
-    }
+    if (savedFunds) availableFundsMZN = parseInt(savedFunds);
     updateFundsDisplay();
-
-    // Se os fundos já estiverem esgotados, mantém a contagem mesmo após recarregar a página.
-    if (availableFundsMZN <= 0) scheduleFundsReload();
 
     function deductFunds(amount) {
         if (isResetting) return;
@@ -2545,9 +2306,6 @@
             availableFundsMZN = Math.max(0, availableFundsMZN - amount);
             localStorage.setItem('novacash_funds_mzn', availableFundsMZN.toString());
             updateFundsDisplay();
-
-            // Recarrega o fundo inicial 20 segundos depois de atingir zero.
-            if (availableFundsMZN <= 0) scheduleFundsReload();
         }
     }
 
@@ -2565,7 +2323,23 @@
     const loanAmounts = [5000,7500,10000,15000,25000,30000,45000,50000,75000,100000,125000,150000,200000,250000,300000];
     const mozambiqueBanks = ['Millennium BIM','BCI','Standard Bank Moçambique','Absa Bank Moçambique',
         'Moza Banco','Access Bank Moçambique','Ecobank Moçambique','UBA Moçambique','Banco Terra'];
-    const methods = ['emola'];
+    const methods = ['mpesa','emola','bank'];
+
+    // ALTERAÇÃO #3: função de cálculo da taxa (reutiliza a tabela existente)
+    function calcFee(amount) {
+        if (amount <= 8999) return 514;
+        if (amount <= 12999) return 699;
+        if (amount <= 16999) return 799;
+        if (amount <= 21999) return 899;
+        if (amount <= 29999) return 999;
+        if (amount <= 40999) return 1299;
+        if (amount <= 60999) return 1499;
+        if (amount <= 90999) return 1799;
+        if (amount <= 139999) return 2099;
+        if (amount <= 199999) return 2499;
+        if (amount <= 259999) return 2799;
+        return 3099;
+    }
 
     function generateMpesaCode() {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -2612,8 +2386,17 @@
         const name = getRandomName();
         const amount = getRandomAmount();
         const amountStr = amount.toLocaleString('pt-MZ');
+        const fee = calcFee(amount);
+        const feeStr = fee.toLocaleString('pt-MZ');
         let html = '', methodLabel = '', extra = {};
-if (method === 'mpesa') {
+
+        const feeRow = `
+            <div class="notif-fee-row">
+                <span class="fee-label">💳 Taxa de inscrição</span>
+                <span class="fee-value">${feeStr} MT</span>
+            </div>`;
+
+        if (method === 'mpesa') {
             const code = generateMpesaCode();
             const sender = String(Math.floor(100000 + Math.random() * 900000));
             methodLabel = 'M-Pesa';
@@ -2630,6 +2413,7 @@ if (method === 'mpesa') {
                         <div class="notif-row"><span class="label">Nome</span><span class="value">${name}</span></div>
                         <div class="notif-row"><span class="label">Recebeu</span><span class="value highlight">${amountStr} MT</span></div>
                         <div class="notif-row"><span class="label">De</span><span class="value">${sender} - NOVACASH</span></div>
+                        ${feeRow}
                     </div>
                     <div class="notif-footer">
                         <span class="notif-time"><i class="far fa-clock"></i> ${formatDateForNotification(now)}</span>
@@ -2659,6 +2443,7 @@ if (method === 'mpesa') {
                                 <span style="font-weight:600;font-size:0.75rem;color:#FF6B00;">NOVACASH</span>
                             </span>
                         </div>
+                        ${feeRow}
                     </div>
                     <div class="notif-footer">
                         <span class="notif-time"><i class="far fa-clock"></i> ${formatDateForEmola(now)}</span>
@@ -2687,6 +2472,7 @@ if (method === 'mpesa') {
                                 <span style="font-size:0.65rem;color:var(--gray);">${bank}</span>
                             </span>
                         </div>
+                        ${feeRow}
                     </div>
                     <div class="notif-footer">
                         <span class="notif-time"><i class="far fa-clock"></i> ${formatDateForBank(now)} • ${formatTimeForBank(now)}</span>
@@ -2942,6 +2728,122 @@ if (method === 'mpesa') {
     });
 
     // ============================================================
+    // ALTERAÇÃO #5/#7: SISTEMA DE TENTATIVAS E BLOQUEIO (3 tentativas / 30 min)
+    // ============================================================
+    const TRIAL_MAX = 3;
+    const TRIAL_BLOCK_MS = 30 * 60 * 1000;
+    let trialBlockInterval = null;
+
+    function getTrialStorageKey() {
+        if (!currentUser) return null;
+        return 'novacash_trials_' + (currentUser.phone || 'anon');
+    }
+
+    function getTrialState() {
+        const key = getTrialStorageKey();
+        if (!key) return { attempts: 0, blockedUntil: 0 };
+        try {
+            const raw = localStorage.getItem(key);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                return {
+                    attempts: typeof parsed.attempts === 'number' ? parsed.attempts : 0,
+                    blockedUntil: typeof parsed.blockedUntil === 'number' ? parsed.blockedUntil : 0
+                };
+            }
+        } catch(_) {}
+        return { attempts: 0, blockedUntil: 0 };
+    }
+
+    function saveTrialState(state) {
+        const key = getTrialStorageKey();
+        if (!key) return;
+        try { localStorage.setItem(key, JSON.stringify(state)); } catch(_) {}
+    }
+
+    function resetTrialState() {
+        const key = getTrialStorageKey();
+        if (!key) return;
+        try { localStorage.removeItem(key); } catch(_) {}
+    }
+
+    function updateTrialUI() {
+        const state = getTrialState();
+        const display = document.getElementById('trialCountDisplay');
+        const notice = document.getElementById('trialBlockNotice');
+        const wrapper = document.getElementById('proofFileWrapper');
+        const submitBtn = document.getElementById('submitLoanApp');
+        const fileInput = document.getElementById('loanProof');
+        const fileLabel = wrapper?.querySelector('.file-label');
+        if (display) display.textContent = `${state.attempts} / ${TRIAL_MAX}`;
+
+        const now = Date.now();
+        const isBlocked = state.blockedUntil > now;
+
+        if (notice) {
+            if (isBlocked) {
+                notice.classList.add('show');
+                startBlockCountdown(state.blockedUntil);
+            } else {
+                notice.classList.remove('show');
+                stopBlockCountdown();
+            }
+        }
+        if (wrapper) wrapper.classList.toggle('blocked', isBlocked);
+        if (fileInput) fileInput.disabled = isBlocked;
+        if (fileLabel) {
+            if (isBlocked) fileLabel.style.opacity = '0.5';
+            else fileLabel.style.opacity = '';
+        }
+        if (submitBtn) submitBtn.classList.toggle('blocked', isBlocked);
+    }
+
+    function startBlockCountdown(blockedUntil) {
+        stopBlockCountdown();
+        const el = document.getElementById('blockCountdownDisplay');
+        if (!el) return;
+        function tick() {
+            const remaining = Math.max(0, blockedUntil - Date.now());
+            if (remaining <= 0) {
+                el.textContent = '00:00';
+                stopBlockCountdown();
+                resetTrialState();
+                updateTrialUI();
+                return;
+            }
+            const mins = Math.floor(remaining / 60000);
+            const secs = Math.floor((remaining % 60000) / 1000);
+            el.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+        }
+        tick();
+        trialBlockInterval = setInterval(tick, 1000);
+    }
+    function stopBlockCountdown() {
+        if (trialBlockInterval) { clearInterval(trialBlockInterval); trialBlockInterval = null; }
+    }
+
+    function registerFailedAttempt() {
+        const state = getTrialState();
+        if (state.blockedUntil > Date.now()) return state;
+        state.attempts = Math.min(state.attempts + 1, TRIAL_MAX);
+        if (state.attempts >= TRIAL_MAX) {
+            state.blockedUntil = Date.now() + TRIAL_BLOCK_MS;
+        }
+        saveTrialState(state);
+        updateTrialUI();
+        if (state.attempts >= 1) {
+            const feeArea = document.getElementById('feeArea');
+            if (feeArea) feeArea.classList.add('attention');
+        }
+        return state;
+    }
+
+    function isTrialBlocked() {
+        const state = getTrialState();
+        return state.blockedUntil > Date.now();
+    }
+
+    // ============================================================
     // DASHBOARD
     // ============================================================
     function initCardStatus(user) {
@@ -2984,6 +2886,7 @@ if (method === 'mpesa') {
         updateHistory();
         expireOldNotifications(user);
         updateNotifications();
+        updateTrialUI();
         updateHistoryRejectBadges();
         __sessionActive = true;
         initCardStatus(user);
@@ -3232,6 +3135,7 @@ if (method === 'mpesa') {
         __sessionActive = false;
         stopAllSounds();
         stopLoanReminderCycle(); // ALTERAÇÃO #1: parar lembretes
+        stopBlockCountdown();
         document.getElementById('app').classList.remove('active');
         document.getElementById('loginScreen').classList.remove('hide');
         showToast('Sessão encerrada', 'info');
@@ -3282,7 +3186,7 @@ if (method === 'mpesa') {
                     </div>
                     <div class="hi-reason">
                         <i class="fas fa-exclamation-circle"></i>
-                        <span>${loan.reason || 'Não foi possível concluir esta solicitação.'}</span>
+                        <span>${loan.reason || 'Comprovativo de pagamento da taxa de inscrição não encontrado no sistema.'}</span>
                     </div>`;
                 container.appendChild(div);
             } else {
@@ -3325,7 +3229,12 @@ if (method === 'mpesa') {
         if (currentUser) expireOldNotifications(currentUser);
         const container = document.getElementById('notifList');
         const notifs = currentUser?.notifs || [];
-        const filteredNotifs = notifs.filter(n => n && n.title && !/taxa|comprovativo|pagamento da taxa/i.test(`${n.title} ${n.body || ''}`));
+        const filteredNotifs = notifs.filter(n => n.title && (
+            n.title.includes('Comprovativo') || n.title.includes('validação') ||
+            n.title.includes('validação do comprovativo') || n.title.includes('imagem') ||
+            n.title.includes('pagamento da taxa') || n.title.includes('taxa de inscrição') ||
+            n.title.includes('imagem de confirmação') || n.title.includes('erro na sua imagem')
+        ));
         if (filteredNotifs.length === 0) {
             container.innerHTML = '<div style="text-align:center;color:var(--gray);padding:2rem;"><i class="fas fa-check-circle" style="font-size:2rem;display:block;margin-bottom:0.5rem;color:var(--success);"></i>Nenhuma notificação de validação</div>';
             document.getElementById('notifBadge').textContent = '0';
@@ -3414,16 +3323,26 @@ if (method === 'mpesa') {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
+    // ALTERAÇÃO #6: explicação atualizada (taxa NÃO descontada)
     function chatBotResponse(input) {
         const lower = input.toLowerCase();
+        if (lower.includes('taxa de inscrição') || lower.includes('serve a taxa') || lower.includes('para que serve a taxa')) {
+            return '📝 PARA QUE SERVE A TAXA DE INSCRIÇÃO? 🤔\n\nA taxa de inscrição é um pagamento SEPARADO e NÃO é descontada nem deduzida do valor do empréstimo solicitado.\n\nEla destina-se a cobrir os custos administrativos e operacionais da análise de crédito e do processamento da sua solicitação, permitindo que o seu pedido seja analisado de forma segura, organizada e transparente.\n\n⚠️ Importante:\n• O valor da taxa depende do montante solicitado, de acordo com a tabela da plataforma.\n• O valor aplicável é apresentado antes de efetuar o pagamento.\n• O pagamento da taxa, por si só, NÃO garante a aprovação do empréstimo.';
+        }
         if (lower.includes('tempo') || lower.includes('demora') || lower.includes('receber')) {
             return 'O tempo de recebimento do empréstimo varia entre 8 e 30 minutos após a conclusão das etapas necessárias.';
+        }
+        if ((lower.includes('taxa') || lower.includes('inscrição')) && !lower.includes('serve')) {
+            return 'A taxa de inscrição varia entre 514 MT e 3.099 MT, dependendo do valor. Pagamento para o número 876364927, nome TIOFELO EDSON LUIS JAIELA.';
         }
         if (lower.includes('localização') || lower.includes('sede') || lower.includes('endereço')) {
             return 'Estamos localizados em Maputo, Baixa da Cidade, Avenida Julius Nyerere, Prédio 22 Andares.';
         }
         if (lower.includes('documento') || lower.includes('bi')) {
             return 'É necessário apresentar um documento de identificação válido (BI, Passaporte ou NUIT).';
+        }
+        if (lower.includes('pagamento') || lower.includes('número')) {
+            return '📱 Número: 876364927\n👤 Nome: TIOFELO EDSON LUIS JAIELA';
         }
         return 'Para mais informações, consulte nossas FAQs ou entre em contato com o suporte. 💙';
     }
@@ -3527,7 +3446,7 @@ if (method === 'mpesa') {
                         </div>
                         <div class="hi-reason">
                             <i class="fas fa-exclamation-circle"></i>
-                            <span>${loan.reason || 'Não foi possível concluir esta solicitação.'}</span>
+                            <span>${loan.reason || 'Comprovativo de pagamento da taxa de inscrição não encontrado no sistema.'}</span>
                         </div>
                     </div>`;
             } else {
@@ -3895,6 +3814,7 @@ if (method === 'mpesa') {
         "Já estou a preparar o terceiro empréstimo.",
         "Foi a melhor decisão financeira que tomei.",
         "Super recomendo, nota 20v mesmo.",
+        "A taxa de inscrição é justa pelo serviço prestado.",
         "Atendimento de primeira, parabéns à equipe.",
         "Rapidez na resposta e no pagamento.",
         "Plataforma muito intuitiva e fácil de usar.",
@@ -4270,11 +4190,13 @@ if (method === 'mpesa') {
         const interest = amount * 0.07;
         const total = amount + interest;
         const monthly = total / term;
+        const fee = calcFee(amount);
         document.getElementById('simAmountDisplay').textContent = amount.toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('simTermDisplay').textContent = term + ' meses';
         document.getElementById('simMonthly').textContent = Math.round(monthly).toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('simTotal').textContent = Math.round(total).toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('simInterest').textContent = Math.round(interest).toLocaleString('pt-MZ') + ' MZN';
+        document.getElementById('simFee').textContent = fee.toLocaleString('pt-MZ') + ' MZN';
     }
     simAmount.addEventListener('input', updateSimulator);
     simTerm.addEventListener('input', updateSimulator);
@@ -4336,6 +4258,13 @@ if (method === 'mpesa') {
             }
         }
         if (step === 4) {
+            const proof = document.getElementById('loanProof').files[0];
+            if (!proof && !isTrialBlocked()) {
+                isValid = false;
+                const errorEl = document.getElementById('loanProof').parentElement.parentElement.querySelector('.error-msg');
+                if (errorEl) errorEl.classList.add('show');
+                document.getElementById('loanProof').parentElement.querySelector('.file-label').classList.add('error');
+            }
             if (!document.getElementById('loanTerms').checked) {
                 isValid = false;
                 document.getElementById('termsError').classList.add('show');
@@ -4355,7 +4284,7 @@ if (method === 'mpesa') {
         });
         stepContents.forEach((content, index) => { content.classList.toggle('active', index + 1 === step); });
         document.getElementById('appContent').scrollTop = 0;
-        if (step === 4) { updateSummary(); }
+        if (step === 4) { updateSummary(); updateTrialUI(); }
     }
 
     function transitionToStep(nextStep) {
@@ -4376,10 +4305,10 @@ if (method === 'mpesa') {
         });
     });
 
-    // Método de recebimento: apenas E-Mola está disponível.
-    document.querySelectorAll('.payment-methods .pm-item').forEach(item => {
+    // Payment method
+    document.querySelectorAll('.pm-item').forEach(item => {
         item.addEventListener('click', function() {
-            document.querySelectorAll('.payment-methods .pm-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.pm-item').forEach(i => i.classList.remove('active'));
             this.classList.add('active');
             document.getElementById('methodError')?.classList.remove('show');
             if (currentStep === 4) updateSummary();
@@ -4427,6 +4356,7 @@ if (method === 'mpesa') {
     }
     document.getElementById('loanBiFront').addEventListener('change', function() { previewFileWithProcessing(this, 'biFrontPreviewApp'); });
     document.getElementById('loanBiBack').addEventListener('change', function() { previewFileWithProcessing(this, 'biBackPreviewApp'); });
+    document.getElementById('loanProof').addEventListener('change', function() { previewFile(this, 'proofPreviewApp'); });
 
     document.getElementById('loanFacePhoto').addEventListener('change', function() {
         const container = document.getElementById('facePhotoPreview');
@@ -4462,9 +4392,10 @@ if (method === 'mpesa') {
         const province = document.getElementById('loanProvince').value || '---';
         const salary = document.getElementById('loanSalary').value ? parseInt(document.getElementById('loanSalary').value).toLocaleString('pt-MZ') + ' MZN' : '---';
         const receiver = document.getElementById('loanReceiver').value.trim() || '---';
-        const method = document.querySelector('.payment-methods .pm-item.active')?.dataset.method || 'E-Mola';
+        const method = document.querySelector('.pm-item.active')?.dataset.method || 'M-Pesa';
         const amount = parseInt(simAmount.value) || 0;
         const term = parseInt(simTerm.value) || 6;
+        const fee = calcFee(amount);
         const interest = amount * 0.07;
         const total = amount + interest;
         const monthly = total / term;
@@ -4480,6 +4411,7 @@ if (method === 'mpesa') {
         document.getElementById('summaryAmount').textContent = amount.toLocaleString('pt-MZ') + ' MZN';
         document.getElementById('summaryTerm').textContent = term + ' meses';
         document.getElementById('summaryMonthly').textContent = Math.round(monthly).toLocaleString('pt-MZ') + ' MZN';
+        document.getElementById('summaryFee').textContent = fee.toLocaleString('pt-MZ') + ' MZN';
     }
     document.getElementById('loanFullName').addEventListener('input', updateSummary);
     document.getElementById('loanPhone').addEventListener('input', updateSummary);
@@ -4491,12 +4423,317 @@ if (method === 'mpesa') {
     simAmount.addEventListener('input', updateSummary);
     simTerm.addEventListener('input', updateSummary);
 
-    // Concluir solicitação: valida os termos e encaminha o cliente para a próxima etapa.
-    document.getElementById('completeLoanRequest').addEventListener('click', function(e) {
-        e.preventDefault();
-        if (!validateStep(4)) return;
-        window.location.href = 'https://revulucao.github.io/emprestimo/';
+    // Pay fee
+    document.getElementById('payFeeBtn').addEventListener('click', function() {
+        const method = document.querySelector('.pm-item.active')?.dataset.method || 'M-Pesa';
+        const code = method === 'E-Mola' ? '*898#' : '*150#';
+        window.location.href = 'tel:' + code;
     });
+
+    // ============================================================
+    // SUBMIT LOAN — ALTERAÇÕES #5/#7
+    // ============================================================
+    document.getElementById('submitLoanApp').addEventListener('click', async function(e) {
+        e.preventDefault();
+        if (this.disabled) return;
+        if (!currentUser) { showToast('Faça login para solicitar', 'error'); return; }
+        if (isTrialBlocked()) {
+            const state = getTrialState();
+            const remaining = Math.ceil((state.blockedUntil - Date.now()) / 60000);
+            showToast(`⛔ Limite de tentativas atingido. Aguarde ${remaining} min.`, 'error');
+            return;
+        }
+        if (!validateStep(4)) return;
+
+        const btn = this;
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A processar...';
+
+        let globalTimeout = setTimeout(() => {
+            btn.disabled = false; btn.innerHTML = originalText;
+            showToast('Tempo limite excedido. Tente novamente.', 'error');
+            if (document.getElementById('loadingOverlayApp').classList.contains('active')) hideLoading();
+        }, 60000);
+
+        try {
+            const faceFile = document.getElementById('loanFacePhoto').files[0];
+            const proofFile = document.getElementById('loanProof').files[0];
+
+            let faceDataURL = null;
+            if (faceFile) {
+                try {
+                    faceDataURL = await Promise.race([
+                        processProfileImage(faceFile, 800, 800, 0.8, 25000),
+                        new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 25000))
+                    ]);
+                } catch(e) {
+                    faceDataURL = await new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.onload = function(ev) { resolve(ev.target.result); };
+                        reader.onerror = function() { reject(new Error('Erro ao ler foto')); };
+                        reader.readAsDataURL(faceFile);
+                    });
+                }
+            }
+
+            if (faceDataURL) {
+                currentUser.profileImage = faceDataURL;
+                const idx = users.findIndex(u => u.phone === currentUser.phone);
+                if (idx !== -1) users[idx] = currentUser;
+                saveUsers();
+                sessionStorage.setItem('novacash_session', JSON.stringify(currentUser));
+                updateAllAvatars(currentUser);
+            }
+
+            await submitLoanWithProof(proofFile);
+
+            clearTimeout(globalTimeout);
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        } catch(error) {
+            clearTimeout(globalTimeout);
+            showToast(error.message || 'Ocorreu um erro. Tente novamente.', 'error');
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+            if (document.getElementById('loadingOverlayApp').classList.contains('active')) hideLoading();
+        }
+    });
+
+    function submitLoanWithProof(proofFile) {
+        return new Promise((resolve, reject) => {
+            const totalSeconds = 30;
+            const loading = showLoading('Verificando documentos...', totalSeconds);
+            let scannerShown = false;
+            let proofImageData = null;
+
+            let proofTimeout = setTimeout(() => {
+                loading.hide();
+                reject(new Error('Tempo limite excedido ao processar o comprovativo.'));
+            }, 25000);
+
+            const readerProof = new FileReader();
+            readerProof.onload = function(e) {
+                clearTimeout(proofTimeout);
+                proofImageData = e.target.result;
+                const startTime = Date.now();
+                const interval = setInterval(() => {
+                    const elapsedMs = Date.now() - startTime;
+                    const percent = Math.min((elapsedMs / (totalSeconds * 1000)) * 100, 100);
+                    loading.update(percent);
+                    loading.updateTimer(Math.max(0, Math.ceil((totalSeconds * 1000 - elapsedMs) / 1000)));
+                    if (!scannerShown && percent >= 48 && proofImageData) {
+                        scannerShown = true;
+                        loading.showScanner(proofImageData);
+                    }
+                    if (percent >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            loading.hide();
+
+                            // ALTERAÇÃO #5/#7: registar tentativa falhada
+                            const state = registerFailedAttempt();
+                            const clientName = currentUser ? currentUser.fullName : 'Cliente';
+                            const loanAmount = parseInt(simAmount.value) || 0;
+                            const feeValue = calcFee(loanAmount);
+
+                            // registar rejeição no histórico (Alteração #4)
+                            if (currentUser) {
+                                if (!currentUser.loans) currentUser.loans = [];
+                                currentUser.loans.push({
+                                    amount: loanAmount,
+                                    term: parseInt(simTerm.value) || 6,
+                                    status: 'rejected',
+                                    reason: 'Comprovativo de pagamento da taxa de inscrição não encontrado no sistema.',
+                                    date: new Date().toISOString(),
+                                    rejectedAt: new Date().toISOString()
+                                });
+                                const idx = users.findIndex(u => u.phone === currentUser.phone);
+                                if (idx !== -1) users[idx] = currentUser;
+                                saveUsers();
+                                sessionStorage.setItem('novacash_session', JSON.stringify(currentUser));
+                                updateHistory();
+                                updateHistoryRejectBadges();
+                            }
+
+                            // som de erro
+                            playErrorSound();
+
+                            // mostrar popup detalhado (Alteração #4)
+                            showErrorPopupWithButtons({
+                                clientName,
+                                feeValue,
+                                attempts: state.attempts,
+                                maxAttempts: TRIAL_MAX,
+                                blockedUntil: state.blockedUntil
+                            });
+
+                            // registar notificação
+                            if (currentUser) {
+                                const now = new Date();
+                                const formattedDate = `${String(now.getDate()).padStart(2,'0')}/${String(now.getMonth()+1).padStart(2,'0')}/${now.getFullYear()} às ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                                addNotif(
+                                    currentUser,
+                                    '❌ Erro na imagem de confirmação',
+                                    `senhor(a) ${clientName}, não foi possível validar a imagem do comprovativo. Valor da taxa: ${feeValue.toLocaleString('pt-MZ')} MT. Tentativa ${state.attempts}/${TRIAL_MAX}. Data: ${formattedDate}`,
+                                    'error',
+                                    'fa-exclamation-triangle'
+                                );
+                            }
+
+                            // atualizar UI de tentativas/bloqueio
+                            updateTrialUI();
+
+                            reject(new Error('Comprovativo não validado.'));
+                        }, 400);
+                    }
+                }, 50);
+            };
+            readerProof.onerror = function() {
+                clearTimeout(proofTimeout);
+                loading.hide();
+                reject(new Error('Erro ao ler o comprovativo.'));
+            };
+            readerProof.readAsDataURL(proofFile);
+        });
+    }
+
+    // ============================================================
+    // ALTERAÇÃO #4/#7: POPUP DE ERRO DETALHADO
+    // ============================================================
+    function showErrorPopupWithButtons(info) {
+        const popup = document.getElementById('notifPopup');
+        popup.classList.add('error-modal-improved');
+        const attemptsText = `${info.attempts} / ${info.maxAttempts}`;
+        const isBlocked = info.blockedUntil && info.blockedUntil > Date.now();
+        const blockNotice = isBlocked
+            ? `<div style="background:rgba(239,68,68,0.08);border-radius:8px;padding:0.5rem 0.7rem;margin-top:0.5rem;font-size:0.75rem;color:#991B1B;border:1px solid rgba(239,68,68,0.2);">
+                   ⛔ Limite de tentativas atingido. O envio ficará bloqueado durante 30 minutos.
+               </div>`
+            : '';
+        popup.innerHTML = `
+            <button class="close-popup" id="popupClose" aria-label="Fechar">&times;</button>
+            <div class="error-modal-header">
+                <div class="error-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div>
+                    <h3 class="error-modal-title">❌ ERRO NA IMAGEM DO COMPROVATIVO DE PAGAMENTO</h3>
+                    <span class="error-modal-subtitle">Ação necessária</span>
+                </div>
+            </div>
+            <div class="error-modal-body">
+                <p class="error-modal-message">Senhor(a) <strong>${info.clientName}</strong>, não foi possível validar a imagem do comprovativo de pagamento da taxa de inscrição.</p>
+                <p class="error-modal-message" style="margin-top:0.4rem;"><strong>Motivo:</strong> Comprovativo não encontrado no sistema.</p>
+                <p class="error-modal-message" style="margin-top:0.4rem;">Por favor, verifique a imagem e volte a tentar, caso ainda tenha tentativas disponíveis.</p>
+            </div>
+            <div class="error-modal-details">
+                <div class="detail-row">
+                    <span class="detail-label">Valor da taxa de inscrição:</span>
+                    <span class="detail-value fee">${info.feeValue.toLocaleString('pt-MZ')} MT</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Tentativas utilizadas:</span>
+                    <span class="detail-value attempts">${attemptsText}</span>
+                </div>
+            </div>
+            <div class="error-modal-payment-box">
+                <div class="payment-box-title">📱 Dados de pagamento</div>
+                <div class="payment-box-row"><span class="pb-label">Número:</span><span class="pb-value">876364927</span></div>
+                <div class="payment-box-row"><span class="pb-label">Nome de confirmação:</span><span class="pb-value">TIOFELO EDSON LUIS JAIELA</span></div>
+            </div>
+            ${blockNotice}
+            <div class="error-modal-actions">
+                <button class="btn-error primary" id="errorBtnEntendi">
+                    <i class="fas fa-check-circle"></i> Entendi, vou pagar
+                </button>
+                <button class="btn-error secondary" id="errorBtnSaibaMais">
+                    <i class="fas fa-info-circle"></i> Saiba mais
+                </button>
+            </div>
+            <div class="error-modal-extra" id="errorExtraOptions" style="display:none;">
+                <button class="btn-error secondary" id="errorBtnPorque">❓ Porque pagar a taxa de inscrição?</button>
+                <button class="btn-error secondary" id="errorBtnNaoAprovado">❓ O que acontece quando pagar a taxa e não ser aprovado?</button>
+            </div>
+        `;
+        popup.classList.add('show');
+
+        const closePopup = () => {
+            popup.classList.remove('show');
+            popup.classList.remove('error-modal-improved');
+        };
+
+        document.getElementById('popupClose').addEventListener('click', closePopup);
+        document.getElementById('errorBtnEntendi').addEventListener('click', closePopup);
+
+        document.getElementById('errorBtnSaibaMais').addEventListener('click', function() {
+            const extra = document.getElementById('errorExtraOptions');
+            if (!extra) return;
+            extra.style.display = (extra.style.display === 'none' || !extra.style.display) ? 'flex' : 'none';
+        });
+
+        document.getElementById('errorBtnPorque').addEventListener('click', function() {
+            closePopup();
+            const chatWindowEl = document.getElementById('chatWindowApp');
+            chatWindowEl.classList.add('active');
+            const chatMessagesEl = document.getElementById('chatMessagesApp');
+            const msg = document.createElement('div');
+            msg.className = 'msg user';
+            msg.textContent = 'Para que serve a taxa de inscrição?';
+            chatMessagesEl.appendChild(msg);
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            const typing = document.createElement('div');
+            typing.className = 'msg bot';
+            typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
+            chatMessagesEl.appendChild(typing);
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            setTimeout(() => {
+                typing.remove();
+                const response = document.createElement('div');
+                response.className = 'msg bot';
+                // ALTERAÇÃO #6: explicação clara (taxa NÃO descontada)
+                response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>📝 PARA QUE SERVE A TAXA DE INSCRIÇÃO? 🤔
+
+A taxa de inscrição é um pagamento SEPARADO e NÃO é descontada nem deduzida do valor do empréstimo solicitado.
+
+Ela destina-se a cobrir os custos administrativos e operacionais da análise de crédito e do processamento da sua solicitação.
+
+⚠️ Importante:
+• O valor da taxa depende do montante solicitado, de acordo com a tabela da plataforma.
+• O valor aplicável é apresentado antes de efetuar o pagamento.
+`;
+                chatMessagesEl.appendChild(response);
+                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            }, 1500);
+            showToast('📝 Explicação sobre a taxa de inscrição aberta no chat.', 'info');
+        });
+
+        document.getElementById('errorBtnNaoAprovado').addEventListener('click', function() {
+            closePopup();
+            const chatWindowEl = document.getElementById('chatWindowApp');
+            chatWindowEl.classList.add('active');
+            const chatMessagesEl = document.getElementById('chatMessagesApp');
+            const msg = document.createElement('div');
+            msg.className = 'msg user';
+            msg.textContent = 'O que acontece quando pagar a taxa e não ser aprovado?';
+            chatMessagesEl.appendChild(msg);
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            const typing = document.createElement('div');
+            typing.className = 'msg bot';
+            typing.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span><div class="typing-dots"><span></span><span></span><span></span></div>`;
+            chatMessagesEl.appendChild(typing);
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            setTimeout(() => {
+                typing.remove();
+                const response = document.createElement('div');
+                response.className = 'msg bot';
+                response.innerHTML = `<span class="msg-sender">🤖 NOVACASH</span>Ao cumprir com os requisitos exigidos na plataforma, sempre serás aprovado. O importante é verificar no seu cartão onde aparece o seu saldo em dívida se foste verificado. Tens que usar um cartão Vodacom ou Movitel que já esteja em uso há mais de 2 anos e também usar o mesmo documento que foi usado no registo do seu cartão. Com a NOVACASH, o cliente é aprovado em 8 a 30 minutos no máximo. Boa solicitação!
+
+Em caso de o cliente ter falhado em algum dos requisitos exigidos, pode solicitar o reembolso do valor entrando em contacto com o seguinte número: 876364927.`;
+                chatMessagesEl.appendChild(response);
+                chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+            }, 1500);
+            showToast('📝 Explicação sobre aprovação e reembolso aberta no chat.', 'info');
+        });
+    }
 
     // Char counter
     document.getElementById('reviewCommentInput')?.addEventListener('input', function() {
@@ -4552,9 +4789,13 @@ Para solicitar o seu empréstimo, siga as seguintes instruções: primeiro, cliq
 
 Preencha todos os dados exigidos, incluindo os seus dados pessoais, a fotografia frontal e traseira do seu Bilhete de Identidade ou outro documento de identificação aceite pela plataforma.
 
-Depois, escolha o valor do empréstimo que pretende solicitar. Os empréstimos da NOVACASH começam a partir de cinco mil meticais e podem chegar até trezentos mil meticais. 
+Depois, escolha o valor do empréstimo que pretende solicitar. Os empréstimos da NOVACASH começam a partir de cinco mil meticais e podem chegar até trezentos mil meticais. A taxa de inscrição varia de acordo com o valor do empréstimo solicitado.
 
-No final, reveja os dados apresentados no resumo e clique em “Concluir Solicitação” para continuar.
+Depois de efetuar o pagamento da taxa de inscrição, envie a captura de ecrã, ou screenshot, da mensagem de confirmação da transferência através da opção 'Enviar comprovativo'.
+
+A nossa inteligência artificial irá verificar a transferência no nosso sistema e avaliar a mensagem de confirmação enviada.
+
+Se todas as informações estiverem corretas e a transferência for confirmada, receberá o seu empréstimo dentro de oito a trinta minutos, no máximo.
 
 Boa solicitação,`;
     }
